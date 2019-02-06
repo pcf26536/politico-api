@@ -1,5 +1,4 @@
 """creating app"""
-#import os
 from flask import Flask
 from instance.config import app_config
 from api.ver1.parties.endpoints import party_bp
