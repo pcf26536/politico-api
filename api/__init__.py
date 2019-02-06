@@ -2,6 +2,7 @@
 from flask import Flask
 from instance.config import app_config
 from api.ver1.parties.endpoints import party_bp
+from api.ver1.offices.endpoints import office_bp
 
 def create_app(config_name):
     """ create flask app with specified configs """
@@ -17,6 +18,6 @@ def create_app(config_name):
     app.register_blueprint(party_bp, url_prefix=ver_1_url_prefix)
 
     #register office blueprint
-    #app.register_blueprint(office_blueprint, url_prefix=url_prefix_version_1)
+    app.register_blueprint(office_bp, url_prefix=ver_1_url_prefix)
 
     return app
