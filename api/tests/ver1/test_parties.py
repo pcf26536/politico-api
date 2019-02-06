@@ -2,6 +2,7 @@ from .test_base import TestBase
 from api.ver1.parties.models import political_parties
 from api.strings import *
 from api.ver1.parties.strings import *
+from api.tests.strings import *
 
 
 class TestParties(TestBase):
@@ -34,11 +35,12 @@ class TestParties(TestBase):
 
     def test_add_party_missing_fields(self):
         """ Tests when some political party fields are missing e.g logo url """
-        res = self.client.post('/api/v1/parties', json={ hqAddKey: "14588 - Shimo la Tewa", logoUrlKey: "anc.gif" })
+        res = self.client.post('/api/v1/parties', json={ 
+            hqAddKey: "14588 - Shimo la Tewa", logoUrlKey: "anc.gif" })
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "name field is required")
+        self.assertEqual(data[error_key], name_required)
         self.assertEqual(res.status_code, status_400)
 
     def test_add_party_no_data(self):
@@ -47,7 +49,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "No data was provided")
+        self.assertEqual(data[error_key], no_data)
         self.assertEqual(res.status_code, status_400)
 
     # tests for GET all parties
