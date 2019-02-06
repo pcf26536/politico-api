@@ -31,7 +31,7 @@ class Party(object):
         for party in political_parties:
             if party[id_key] == self.id:
                 return party
-        return error(party_id_str + not_found + ' URL: http:/127.0.0.1:5000/api/v1/parties/' + str(id) , status_404)
+        return error(party_id_str + not_found, status_404)
 
 
     #create a political party.
