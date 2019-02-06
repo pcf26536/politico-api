@@ -3,7 +3,7 @@ from api.strings import *
 
 def validate_name(name):
     if len(name) < 3:
-        return error(message="The party name provided is too short", code=status_400)
+        return error(message="The name provided is too short", code=status_400)
     return ok_str
 
 
@@ -16,4 +16,4 @@ def validate_dict(data_dict):
                 status = validate_name(value)
                 if not status == ok_str:
                     return status
-        return 'OK'
+        return ok_str
