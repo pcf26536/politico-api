@@ -11,8 +11,9 @@ class Testoffices(TestBase):
         """ setup objects required for these tests """
         super().setUp()
 
-        self.ex_office = {
-            name_key: "African National Congress",
+        self.office = {
+            name_key: "Women Representative",
+            type_key : fed_type
         }
 
     # clear all lists after tests
@@ -23,18 +24,16 @@ class Testoffices(TestBase):
     # tests for POST offices
     def test_add_office_ep(self):
         """ Tests add office success """
-        res = self.client.post('/api/v1/offices', json=self.ex_office)
+        res = self.client.post('/api/v1/offices', json=self.office)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_201)
-        self.assertEqual(data[data_key][0][name_key], self.ex_office[name_key])
+        self.assertEqual(data[data_key][0][name_key], self.office[name_key])
         self.assertEqual(res.status_code, status_201)
 
     def test_add_office_missing_fields(self):
         """ Tests when some political office fields are missing e.g logo url """
-        #incomplete = self.ex_office.copy()
-        #del incomplete[logoUrlKey]
-        res = self.client.post('/api/v1/offices', json={})
+        res = self.client.post('/api/v1/offices', json={type_key: leg_type})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
@@ -65,8 +64,6 @@ class Testoffices(TestBase):
     # tests for GET single office
     def test_get_specific_office_ep(self):
         """ Tests get specific office """
-        #self.client.post('/api/v1/offices', json=self.ex_office)
-
         res = self.client.get('/api/v1/offices/1')
         data = res.get_json()
 
