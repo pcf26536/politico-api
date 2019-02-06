@@ -1,6 +1,6 @@
 from .models import political_offices
 from api.strings import *
-from api.ver1.utils import generate_id, error, success
+from api.ver1.utils import generate_id, error, success, exists
 from .strings import *
 
 
@@ -9,17 +9,6 @@ class Office:
         self.id = id
         self.type = type
         self.name = name
-
-    def exists(self, id):
-        for office in political_offices:
-            if office[id_key] == self.id:
-                return office
-        return error(office_id_str + not_found, status_404)
-
-    def validate_name(self, name):
-        if len(name) < 3:
-            return error(message="The office name provided is too short", code=status_400)
-        return 'OK'
     
     def validate_office(self, office):
         """This function validates a office and rejects or accepts it"""
@@ -48,10 +37,10 @@ class Office:
         
     #gets a specific office.
     def get_office(self):
-        status = self.exists(self.id)
+        status = exists(self.id, political_offices)
         if type(status) == dict:
             return success(status_201, [status])
-        return status
+        return error(office_id_str + not_found, status_404)
 
      #gets all offices.
     def get_offices(self):
