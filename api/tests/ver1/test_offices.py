@@ -63,8 +63,9 @@ class TestOffices(TestBase):
         self.assertEqual(res.status_code, status_201)
 
     # tests for GET single office
-    def test_get_specific_office_ep(self):
+    def test_get_office_ep(self):
         """ Tests get specific office """
+        self.client.post('/api/v1/offices', json=self.office) # add a office cause of teardown clearing list
         res = self.client.get('/api/v1/offices/1')
         data = res.get_json()
 
@@ -73,7 +74,7 @@ class TestOffices(TestBase):
         self.assertEqual(data[data_key][0][id_key], 1)
         self.assertEqual(res.status_code, status_201)
 
-    def test_get_specific_office_id_not_found(self):
+    def test_get_office_id_not_found(self):
         """ Tests request made with id that does not exist """
         res = self.client.get('/api/v1/offices/14')
         data = res.get_json()

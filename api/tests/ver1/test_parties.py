@@ -65,6 +65,7 @@ class TestParties(TestBase):
     # tests for GET single party
     def test_get_specific_party_ep(self):
         """ Tests get specific party """
+        self.client.post('/api/v1/parties', json=self.ex_party)
         res = self.client.get('/api/v1/parties/1')
         data = res.get_json()
 
@@ -85,9 +86,10 @@ class TestParties(TestBase):
     # tests for DELETE party
     def test_delete_party_ep(self):
         """ Tests when DELETE reuest made to /parties/<int:id> """
+        self.client.post('/api/v1/parties', json=self.ex_party) # add a party cause of teardown clearing list
         res = self.client.post('/api/v1/parties', json=self.ex_party)
 
-        res = self.client.delete('/api/v1/parties/4')
+        res = self.client.delete('/api/v1/parties/1')
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
@@ -107,12 +109,13 @@ class TestParties(TestBase):
     # tests for PATCH party
     def test_patch_party(self):
         """ Tests PATCH request made to /parties/<int:id> """
-        res = self.client.patch('/api/v1/parties/3', json={name_key: 'Iskerebete'})
+        self.client.post('/api/v1/parties', json=self.ex_party) # add a party cause of teardown clearing list
+        res = self.client.patch('/api/v1/parties/1', json={name_key: 'Iskerebete'})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
         self.assertEqual(len(data[data_key]), 1)
-        self.assertEqual(data[data_key][0][id_key], 3)
+        self.assertEqual(data[data_key][0][id_key], 1)
         self.assertEqual(data[data_key][0][name_key], 'Iskerebete')
         self.assertEqual(res.status_code, status_200)
 
