@@ -2,6 +2,7 @@ from .test_base import TestBase
 from api.ver1.offices.models import political_offices
 from api.strings import *
 from api.ver1.offices.strings import *
+from api.tests.strings import *
 
 
 class Testoffices(TestBase):
@@ -37,7 +38,7 @@ class Testoffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "name field is required")
+        self.assertEqual(data[error_key], name_required)
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_no_data(self):
@@ -46,7 +47,7 @@ class Testoffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "No data was provided")
+        self.assertEqual(data[error_key], no_data)
         self.assertEqual(res.status_code, status_400)
 
     # tests for GET all offices
@@ -75,15 +76,6 @@ class Testoffices(TestBase):
     def test_get_specific_office_id_not_found(self):
         """ Tests request made with id that does not exist """
         res = self.client.get('/api/v1/offices/14')
-        data = res.get_json()
-
-        self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], office_id_str + not_found)
-        self.assertEqual(res.status_code, status_404)
-
-    def test_patch_office_id_not_found(self):
-        """ Tests PATCH request made with id that does not exist """
-        res = self.client.patch('/api/v1/offices/14', json={name_key: 'CORD'})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
