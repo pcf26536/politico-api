@@ -1,4 +1,5 @@
 # politico-api
+[![Build Status](https://travis-ci.com/wainainad60/politico-api.svg?branch=develop)](https://travis-ci.com/wainainad60/politico-api)
 This repository holds the API endpoints for politico application. Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
 ## Requirements
