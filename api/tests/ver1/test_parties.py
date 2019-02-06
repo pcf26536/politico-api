@@ -4,7 +4,6 @@ from api.strings import *
 from api.ver1.parties.strings import *
 
 
-
 class TestParties(TestBase):
     """ Tests for all parties endpoints """
 
@@ -21,7 +20,7 @@ class TestParties(TestBase):
     # clear all lists after tests
     def tearDown(self):
         super().tearDown()
-        #political_parties.clear()
+        political_parties.clear()
 
     # tests for POST parties
     def test_add_party_ep(self):
