@@ -7,7 +7,7 @@
 This repository holds the API endpoints for politico application. Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
 
 ## Requirements
-- [Python 3.x](https://www.python.org/)
+- Python [Python 3.6](https://www.python.org/)
 - Any text editor or python IDE. Recommended [Visual Studio code](https://code.visualstudio.com/)
 - Any API client. Recommended [Postman](https://www.getpostman.com/downloads/)
 - Any Operating System. Recommeded Mac OS X, Linux or Windows
