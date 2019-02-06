@@ -30,4 +30,16 @@ def add_or_get_all_ep():
 
     elif request.method == get_method:
         return Party().get_parties()
-        
+
+
+@party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
+def get_or_delete_ep(id):
+    try:
+        party = Party(id=id)
+
+        if request.method == get_method:
+            return party.get_party()
+        elif request.method == delete_method:
+            return party.delete_party()
+    except Exception as e:
+        return error(str(e), 500)
