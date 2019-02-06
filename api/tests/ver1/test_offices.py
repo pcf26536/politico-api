@@ -33,7 +33,7 @@ class Testoffices(TestBase):
         self.assertEqual(res.status_code, status_201)
 
     def test_add_office_missing_fields(self):
-        """ Tests when some political office fields are missing e.g logo url """
+        """ Tests when some political office fields are missing e.g office name """
         res = self.client.post('/api/v1/offices', json={type_key: leg_type})
         data = res.get_json()
 
