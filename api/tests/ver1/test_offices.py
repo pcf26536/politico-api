@@ -5,7 +5,7 @@ from api.ver1.offices.strings import *
 from api.tests.strings import *
 
 
-class Testoffices(TestBase):
+class TestOffices(TestBase):
     """ Tests for all offices endpoints """
 
     def setUp(self):
