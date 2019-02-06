@@ -43,3 +43,15 @@ def get_or_delete_ep(id):
             return party.delete_party()
     except Exception as e:
         return error(str(e), 500)
+
+
+@party_bp.route('/parties/<int:id>', methods=[patch_method])
+def edit_ep(id):
+    try:
+        data = request.get_json()
+        #data = request.form
+        new_name = data[name_key]
+        party = Party(id=id, name=new_name)
+        return party.edit_party()
+    except Exception as e:
+        return error(str(e), 500)
