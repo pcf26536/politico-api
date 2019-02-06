@@ -22,3 +22,11 @@ def error(message, code):
         error_key: message
     }
     return make_response(jsonify(resp), code)
+
+
+def exists(id, item_list):
+    """Check if item exits in dict list via id and returns item or not found"""
+    for item in item_list:
+        if item[id_key] == id:
+            return item
+    return not_found
