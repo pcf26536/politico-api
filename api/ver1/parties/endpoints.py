@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import error, no_entry_resp
+from api.ver1.utils import error, no_entry_resp, field_missing_resp
 from api.ver1.validators import validate_dict
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method
 from .strings import hqAddKey, logoUrlKey, party_key
@@ -13,19 +13,19 @@ def add_or_get_all_ep():
         """ create party endpoint """
         data = request.get_json()
         form_data = request.form
-        #return error(str(len(data)), 201)
+        fields = [name_key, hqAddKey, logoUrlKey]
         if not data or not len(data):
             if form_data:
                 data = form_data
             else:
-                return no_entry_resp(party_key, [name_key, hqAddKey, logoUrlKey])
+                return no_entry_resp(party_key, fields)
         try:
             validate_dict(data, party_key)
             name = data[name_key]
             hq_address = data[hqAddKey]
             logo_url = data[logoUrlKey]
         except KeyError as e:
-            return error("{} field is required".format(e.args[0]), status_400)
+            return field_missing_resp(party_key, fields, e.args[0])
 
         party = cParty(name=name, hqAddress=hq_address, logoUrl=logo_url)
         return party.add_party()
@@ -36,6 +36,7 @@ def add_or_get_all_ep():
 @party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
 def get_or_delete_ep(id):
     try:
+        
         party = cParty(id=id)
         if request.method == get_method:
             return party.get_party()

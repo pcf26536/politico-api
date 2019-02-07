@@ -19,6 +19,10 @@ def validate_dict(data_dict, entity):
         return ok_str
 
 
-#def check_empty(field):
-
+def validate_id(entity, entity_id):
+    try:
+        int(entity_id)
+        return ok_str
+    except Exception:
+        return error("The {} id [{}] is not of correct format".format(entity, entity_id), status_400)
         

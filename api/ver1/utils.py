@@ -37,3 +37,9 @@ def not_found_resp(entity):
 
 def no_entry_resp(entity, fields):
     return error("No data was provided, fields {} required to create {}".format(fields, entity), status_400)
+
+def field_missing_resp(entity, fields, field):
+    return error("{} field is required. NOTE: required fields {} to create {}".format(field, fields, entity), status_400)
+
+def method_not_allowed(method):
+    return error("method [{}] not allowed on this endpoint".format(method), status_405)
