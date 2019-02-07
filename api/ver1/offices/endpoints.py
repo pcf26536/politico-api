@@ -33,7 +33,10 @@ def add_or_get_all_ep():
     elif request.method == get_method:
         """ get all offices endpoint"""
         return cOffice().get_offices()
-
+    
+    else:
+        return method_not_allowed(request.method)
+        
 
 @office_bp.route('/offices/<int:id>', methods=[get_method])
 def get_office_ep(office_id):

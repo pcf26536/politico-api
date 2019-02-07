@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import error, no_entry_resp, field_missing_resp
+from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed
 from api.ver1.validators import validate_dict
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method
 from .strings import hqAddKey, logoUrlKey, party_key
@@ -32,6 +32,8 @@ def add_or_get_all_ep():
 
     elif request.method == get_method:
         return cParty().get_parties()
+    else:
+        return method_not_allowed(request.method)
 
 @party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
 def get_or_delete_ep(id):
