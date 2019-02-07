@@ -1,10 +1,9 @@
 from flask import Blueprint, request
-from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp
+from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp, not_found_resp
 from api.ver1.validators import validate_dict, validate_id
-from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method, ok_str
+from api.strings import name_key, post_method, get_method, patch_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.parties.controllers import PartyCont
-import traceback
 
 party_bp = Blueprint('parties', __name__) # init the blueprint for parties module
 
@@ -48,7 +47,8 @@ def get_or_delete_ep(id):
             elif request.method == delete_method:
                 return party.delete_party()
             else:
-                return method_not_allowed(request.method)  
+                return method_not_allowed(request.method)
+        return not_found_resp(party_key)  
     except Exception as e:
         return runtime_error_resp(e)
 

@@ -28,10 +28,7 @@ class PartyCont:
     def delete_party(self):
         for i in range(len(political_parties)):
             if political_parties[i][id_key] == self.Id:
-                return success(
-                    code=status_200, 
-                    data=[ { msg_key: '{} deleted successfully'.format(political_parties.pop(i)[name_key]) } ]
-                    )
+                return success( code=status_200, data=[{ msg_key: '{} deleted successfully'.format(political_parties.pop(i)[name_key])}])
         return not_found_resp(party_id_str)
         
     #gets a specific party.
@@ -44,7 +41,7 @@ class PartyCont:
     # edits a specific party.
     def edit_party(self):
         status = exists(self.Id, political_parties, id_key)
-        if type(status) == dict:
+        if isinstance(status, dict):
             state = validate_partyName(self.name)
             if state == ok_str:
                 status[name_key] = self.name
