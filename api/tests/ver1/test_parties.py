@@ -43,6 +43,15 @@ class TestParties(TestBase):
         self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party")
         self.assertEqual(res.status_code, status_400)
 
+    def test_no_add_party_fields_value(self): #########3
+        """ Tests when some political party fields are missing e.g logo url """
+        res = self.client.post('/api/v1/parties', json={ name_key: "", hqAddKey: "14588 - Shimo la Tewa", logoUrlKey: "anc.gif" })
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_400)
+        self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party")
+        self.assertEqual(res.status_code, status_400)
+
     def test_add_party_no_data(self):
         """ Tests when no data is provided for add party"""
         res = self.client.post('/api/v1/parties')

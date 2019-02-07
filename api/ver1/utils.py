@@ -46,3 +46,6 @@ def method_not_allowed(method):
 
 def runtime_error_resp(e):
     return error('Runtime Exception: {}'.format(str(e)), 500)
+
+def name_error_resp(entity, name):
+    return error(message="The {} name {} provided is too short or has a wrong format".format(entity, name), code=status_400)
