@@ -10,6 +10,7 @@ status_409 = 409
 status_405 = 405
 status_400 = 400
 status_404 = 404
+status_500 = 500
 post_method = 'POST'
 get_method = 'GET'
 delete_method = 'DELETE'

@@ -43,3 +43,6 @@ def field_missing_resp(entity, fields, field):
 
 def method_not_allowed(method):
     return error("method [{}] not allowed on this endpoint".format(method), status_405)
+
+def runtime_error_resp(e):
+    return error('Runtime Exception: {}'.format(str(e)), 500)

@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed
+from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp
 from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
@@ -46,7 +46,7 @@ def get_or_delete_ep(party_id):
             elif request.method == delete_method:
                 return party.delete_party()
     except Exception as e:
-        return error(str(e), 500)
+        return runtime_error_resp(e)
 
 
 @party_bp.route('/parties/<int:id>', methods=[patch_method])
@@ -58,4 +58,4 @@ def edit_ep(party_id):
             party = cParty(id=party_id, name=new_name)
             return party.edit_party()
     except Exception as e:
-        return error(str(e), 500)
+        return runtime_error_resp(e)

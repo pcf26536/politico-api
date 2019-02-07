@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from api.ver1.utils import error, success, no_entry_resp, field_missing_resp, method_not_allowed
+from api.ver1.utils import error, success, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp
 from api.ver1.offices.controllers import cOffice
 from api.strings import name_key, post_method, get_method, status_400, type_key, ok_str
 from api.tests.strings import no_data
@@ -36,7 +36,7 @@ def add_or_get_all_ep():
     
     else:
         return method_not_allowed(request.method)
-        
+
 
 @office_bp.route('/offices/<int:id>', methods=[get_method])
 def get_office_ep(office_id):
@@ -49,4 +49,4 @@ def get_office_ep(office_id):
             else:
                 return method_not_allowed(request.method)
     except Exception as e:
-        return error(str(e), 500)
+        return runtime_error_resp(e)
