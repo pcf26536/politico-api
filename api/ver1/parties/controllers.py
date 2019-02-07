@@ -36,14 +36,14 @@ class PartyCont:
         
     #gets a specific party.
     def get_party(self):
-        status = exists(self.Id, political_parties)
+        status = exists(self.Id, political_parties, id_key)
         if type(status) == dict:
             return success(status_201, [status])
         return not_found_resp(party_id_str)
 
     # edits a specific party.
     def edit_party(self):
-        status = exists(self.Id, political_parties)
+        status = exists(self.Id, political_parties, id_key)
         if type(status) == dict:
             state = validate_partyName(self.name)
             if state == ok_str:
