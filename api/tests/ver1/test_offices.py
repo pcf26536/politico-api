@@ -32,6 +32,16 @@ class TestOffices(TestBase):
         self.assertEqual(data[data_key][0][name_key], self.office[name_key])
         self.assertEqual(res.status_code, status_201)
 
+    def test_add_office_exists(self):
+        """ Tests add office success """
+        self.client.post('/api/v1/offices', json=self.office)
+        res = self.client.post('/api/v1/offices', json=self.office)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], 409)
+        self.assertEqual(data[error_key], "Conflict: office with Women Representative as name already exists")
+        self.assertEqual(res.status_code, 409)
+
     def test_add_office_missing_fields(self):
         """ Tests when some political office fields are missing e.g office name """
         res = self.client.post('/api/v1/offices', json={type_key: leg_type})

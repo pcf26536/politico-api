@@ -33,6 +33,16 @@ class TestParties(TestBase):
         self.assertEqual(data[data_key][0][hqAddKey], self.ex_party[hqAddKey])
         self.assertEqual(res.status_code, status_201)
 
+    def test_add_party_exits_ep(self):
+        """ Tests add party success """
+        self.client.post('/api/v1/parties', json=self.ex_party)
+        res = self.client.post('/api/v1/parties', json={ name_key: "A party", hqAddKey: "14588-0100, Shimo la Tewa", logoUrlKey: "122fd.png" })
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], 409)
+        self.assertEqual(data[error_key], "Conflict: party with 14588-0100, Shimo la Tewa as hqAddress already exists")
+        self.assertEqual(res.status_code, 409)
+
     def test_add_party_missing_fields(self):
         """ Tests when some political party fields are missing e.g logo url """
         res = self.client.post('/api/v1/parties', json={ 
