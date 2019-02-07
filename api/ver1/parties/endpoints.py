@@ -3,7 +3,7 @@ from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_
 from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
-from api.ver1.parties.controllers import cParty
+from api.ver1.parties.controllers import PartyCont
 
 party_bp = Blueprint('parties', __name__) # init the blueprint for parties module
 
@@ -27,11 +27,11 @@ def add_or_get_all_ep():
         except KeyError as e:
             return field_missing_resp(party_key, fields, e.args[0])
 
-        party = cParty(name=name, hqAddress=hq_address, logoUrl=logo_url)
+        party = PartyCont(name=name, hqAddress=hq_address, logoUrl=logo_url)
         return party.add_party()
 
     elif request.method == get_method:
-        return cParty().get_parties()
+        return PartyCont().get_parties()
     else:
         return method_not_allowed(request.method)
 
@@ -39,7 +39,7 @@ def add_or_get_all_ep():
 @party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
 def get_or_delete_ep(id):
     try:
-        party = cParty(id=id)
+        party = PartyCont(id=id)
         if validate_id(party_key, id) == ok_str:
             if request.method == get_method:
                 return party.get_party()
@@ -55,7 +55,7 @@ def edit_ep(id):
         if validate_id(party_key,id) == ok_str:
             data = request.get_json()
             new_name = data[name_key]
-            party = cParty(id=id, name=new_name)
+            party = PartyCont(id=id, name=new_name)
             return party.edit_party()
     except Exception as e:
         return runtime_error_resp(e)

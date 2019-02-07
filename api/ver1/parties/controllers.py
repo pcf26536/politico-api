@@ -5,7 +5,7 @@ from .strings import party_id_str, hqAddKey, logoUrlKey, party_key
 from api.ver1.validators import validate_name, validate_dict
 from api.ver1.utils import exists, not_found_resp
 
-class cParty:
+class PartyCont:
     """Party model to store party data in data structures"""
     def __init__(self, id=None, name=None, hqAddress=None, logoUrl=None):
         self.id = id

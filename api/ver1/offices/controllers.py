@@ -5,7 +5,7 @@ from .strings import office_id_str, office_key
 from api.ver1.validators import validate_dict
 
 
-class cOffice:
+class OfficeCont:
     def __init__(self, id=None, type=None, name=None):
         self.id = id
         self.type = type
