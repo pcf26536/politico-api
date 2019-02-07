@@ -4,6 +4,7 @@ from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.parties.controllers import PartyCont
+import traceback
 
 party_bp = Blueprint('parties', __name__) # init the blueprint for parties module
 
@@ -11,27 +12,25 @@ party_bp = Blueprint('parties', __name__) # init the blueprint for parties modul
 def add_or_get_all_ep():
     if request.method == post_method:
         """ create party endpoint """
+        
+        data = request.get_json()
+        form_data = request.form
+        fields = [name_key, hqAddKey, logoUrlKey]
+        if not data or not len(data):
+            if form_data:
+                data = form_data
+            else:
+                return no_entry_resp(party_key, fields)
         try:
-            data = request.get_json()
-            form_data = request.form
-            fields = [name_key, hqAddKey, logoUrlKey]
-            if not data or not len(data):
-                if form_data:
-                    data = form_data
-                else:
-                    return no_entry_resp(party_key, fields)
-            try:
-                validate_dict(data, party_key)
-                name = data[name_key]
-                hq_address = data[hqAddKey]
-                logo_url = data[logoUrlKey]
-            except KeyError as e:
-                return field_missing_resp(party_key, fields, e.args[0])
+            validate_dict(data, party_key)
+            name = data[name_key]
+            hq_address = data[hqAddKey]
+            logo_url = data[logoUrlKey]
+        except KeyError as e:
+            return field_missing_resp(party_key, fields, e.args[0])
 
-            party = PartyCont(name=name, hqAddress=hq_address, logoUrl=logo_url)
-            return party.add_party()
-        except:
-            return error("invalid request payload", 400)
+        party = PartyCont(name=name, hqAddress=hq_address, logoUrl=logo_url)
+        return party.add_party()
 
     elif request.method == get_method:
         return PartyCont().get_parties()

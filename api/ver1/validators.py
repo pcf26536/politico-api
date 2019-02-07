@@ -3,7 +3,7 @@ from api.strings import ok_str, name_key, status_400, type_key
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.offices.strings import office_key
 import re
-from api.ver1.parties.validators import validate_partyName
+from api.ver1.parties.validators import validate_partyName, validate_logoUrl
 from api.ver1.offices.validators import validate_officeName, validate_officeType
 
 def validate_name(name, entity):
@@ -20,7 +20,9 @@ def validate_dict(data_dict, entity):
             elif key == hqAddKey:
                 pass
             elif key == logoUrlKey:
-                pass
+                status = validate_logoUrl(value)
+                if not status == ok_str:
+                    return status
             elif key == type_key:
                 pass
             elif key == name_key:
