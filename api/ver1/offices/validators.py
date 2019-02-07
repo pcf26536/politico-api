@@ -4,10 +4,13 @@ from api.ver1.utils import error, name_error_resp
 import re
 
 def validate_officeType(value):
-    if value in office_type_list:
-        return ok_str
+    if not re.match(r"^\s{1,}$", value):
+        if value in office_type_list:
+            return ok_str
+        else:
+            return error('Incorrect value [{}], office types should be {}'.format(value, office_type_list), 400)
     else:
-        return error('Incorrect value, office types should be {}'.format(office_type_list), 400)
+        return error("Please provide ['type'] value(s) for the office", 400)
 
 def validate_officeName(name):
     if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):

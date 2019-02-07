@@ -6,11 +6,6 @@ import re
 from api.ver1.parties.validators import validate_partyName, validate_logoUrl, validate_hqAdd
 from api.ver1.offices.validators import validate_officeName, validate_officeType
 
-def validate_name(name, entity):
-    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name)) and (len(name) > 2)):
-        return error(message="The {} name {} provided is too short or has a wrong format".format(entity, name), code=status_400)
-    return ok_str
-
 
 def validate_dict(data_dict, entity):
         """This function validates a dictionary def and rejects or accepts it"""

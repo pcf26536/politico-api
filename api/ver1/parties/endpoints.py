@@ -59,6 +59,8 @@ def edit_ep(id):
         if request.method == patch_method:
             if validate_id(party_key,id) == ok_str:
                 data = request.get_json()
+                if not data:
+                    data = request.form
                 new_name = data[name_key]
                 party = PartyCont(Id=id, name=new_name)
                 return party.edit_party()

@@ -14,7 +14,7 @@ class TestParties(TestBase):
 
         self.ex_party = {
             name_key: "African National Congress",
-            hqAddKey: "14588 - Shimo la Tewa",
+            hqAddKey: "14588-0100, Shimo la Tewa",
             logoUrlKey: "anc.gif"
         }
 
@@ -36,20 +36,29 @@ class TestParties(TestBase):
     def test_add_party_missing_fields(self):
         """ Tests when some political party fields are missing e.g logo url """
         res = self.client.post('/api/v1/parties', json={ 
-            hqAddKey: "14588 - Shimo la Tewa", logoUrlKey: "anc.gif" })
+            hqAddKey: "14588-0100, Shimo la Tewa", logoUrlKey: "anc.gif" })
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party")
         self.assertEqual(res.status_code, status_400)
 
-    def test_no_add_party_fields_value(self): #########3
+    def test_add_party_missing_fields_value(self):
         """ Tests when some political party fields are missing e.g logo url """
-        res = self.client.post('/api/v1/parties', json={ name_key: "", hqAddKey: "14588 - Shimo la Tewa", logoUrlKey: "anc.gif" })
+        res = self.client.post('/api/v1/parties', json={ name_key: " ", hqAddKey: "14588-0100, Shimo la Tewa", logoUrlKey: "anc.gif" })
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party")
+        self.assertEqual(data[error_key], "The party name [ ] provided is too short or has a wrong format")
+        self.assertEqual(res.status_code, status_400)
+
+    def test_add_party_wrong_value_format(self):
+        """ Tests when some political party fields are missing e.g logo url """
+        res = self.client.post('/api/v1/parties', json={ name_key: "A party", hqAddKey: "14588-0100, Shimo la Tewa", logoUrlKey: "122fd" })
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_400)
+        self.assertEqual(data[error_key], "Bad image logo format [122fd] has no file extension.")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_party_no_data(self):

@@ -1,5 +1,5 @@
-from api.strings import *
-from .strings import *
+from api.strings import name_key, id_key
+from .strings import hqAddKey, logoUrlKey, hqAddKey
 
 political_parties = [
     {id_key: 1, name_key: 'Democratic Party', hqAddKey: '20100 - Nairobi', logoUrlKey: 'dp.png'}, 
