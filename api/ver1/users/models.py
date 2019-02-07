@@ -1,5 +1,5 @@
 """ contains all the extra models """
-from api.strings import id_key, name_key
+from api.strings import id_key
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key
 from api.ver1.parties.strings import party_key

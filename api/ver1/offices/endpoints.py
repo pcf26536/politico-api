@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request
 from api.ver1.utils import error, success
 from api.ver1.offices.controllers import cOffice
 from api.strings import name_key, post_method, get_method, status_400, type_key
-from .strings import office_id_str
 from api.tests.strings import no_data
 
 office_bp = Blueprint('offices', __name__) # init the blueprint for offices module

@@ -1,5 +1,5 @@
 from .models import political_parties
-from api.strings import id_key, name_key, ok_str, status_201, status_200, msg_key, not_found, status_404
+from api.strings import id_key, name_key, ok_str, status_201, status_200, msg_key, not_found
 from api.ver1.utils import generate_id, error, success
 from .strings import party_id_str, hqAddKey, logoUrlKey
 from api.ver1.validators import validate_name, validate_dict
