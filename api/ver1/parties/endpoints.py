@@ -39,7 +39,7 @@ def add_or_get_all_ep():
 @party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
 def get_or_delete_ep(id):
     try:
-        party = PartyCont(id=id)
+        party = PartyCont(Id=id)
         if validate_id(party_key, id) == ok_str:
             if request.method == get_method:
                 return party.get_party()
@@ -58,7 +58,7 @@ def edit_ep(id):
             if validate_id(party_key,id) == ok_str:
                 data = request.get_json()
                 new_name = data[name_key]
-                party = PartyCont(id=id, name=new_name)
+                party = PartyCont(Id=id, name=new_name)
                 return party.edit_party()
         else:
             return method_not_allowed(request.method)

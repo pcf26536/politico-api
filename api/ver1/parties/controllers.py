@@ -7,8 +7,8 @@ from api.ver1.utils import exists, not_found_resp
 
 class PartyCont:
     """Party model to store party data in data structures"""
-    def __init__(self, id=None, name=None, hqAddress=None, logoUrl=None):
-        self.id = id
+    def __init__(self, Id=None, name=None, hqAddress=None, logoUrl=None):
+        self.Id = Id
         self.name = name
         self.hqAddress = hqAddress
         self.logoUrl = logoUrl
@@ -26,7 +26,7 @@ class PartyCont:
     #deletes a party.
     def delete_party(self):
         for i in range(len(political_parties)):
-            if political_parties[i][id_key] == self.id:
+            if political_parties[i][id_key] == self.Id:
                 return success(
                     code=status_200, 
                     data=[ { msg_key: '{} deleted successfully'.format(political_parties.pop(i)[name_key]) } ]
@@ -35,14 +35,14 @@ class PartyCont:
         
     #gets a specific party.
     def get_party(self):
-        status = exists(self.id, political_parties)
+        status = exists(self.Id, political_parties)
         if type(status) == dict:
             return success(status_201, [status])
         return not_found_resp(party_id_str)
 
     # edits a specific party.
     def edit_party(self):
-        status = exists(self.id, political_parties)
+        status = exists(self.Id, political_parties)
         if type(status) == dict:
             state = validate_name(self.name, party_key)
             if state == ok_str:

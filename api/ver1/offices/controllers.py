@@ -6,9 +6,9 @@ from api.ver1.validators import validate_dict
 
 
 class OfficeCont:
-    def __init__(self, id=None, type=None, name=None):
-        self.id = id
-        self.type = type
+    def __init__(self, Id=None, office_type=None, name=None):
+        self.Id = Id
+        self.type = office_type
         self.name = name
 
     #create a political office.
@@ -28,7 +28,7 @@ class OfficeCont:
     #gets a specific office.
     def get_office(self):
         """" fetch a specific office via specified id """
-        status = exists(self.id, political_offices)
+        status = exists(self.Id, political_offices)
         if type(status) == dict:
             return success(status_201, [status])
         return not_found_resp(office_id_str)

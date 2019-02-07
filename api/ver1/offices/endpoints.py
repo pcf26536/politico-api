@@ -27,7 +27,7 @@ def add_or_get_all_ep():
         except KeyError as e:
             return field_missing_resp(office_key, fields, e.args[0])
 
-        office = OfficeCont(name=name, type=office_type)
+        office = OfficeCont(name=name, office_type=office_type)
         return office.add_office()
 
     elif request.method == get_method:
@@ -43,7 +43,7 @@ def get_office_ep(id):
     """" get specific offce by id """
     try:
         if validate_id(office_key, id) == ok_str:
-            office = OfficeCont(id=id)
+            office = OfficeCont(Id=id)
             if request.method == get_method:
                 return office.get_office()
             else:
