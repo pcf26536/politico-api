@@ -1,7 +1,8 @@
 from flask import Blueprint, request
-from api.ver1.utils import error
+from api.ver1.utils import error, no_entry_resp
+from api.ver1.validators import validate_dict
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method
-from .strings import hqAddKey, logoUrlKey
+from .strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.parties.controllers import cParty
 
 party_bp = Blueprint('parties', __name__) # init the blueprint for parties module
@@ -17,8 +18,9 @@ def add_or_get_all_ep():
             if form_data:
                 data = form_data
             else:
-                return error("No data was provided", status_400)
+                return no_entry_resp(party_key, [name_key, hqAddKey, logoUrlKey])
         try:
+            validate_dict(data, party_key)
             name = data[name_key]
             hq_address = data[hqAddKey]
             logo_url = data[logoUrlKey]

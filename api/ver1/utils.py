@@ -34,3 +34,6 @@ def exists(id, item_list):
 
 def not_found_resp(entity):
     return error(entity + not_found, status_404)
+
+def no_entry_resp(entity, fields):
+    return error("No data was provided, fields {} required to create {}".format(fields, entity), status_400)

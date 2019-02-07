@@ -1,7 +1,7 @@
 from .models import political_parties
 from api.strings import id_key, name_key, ok_str, status_201, status_200, msg_key, not_found
 from api.ver1.utils import generate_id, error, success
-from .strings import party_id_str, hqAddKey, logoUrlKey
+from .strings import party_id_str, hqAddKey, logoUrlKey, party_key
 from api.ver1.validators import validate_name, validate_dict
 from api.ver1.utils import exists, not_found_resp
 
@@ -17,7 +17,7 @@ class cParty:
     def add_party(self):
         """"Add a political party passed on instantiation, generates auto id"""
         party = { id_key: generate_id(political_parties), name_key:self.name, hqAddKey: self.hqAddress, logoUrlKey: self.logoUrl }
-        status = validate_dict(party)
+        status = validate_dict(party, party_key)
         if status == ok_str:
             political_parties.append(party)
             return success(code=status_201, data=[party]) # return list of parties to display added party
@@ -44,7 +44,7 @@ class cParty:
     def edit_party(self):
         status = exists(self.id, political_parties)
         if type(status) == dict:
-            state = validate_name(self.name)
+            state = validate_name(self.name, party_key)
             if state == ok_str:
                 status[name_key] = self.name
                 return success(status_200, [status])
