@@ -44,6 +44,6 @@ def get_office_ep(office_id):
             if request.method == get_method:
                 return office.get_office()
             else:
-                return 
+                return method_not_allowed(request.method)
     except Exception as e:
         return error(str(e), 500)
