@@ -1,0 +1,6 @@
+fname = 'firstname'
+lname = 'lastname'
+email = 'email'
+phone = 'phoneNumber'
+pspt = 'passportUrl'
+admin = 'isAdmin'
