@@ -40,7 +40,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], name_required)
+        self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_party_no_data(self):
@@ -49,7 +49,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], no_data)
+        self.assertEqual(data[error_key], "No data was provided, fields ['name', 'hqAddress', 'logoUrl'] required to create party")
         self.assertEqual(res.status_code, status_400)
 
     # tests for GET all parties
@@ -112,7 +112,7 @@ class TestParties(TestBase):
     def test_patch_party(self):
         """ Tests PATCH request made to /parties/<int:id> """
         self.client.post('/api/v1/parties', json=self.ex_party) # add a party cause of teardown clearing list
-        res = self.client.patch('/api/v1/parties/1', json={name_key: 'Iskerebete'})
+        res = self.client.patch('/api/v1/parties/1/name', json={name_key: 'Iskerebete'})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
@@ -123,7 +123,7 @@ class TestParties(TestBase):
 
     def test_patch_party_id_not_found(self):
         """ Tests PATCH request made with id that does not exist """
-        res = self.client.patch('/api/v1/parties/14', json={name_key: 'CORD'})
+        res = self.client.patch('/api/v1/parties/14/name', json={name_key: 'CORD'})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)

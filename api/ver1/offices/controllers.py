@@ -1,14 +1,14 @@
 from .models import political_offices
 from api.strings import id_key, name_key, type_key, status_201, ok_str, not_found
 from api.ver1.utils import generate_id, success, exists, not_found_resp
-from .strings import office_id_str
+from .strings import office_id_str, office_key
 from api.ver1.validators import validate_dict
 
 
-class cOffice:
-    def __init__(self, id=None, type=None, name=None):
-        self.id = id
-        self.type = type
+class OfficeCont:
+    def __init__(self, Id=None, office_type=None, name=None):
+        self.Id = Id
+        self.type = office_type
         self.name = name
 
     #create a political office.
@@ -19,7 +19,7 @@ class cOffice:
                     name_key:self.name, 
                     type_key: self.type
                 }
-        status = validate_dict(office)
+        status = validate_dict(office, office_key)
         if status == ok_str:
             political_offices.append(office)
             return success(code=status_201, data=[office])
@@ -28,7 +28,7 @@ class cOffice:
     #gets a specific office.
     def get_office(self):
         """" fetch a specific office via specified id """
-        status = exists(self.id, political_offices)
+        status = exists(self.Id, political_offices)
         if type(status) == dict:
             return success(status_201, [status])
         return not_found_resp(office_id_str)
