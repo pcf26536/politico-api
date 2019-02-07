@@ -27,12 +27,12 @@ $ cd politico-api
 - create the virtual environment and activate it
 ```
 (Linux and Mac OS X)
-$ python3 -m venv venv 
-$ source venv/bin/activate
+$ python3 -m venv env 
+$ source env/bin/activate
 
 (Windows)
-> python -m venv venv 
-> venv\Scripts\activate
+> python -m venv env 
+> env\Scripts\activate
 ```
 - install dependencies
 ```
