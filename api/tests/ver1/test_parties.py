@@ -45,8 +45,7 @@ class TestParties(TestBase):
 
     def test_add_party_missing_fields(self):
         """ Tests when some political party fields are missing e.g logo url """
-        res = self.client.post('/api/v1/parties', json={ 
-            hqAddKey: "14588-0100, Shimo la Tewa", logoUrlKey: "anc.gif" })
+        res = self.client.post('/api/v1/parties', json={ hqAddKey: "14588-0100, Shimo la Tewa", logoUrlKey: "anc.gif" })
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)

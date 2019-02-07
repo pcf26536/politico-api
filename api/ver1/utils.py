@@ -24,10 +24,10 @@ def error(message, code):
     return make_response(jsonify(resp), code)
 
 
-def exists(id, item_list, key):
+def exists(value, item_list, key):
     """Check if item exits in dict list via id and returns item or not found"""
     for item in item_list:
-        if item[key] == id:
+        if item[key] == value:
             return item
     return not_found
 

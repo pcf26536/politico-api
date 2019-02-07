@@ -1,8 +1,7 @@
-from api.ver1.utils import generate_id, error, success, exists
+from api.ver1.utils import generate_id, success, exists
 from api.strings import ok_str, name_key, status_400, type_key
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.offices.strings import office_key
-import re
 from api.ver1.parties.validators import validate_partyName, validate_logoUrl, validate_hqAdd
 from api.ver1.offices.validators import validate_officeName, validate_officeType
 
