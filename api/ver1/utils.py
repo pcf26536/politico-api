@@ -49,3 +49,6 @@ def runtime_error_resp(e):
 
 def name_error_resp(entity, name):
     return error(message="The {} name [{}] provided is too short or has a wrong format".format(entity, name), code=status_400)
+
+def exists_resp(entity, value, field):
+    return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)
