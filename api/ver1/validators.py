@@ -1,9 +1,9 @@
 from api.ver1.utils import generate_id, error, success, exists
-from api.strings import *
+from api.strings import ok_str, name_key, status_400
 
 def validate_name(name):
     if len(name) < 3:
-        return error(message="The name provided is too short", code=status_400)
+        return error(message="The name {} provided is too short".format(name), code=status_400)
     return ok_str
 
 
