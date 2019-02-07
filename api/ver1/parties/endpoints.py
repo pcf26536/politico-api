@@ -49,7 +49,7 @@ def get_or_delete_ep(id):
         return runtime_error_resp(e)
 
 
-@party_bp.route('/parties/<int:id>', methods=[patch_method])
+@party_bp.route('/parties/<int:id>/name', methods=[patch_method])
 def edit_ep(id):
     try:
         if validate_id(party_key,id) == ok_str:

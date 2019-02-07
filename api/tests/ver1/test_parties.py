@@ -112,7 +112,7 @@ class TestParties(TestBase):
     def test_patch_party(self):
         """ Tests PATCH request made to /parties/<int:id> """
         self.client.post('/api/v1/parties', json=self.ex_party) # add a party cause of teardown clearing list
-        res = self.client.patch('/api/v1/parties/1', json={name_key: 'Iskerebete'})
+        res = self.client.patch('/api/v1/parties/1/name', json={name_key: 'Iskerebete'})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
@@ -123,7 +123,7 @@ class TestParties(TestBase):
 
     def test_patch_party_id_not_found(self):
         """ Tests PATCH request made with id that does not exist """
-        res = self.client.patch('/api/v1/parties/14', json={name_key: 'CORD'})
+        res = self.client.patch('/api/v1/parties/14/name', json={name_key: 'CORD'})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
