@@ -30,7 +30,9 @@ def validate_dict(data_dict, entity):
                 if not status == ok_str:
                     return status
             elif key == type_key:
-                pass
+                status = validate_officeType(value)
+                if not status == ok_str:
+                    return status
             elif key == name_key:
                 status = None
                 if entity == party_key:
