@@ -30,3 +30,7 @@ def exists(id, item_list):
         if item[id_key] == id:
             return item
     return not_found
+
+
+def not_found_resp(entity):
+    return error(entity + not_found, status_404)

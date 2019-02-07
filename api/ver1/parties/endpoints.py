@@ -47,7 +47,7 @@ def get_or_delete_ep(id):
 def edit_ep(id):
     try:
         data = request.get_json()
-        data = request.form
+        #data = request.form
         new_name = data[name_key]
         party = cParty(id=id, name=new_name)
         return party.edit_party()

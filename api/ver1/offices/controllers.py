@@ -1,6 +1,6 @@
 from .models import political_offices
 from api.strings import id_key, name_key, type_key, status_201, ok_str, not_found, status_404
-from api.ver1.utils import generate_id, error, success, exists
+from api.ver1.utils import generate_id, error, success, exists, not_found_resp
 from .strings import office_id_str
 from api.ver1.validators import validate_dict
 
@@ -31,7 +31,7 @@ class cOffice:
         status = exists(self.id, political_offices)
         if type(status) == dict:
             return success(status_201, [status])
-        return error(office_id_str + not_found, status_404)
+        return not_found_resp(office_id_str)
 
      #gets all offices.
     def get_offices(self):

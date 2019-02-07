@@ -3,7 +3,7 @@ from api.strings import id_key, name_key, ok_str, status_201, status_200, msg_ke
 from api.ver1.utils import generate_id, error, success
 from .strings import party_id_str, hqAddKey, logoUrlKey
 from api.ver1.validators import validate_name, validate_dict
-from api.ver1.utils import exists
+from api.ver1.utils import exists, not_found_resp
 
 class cParty:
     """Party model to store party data in data structures"""
@@ -31,14 +31,14 @@ class cParty:
                     code=status_200, 
                     data=[ { msg_key: '{} deleted successfully'.format(political_parties.pop(i)[name_key]) } ]
                     )
-        return error(party_id_str + not_found, status_404)
+        return not_found_resp(party_id_str)
         
     #gets a specific party.
     def get_party(self):
         status = exists(self.id, political_parties)
         if type(status) == dict:
             return success(status_201, [status])
-        return status
+        return not_found_resp(party_id_str)
 
     # edits a specific party.
     def edit_party(self):
@@ -49,7 +49,7 @@ class cParty:
                 status[name_key] = self.name
                 return success(status_200, [status])
             return state
-        return status
+        return not_found_resp(party_id_str)
 
      #gets all parties.
     def get_parties(self):
