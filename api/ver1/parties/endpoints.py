@@ -45,6 +45,8 @@ def get_or_delete_ep(id):
                 return party.get_party()
             elif request.method == delete_method:
                 return party.delete_party()
+            else:
+                return method_not_allowed(request.method)  
     except Exception as e:
         return runtime_error_resp(e)
 
@@ -52,10 +54,13 @@ def get_or_delete_ep(id):
 @party_bp.route('/parties/<int:id>/name', methods=[patch_method])
 def edit_ep(id):
     try:
-        if validate_id(party_key,id) == ok_str:
-            data = request.get_json()
-            new_name = data[name_key]
-            party = PartyCont(id=id, name=new_name)
-            return party.edit_party()
+        if request.method == patch_method:
+            if validate_id(party_key,id) == ok_str:
+                data = request.get_json()
+                new_name = data[name_key]
+                party = PartyCont(id=id, name=new_name)
+                return party.edit_party()
+        else:
+            return method_not_allowed(request.method)
     except Exception as e:
         return runtime_error_resp(e)
