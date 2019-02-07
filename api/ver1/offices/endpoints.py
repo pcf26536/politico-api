@@ -39,11 +39,11 @@ def add_or_get_all_ep():
 
 
 @office_bp.route('/offices/<int:id>', methods=[get_method])
-def get_office_ep(office_id):
+def get_office_ep(id):
     """" get specific offce by id """
     try:
-        if validate_id(office_key, office_id) == ok_str:
-            office = cOffice(id=office_id)
+        if validate_id(office_key, id) == ok_str:
+            office = cOffice(id=id)
             if request.method == get_method:
                 return office.get_office()
             else:

@@ -40,7 +40,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], name_required)
+        self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_party_no_data(self):
@@ -49,7 +49,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], no_data)
+        self.assertEqual(data[error_key], "No data was provided, fields ['name', 'hqAddress', 'logoUrl'] required to create party")
         self.assertEqual(res.status_code, status_400)
 
     # tests for GET all parties

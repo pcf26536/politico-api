@@ -1,7 +1,7 @@
 from .models import political_offices
 from api.strings import id_key, name_key, type_key, status_201, ok_str, not_found
 from api.ver1.utils import generate_id, success, exists, not_found_resp
-from .strings import office_id_str
+from .strings import office_id_str, office_key
 from api.ver1.validators import validate_dict
 
 
@@ -19,7 +19,7 @@ class cOffice:
                     name_key:self.name, 
                     type_key: self.type
                 }
-        status = validate_dict(office)
+        status = validate_dict(office, office_key)
         if status == ok_str:
             political_offices.append(office)
             return success(code=status_201, data=[office])

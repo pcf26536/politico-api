@@ -37,10 +37,10 @@ def add_or_get_all_ep():
 
 
 @party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
-def get_or_delete_ep(party_id):
+def get_or_delete_ep(id):
     try:
-        party = cParty(id=party_id)
-        if validate_id(party_key, party_id) == ok_str:
+        party = cParty(id=id)
+        if validate_id(party_key, id) == ok_str:
             if request.method == get_method:
                 return party.get_party()
             elif request.method == delete_method:
@@ -50,12 +50,12 @@ def get_or_delete_ep(party_id):
 
 
 @party_bp.route('/parties/<int:id>', methods=[patch_method])
-def edit_ep(party_id):
+def edit_ep(id):
     try:
-        if validate_id(party_key, party_id) == ok_str:
+        if validate_id(party_key,id) == ok_str:
             data = request.get_json()
             new_name = data[name_key]
-            party = cParty(id=party_id, name=new_name)
+            party = cParty(id=id, name=new_name)
             return party.edit_party()
     except Exception as e:
         return runtime_error_resp(e)
