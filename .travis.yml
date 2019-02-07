@@ -10,7 +10,7 @@ install:
 
 # command to automate tests
 script:
-  - pytest --cov=api tests/ -v
+  - pytest --cov=api api/tests/ver1/ -v
 
 after_success:
   - coveralls
