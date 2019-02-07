@@ -2,8 +2,9 @@ from .models import political_parties
 from api.strings import id_key, name_key, ok_str, status_201, status_200, msg_key, not_found
 from api.ver1.utils import generate_id, error, success
 from .strings import party_id_str, hqAddKey, logoUrlKey, party_key
-from api.ver1.validators import validate_name, validate_dict
+from api.ver1.validators import validate_dict
 from api.ver1.utils import exists, not_found_resp
+from .validators import validate_partyName
 
 class PartyCont:
     """Party model to store party data in data structures"""
@@ -35,16 +36,16 @@ class PartyCont:
         
     #gets a specific party.
     def get_party(self):
-        status = exists(self.Id, political_parties)
+        status = exists(self.Id, political_parties, id_key)
         if type(status) == dict:
             return success(status_201, [status])
         return not_found_resp(party_id_str)
 
     # edits a specific party.
     def edit_party(self):
-        status = exists(self.Id, political_parties)
+        status = exists(self.Id, political_parties, id_key)
         if type(status) == dict:
-            state = validate_name(self.name, party_key)
+            state = validate_partyName(self.name)
             if state == ok_str:
                 status[name_key] = self.name
                 return success(status_200, [status])

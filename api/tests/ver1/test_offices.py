@@ -32,6 +32,16 @@ class TestOffices(TestBase):
         self.assertEqual(data[data_key][0][name_key], self.office[name_key])
         self.assertEqual(res.status_code, status_201)
 
+    def test_add_office_exists(self):
+        """ Tests add office success """
+        self.client.post('/api/v1/offices', json=self.office)
+        res = self.client.post('/api/v1/offices', json=self.office)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], 409)
+        self.assertEqual(data[error_key], "Conflict: office with Women Representative as name already exists")
+        self.assertEqual(res.status_code, 409)
+
     def test_add_office_missing_fields(self):
         """ Tests when some political office fields are missing e.g office name """
         res = self.client.post('/api/v1/offices', json={type_key: leg_type})
@@ -39,6 +49,24 @@ class TestOffices(TestBase):
 
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'type'] to create office")
+        self.assertEqual(res.status_code, status_400)
+
+    def test_add_office_missing_fields_value(self):
+        """ Tests when some political office fields are missing e.g office name """
+        res = self.client.post('/api/v1/offices', json={type_key: leg_type, name_key: ""})
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_400)
+        self.assertEqual(data[error_key], "Please provide ['name'] value(s) for the office")
+        self.assertEqual(res.status_code, status_400)
+
+    def test_wrong_office_type(self):
+        """ Tests when some political office fields are missing e.g office name """
+        res = self.client.post('/api/v1/offices', json={type_key: "Office", name_key: "MCA"})
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_400)
+        self.assertEqual(data[error_key], "Incorrect value [Office], office types should be ['federal', 'legislative', 'state', 'local government']")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_no_data(self):

@@ -28,7 +28,7 @@ class OfficeCont:
     #gets a specific office.
     def get_office(self):
         """" fetch a specific office via specified id """
-        status = exists(self.Id, political_offices)
+        status = exists(self.Id, political_offices, id_key)
         if type(status) == dict:
             return success(status_201, [status])
         return not_found_resp(office_id_str)

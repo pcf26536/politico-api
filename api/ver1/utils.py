@@ -24,10 +24,10 @@ def error(message, code):
     return make_response(jsonify(resp), code)
 
 
-def exists(id, item_list):
+def exists(id, item_list, key):
     """Check if item exits in dict list via id and returns item or not found"""
     for item in item_list:
-        if item[id_key] == id:
+        if item[key] == id:
             return item
     return not_found
 
@@ -46,3 +46,9 @@ def method_not_allowed(method):
 
 def runtime_error_resp(e):
     return error('Runtime Exception: {}'.format(str(e)), 500)
+
+def name_error_resp(entity, name):
+    return error(message="The {} name [{}] provided is too short or has a wrong format".format(entity, name), code=status_400)
+
+def exists_resp(entity, value, field):
+    return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)

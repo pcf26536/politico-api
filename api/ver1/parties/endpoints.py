@@ -4,6 +4,7 @@ from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, status_400, patch_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.parties.controllers import PartyCont
+import traceback
 
 party_bp = Blueprint('parties', __name__) # init the blueprint for parties module
 
@@ -11,6 +12,7 @@ party_bp = Blueprint('parties', __name__) # init the blueprint for parties modul
 def add_or_get_all_ep():
     if request.method == post_method:
         """ create party endpoint """
+        
         data = request.get_json()
         form_data = request.form
         fields = [name_key, hqAddKey, logoUrlKey]
@@ -57,6 +59,8 @@ def edit_ep(id):
         if request.method == patch_method:
             if validate_id(party_key,id) == ok_str:
                 data = request.get_json()
+                if not data:
+                    data = request.form
                 new_name = data[name_key]
                 party = PartyCont(Id=id, name=new_name)
                 return party.edit_party()
