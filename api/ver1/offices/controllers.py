@@ -1,8 +1,8 @@
-from .models import political_offices
 from api.strings import id_key, name_key, type_key, status_201, ok_str
 from api.ver1.utils import generate_id, success, exists, not_found_resp
-from .strings import office_id_str, office_key
+from api.ver1.offices.strings import office_id_str, office_key
 from api.ver1.validators import validate_dict
+from api.ver1.offices.models import political_offices
 
 
 class OfficeCont:
@@ -22,7 +22,6 @@ class OfficeCont:
         return status
         
     # gets a specific office.
-    @classmethod
     def get_office(self):
         """" fetch a specific office via specified id """
         status = exists(self.Id, political_offices, id_key)

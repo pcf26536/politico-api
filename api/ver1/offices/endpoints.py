@@ -1,9 +1,10 @@
 from flask import Blueprint, request
-from api.ver1.utils import success, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp
+from api.ver1.utils import success, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp, not_found_resp
 from api.ver1.offices.controllers import OfficeCont
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
 from api.ver1.validators import validate_dict, validate_id
+import traceback
 
 office_bp = Blueprint('offices', __name__) # init the blueprint for offices module
 
@@ -43,5 +44,6 @@ def get_office_ep(id):
                 return office.get_office()
             else:
                 return method_not_allowed(request.method)
+        return not_found_resp(office_key) 
     except Exception as e:
         return runtime_error_resp(e)
