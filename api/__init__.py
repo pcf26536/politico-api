@@ -7,9 +7,8 @@ from api.ver1.offices.endpoints import office_bp
 
 def create_app(config_name):
     """ create flask app with specified configs """
-    on_prod = os.environ.get('IS_HEROKU', None)
-    if on_prod:
-        config_name = 'development'
+    if not config_name:
+        config_name = 'production'
 
     app = Flask(__name__, instance_relative_config=True) # instantiate the app
 
