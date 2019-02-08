@@ -1,4 +1,5 @@
 """creating app"""
+import os
 from flask import Flask
 from instance.config import app_config
 from api.ver1.parties.endpoints import party_bp
@@ -6,6 +7,10 @@ from api.ver1.offices.endpoints import office_bp
 
 def create_app(config_name):
     """ create flask app with specified configs """
+    on_prod = os.environ.get('IS_HEROKU', None)
+    if on_prod:
+        config_name = 'development'
+
     app = Flask(__name__, instance_relative_config=True) # instantiate the app
 
     # set configuration
