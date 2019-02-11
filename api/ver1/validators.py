@@ -1,4 +1,4 @@
-from api.ver1.utils import generate_id, success, exists, error
+from api.ver1.utils import generate_id, success, exists, error, name_length_resp
 from api.strings import ok_str, name_key, status_400, type_key
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.offices.strings import office_key
@@ -46,4 +46,9 @@ def validate_id(entity, entity_id):
         return ok_str
     except Exception:
         return error("The {} id [{}] is not of correct format".format(entity, entity_id), status_400)
+
+
+def validate_name_length(entity, name):
+    if not (len(name) > 2):
+        return name_length_resp(entity, name)
         

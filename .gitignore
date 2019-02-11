@@ -110,3 +110,5 @@ venv.bak/
 
 # vscode
 .vscode/
+
+test-reporter-0.6.3-linux-amd64

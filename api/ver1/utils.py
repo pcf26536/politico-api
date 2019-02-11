@@ -47,8 +47,11 @@ def method_not_allowed(method):
 def runtime_error_resp(e):
     return error('Runtime Exception: {}'.format(str(e)), 500)
 
-def name_error_resp(entity, name):
-    return error(message="The {} name [{}] provided is too short or has a wrong format".format(entity, name), code=status_400)
+def name_format_resp(entity, name):
+    return error(message="The {} name [{}] provided is invalid/wrong format".format(entity, name), code=status_400)
+
+def name_length_resp(entity, name):
+    return error(message="The {} name [{}] provided is too short".format(entity, name), code=status_400)
 
 def exists_resp(entity, value, field):
     return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)
