@@ -39,6 +39,12 @@ $ source env/bin/activate
 ```
 $ pip install -r requirements.txt
 ```
+- set the enviroment settings
+```
+set FLASK_APP="run.py"
+set APP_SETTINGS="development"
+```
+
 - Run the app
 ``` $ flask run ```
 
