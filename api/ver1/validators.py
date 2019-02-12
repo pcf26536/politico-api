@@ -45,12 +45,14 @@ def validate_id(entity, entity_id):
         int(entity_id)
         return ok_str
     except Exception:
-        return error("The {} id [{}] is not of correct format".format(entity, entity_id), status_400)
+        return error(
+            "The {} id [{}] is not of correct format".format(entity, entity_id),
+            status_400)
 
 
 def add_entity_check(entity, data_dict, data_list):
     status = validate_dict(data_dict, entity)
     if status == ok_str:
         data_list.append(data_dict)
-        return success(code=status_201, data=[data_dict]) # return list of parties to display added party
+        return success(code=status_201, data=[data_dict])
     return status

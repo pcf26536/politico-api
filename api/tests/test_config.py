@@ -60,4 +60,3 @@ class TestProductionConfig(unittest.TestCase):
 
     def tearDown(self):
         self.app = None
-        
