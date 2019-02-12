@@ -3,7 +3,7 @@ from api.strings import ok_str, name_key, not_found
 from api.ver1.utils import error, name_format_resp, name_length_resp
 from .models import political_offices
 from api.ver1.utils import exists, exists_resp
-from api.ver1.validators import validate_name_base
+from api.ver1.utils import check_name_base
 import re
 
 def validate_officeType(value):
@@ -16,4 +16,4 @@ def validate_officeType(value):
         return error("Please provide ['type'] value(s) for the office", 400)
 
 def validate_officeName(name):
-    return validate_name_base(office_key, name, political_offices)
+    return check_name_base(office_key, name, political_offices)

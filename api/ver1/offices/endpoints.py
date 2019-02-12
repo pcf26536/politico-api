@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import success, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp, not_found_resp
+from api.ver1.utils import success, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp, not_found_resp, check_form_data
 from api.ver1.offices.controllers import OfficeCont
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
@@ -11,14 +11,8 @@ office_bp = Blueprint('offices', __name__) # init the blueprint for offices modu
 @office_bp.route('/offices', methods=[post_method, get_method])
 def add_or_get_all_ep():
     if request.method == post_method:
-        data = request.get_json()
-        form_data = request.form # check for any form data
         fields = [name_key, type_key]
-        if not data or not len(data):
-            if form_data:
-                data = form_data
-            else:
-                return no_entry_resp(office_key, fields)
+        data = check_form_data(office_key, request, fields)
         try:
             validate_dict(data, office_key)
             name = data[name_key]

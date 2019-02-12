@@ -47,14 +47,4 @@ def validate_id(entity, entity_id):
         return ok_str
     except Exception:
         return error("The {} id [{}] is not of correct format".format(entity, entity_id), status_400)
-
-
-def validate_name_base(entity, name, data_list):
-    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
-        return name_format_resp(entity, name)
-    elif not (len(name) > 2):
-        return name_length_resp(entity, name)
-    elif not exists(name, data_list, name_key) == not_found:
-        return exists_resp(entity, name, name_key)
-    return ok_str
         

@@ -3,7 +3,7 @@ from api.ver1.utils import name_format_resp, name_length_resp, error, exists, ex
 from api.strings import ok_str, not_found, name_key
 from .strings import logoTypes, hqAddKey
 from .models import political_parties
-from api.ver1.validators import validate_name_base
+from api.ver1.utils import check_name_base
 import re
 
 def validate_hqAdd(value):
@@ -29,4 +29,4 @@ def validate_logoUrl(value):
             return error('Bad image logo format [{}] has no file extension.'.format(value), 400)
 
 def validate_partyName(name):
-    return validate_name_base(party_key, name, political_parties)
+    return check_name_base(party_key, name, political_parties)

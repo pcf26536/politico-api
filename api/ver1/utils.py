@@ -1,5 +1,6 @@
 from flask import make_response, jsonify
 from api.strings import *
+import re
 
 def generate_id(list):
     """ Creates a unique ID for a new item to be added to the list"""
@@ -30,6 +31,26 @@ def exists(value, item_list, key):
         if item[key] == value:
             return item
     return not_found
+
+def check_form_data(entity, request, fields):
+    data = request.get_json()
+    form_data = request.form # check for any form data
+    if not data or not len(data):
+        if form_data:
+            data = form_data
+        else:
+            return no_entry_resp(entity, fields)
+    return data
+
+
+def check_name_base(entity, name, data_list):
+    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
+        return name_format_resp(entity, name)
+    elif not (len(name) > 2):
+        return name_length_resp(entity, name)
+    elif not exists(name, data_list, name_key) == not_found:
+        return exists_resp(entity, name, name_key)
+    return ok_str
 
 
 def not_found_resp(entity):
