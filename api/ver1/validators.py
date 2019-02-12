@@ -4,7 +4,6 @@ from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.offices.strings import office_key
 from api.ver1.parties.validators import validate_partyname, validate_logourl, validate_hqadd
 from api.ver1.offices.validators import validate_officeName, validate_officeType
-import re
 
 
 def validate_dict(data_dict, entity):

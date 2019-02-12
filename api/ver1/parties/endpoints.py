@@ -42,7 +42,7 @@ def get_or_delete_ep(id):
                 return party.get_party()
             elif request.method == delete_method:
                 return party.delete_party()
-        not_found_resp(party_key)  
+        not_found_resp(party_key)
     except Exception as e:
         return runtime_error_resp(e)
 
