@@ -2,6 +2,7 @@ from flask import make_response, jsonify
 from api.strings import *
 import re
 
+
 def generate_id(list):
     """ Creates a unique ID for a new item to be added to the list"""
     return len(list) + 1
@@ -32,6 +33,7 @@ def exists(value, item_list, key):
             return item
     return not_found
 
+
 def check_form_data(entity, request, fields):
     data = request.get_json()
     form_data = request.form # check for any form data
@@ -53,26 +55,37 @@ def check_name_base(entity, name, data_list):
     return ok_str
 
 
+def provide_field_value(entity, fields):
+    return error(message="Please provide {} value(s) for the {}".format(fields, entity), code=status_400)
+
+
 def not_found_resp(entity):
     return error(entity + not_found, status_404)
+
 
 def no_entry_resp(entity, fields):
     return error("No data was provided, fields {} required to create {}".format(fields, entity), status_400)
 
+
 def field_missing_resp(entity, fields, field):
     return error("{} field is required. NOTE: required fields {} to create {}".format(field, fields, entity), status_400)
+
 
 def method_not_allowed(method):
     return error("method [{}] not allowed on this endpoint".format(method), status_405)
 
+
 def runtime_error_resp(e):
     return error('Runtime Exception: {}'.format(str(e)), 500)
+
 
 def name_format_resp(entity, name):
     return error(message="The {} name [{}] provided is invalid/wrong format".format(entity, name), code=status_400)
 
+
 def name_length_resp(entity, name):
     return error(message="The {} name [{}] provided is too short".format(entity, name), code=status_400)
+
 
 def exists_resp(entity, value, field):
     return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)

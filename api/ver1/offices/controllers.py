@@ -1,7 +1,7 @@
-from api.strings import id_key, name_key, type_key, status_201, ok_str
+from api.strings import id_key, name_key, type_key, status_201
 from api.ver1.utils import generate_id, success, exists, not_found_resp
 from api.ver1.offices.strings import office_id_str, office_key
-from api.ver1.validators import validate_dict, add_entity_check
+from api.ver1.validators import add_entity_check
 from api.ver1.offices.models import political_offices
 
 

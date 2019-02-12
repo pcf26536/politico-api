@@ -1,8 +1,8 @@
-from api.ver1.utils import error, success, status_201
-from api.strings import ok_str, name_key, status_400, type_key, not_found
+from api.ver1.utils import error, success, status_201, provide_field_value
+from api.strings import ok_str, name_key, status_400, type_key
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.offices.strings import office_key
-from api.ver1.parties.validators import validate_partyName, validate_logoUrl, validate_hqAdd
+from api.ver1.parties.validators import validate_partyname, validate_logourl, validate_hqadd
 from api.ver1.offices.validators import validate_officeName, validate_officeType
 import re
 
@@ -15,13 +15,13 @@ def validate_dict(data_dict, entity):
                 fields.append(key)
                 continue
             if len(fields) > 0:
-                return error(message="Please provide {} value(s) for the {}".format(fields, entity), code=status_400)
+                provide_field_value(party_key, fields)
             elif key == hqAddKey:
-                status = validate_hqAdd(value)
+                status = validate_hqadd(value)
                 if not status == ok_str:
                     return status
             elif key == logoUrlKey:
-                status = validate_logoUrl(value)
+                status = validate_logourl(value)
                 if not status == ok_str:
                     return status
             elif key == type_key:
@@ -31,13 +31,13 @@ def validate_dict(data_dict, entity):
             elif key == name_key:
                 status = None
                 if entity == party_key:
-                    status = validate_partyName(value)
+                    status = validate_partyname(value)
                 elif entity == office_key:
                     status = validate_officeName(value)
                 if not status == ok_str:
                     return status
         if fields:
-            return error(message="Please provide {} value(s) for the {}".format(fields, entity), code=status_400)
+            provide_field_value(party_key, fields)
         return ok_str
 
 

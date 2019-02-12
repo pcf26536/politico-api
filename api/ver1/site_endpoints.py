@@ -1,8 +1,9 @@
 from flask import Blueprint
-from api.strings import status_key, status_200
-from api.ver1.utils import success, error
+from api.strings import status_200
+from api.ver1.utils import success
 
 route_bp = Blueprint('route', __name__) # init the blueprint for Heroku online
+
 
 @route_bp.route('/')
 @route_bp.route('/index')
