@@ -2,7 +2,6 @@ from .test_base import TestBase
 from api.ver1.offices.models import political_offices
 from api.strings import *
 from api.ver1.offices.strings import *
-from api.tests.strings import *
 
 
 class TestOffices(TestBase):
@@ -39,7 +38,9 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], 409)
-        self.assertEqual(data[error_key], "Conflict: office with Women Representative as name already exists")
+        self.assertEqual(
+            data[error_key],
+            "Conflict: office with Women Representative as name already exists")
         self.assertEqual(res.status_code, 409)
 
     def test_add_office_missing_fields(self):
@@ -48,7 +49,9 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "name field is required. NOTE: required fields ['name', 'type'] to create office")
+        self.assertEqual(
+            data[error_key],
+            "name field is required. NOTE: required fields ['name', 'type'] to create office")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_missing_fields_value(self):
@@ -66,7 +69,10 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "Incorrect value [Office], office types should be ['federal', 'legislative', 'state', 'local government']")
+        self.assertEqual(
+            data[error_key],
+            "Incorrect value [Office], office types should be ['federal', 'legislative', 'state', 'local government']"
+        )
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_no_data(self):
@@ -75,7 +81,10 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "No data was provided, fields ['name', 'type'] required to create office")
+        self.assertEqual(
+            data[error_key],
+            "No data was provided, fields ['name', 'type'] required to create office"
+        )
         self.assertEqual(res.status_code, status_400)
 
     # tests for GET all offices
@@ -93,7 +102,8 @@ class TestOffices(TestBase):
     # tests for GET single office
     def test_get_office_ep(self):
         """ Tests get specific office """
-        self.client.post('/api/v1/offices', json=self.office) # add a office cause of teardown clearing list
+        # add a office cause of teardown clearing list
+        self.client.post('/api/v1/offices', json=self.office)
         res = self.client.get('/api/v1/offices/1')
         data = res.get_json()
 
@@ -110,4 +120,3 @@ class TestOffices(TestBase):
         self.assertEqual(data[status_key], status_404)
         self.assertEqual(data[error_key], office_id_str + not_found)
         self.assertEqual(res.status_code, status_404)
-        

@@ -46,7 +46,9 @@ def check_form_data(entity, request, fields):
 
 
 def name_length_resp(entity, name):
-    return error(message="The {} name [{}] provided is too short".format(entity, name), code=400)
+    return error(
+        message="The {} name [{}] provided is too short".format(entity, name),
+        code=400)
 
 
 def check_name_base(entity, name, data_list):
@@ -60,7 +62,9 @@ def check_name_base(entity, name, data_list):
 
 
 def provide_field_value(entity, fields):
-    return error(message="Please provide {} value(s) for the {}".format(fields, entity), code=status_400)
+    return error(
+        message="Please provide {} value(s) for the {}".format(fields, entity),
+        code=status_400)
 
 
 def not_found_resp(entity):
@@ -68,11 +72,15 @@ def not_found_resp(entity):
 
 
 def no_entry_resp(entity, fields):
-    return error("No data was provided, fields {} required to create {}".format(fields, entity), status_400)
+    return error(
+        "No data was provided, fields {} required to create {}".format(fields, entity),
+        status_400)
 
 
 def field_missing_resp(entity, fields, field):
-    return error("{} field is required. NOTE: required fields {} to create {}".format(field, fields, entity), status_400)
+    return error(
+        "{} field is required. NOTE: required fields {} to create {}".format(field, fields, entity),
+        status_400)
 
 
 def method_not_allowed(method):
@@ -84,7 +92,9 @@ def runtime_error_resp(e):
 
 
 def name_format_resp(entity, name):
-    return error(message="The {} name [{}] provided is invalid/wrong format".format(entity, name), code=status_400)
+    return error(
+        message="The {} name [{}] provided is invalid/wrong format".format(entity, name),
+        code=status_400)
 
 
 def exists_resp(entity, value, field):

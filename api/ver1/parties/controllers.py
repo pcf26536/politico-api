@@ -18,14 +18,20 @@ class PartyCont:
     # create a political party.
     def add_party(self):
         """"Add a political party passed on instantiation, generates auto id"""
-        party = { id_key: generate_id(political_parties), name_key:self.name, hqAddKey: self.hqAddress, logoUrlKey: self.logoUrl }
+        party = {
+            id_key: generate_id(political_parties),
+            name_key: self.name, hqAddKey: self.hqAddress,
+            logoUrlKey: self.logoUrl
+        }
         return add_entity_check(party_key, party, political_parties)
 
     # deletes a party.
     def delete_party(self):
         for i in range(len(political_parties)):
             if political_parties[i][id_key] == self.Id:
-                return success( code=status_200, data=[{ msg_key: '{} deleted successfully'.format(political_parties.pop(i)[name_key])}])
+                return success( code=status_200, data=[
+                    { msg_key: '{} deleted successfully'.format(political_parties.pop(i)[name_key])}
+                ])
         return not_found_resp(party_id_str)
         
     # gets a specific party.
