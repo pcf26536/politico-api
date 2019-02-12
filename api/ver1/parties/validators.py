@@ -9,7 +9,10 @@ import re
 
 def validate_hqadd(value):
     if not re.match(r'^[0-9]+-[0-9]+,\s[a-zA-Z]{3,}$', value):
-        return error('Bad address format [{}], expected format > [Address-Code, Town] e.g [20100-0100, Nairobi].'.format(value), 400)
+        return error(
+            'Bad address format [{}],'
+            ' expected format > [Address-Code, Town] e.g [20100-0100, Nairobi].'.format(value),
+            400)
     elif not exists(value, political_parties, hqAddKey) == not_found:
         return exists_resp(party_key, value, hqAddKey)
     return ok_str

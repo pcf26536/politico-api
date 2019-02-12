@@ -8,4 +8,3 @@ app = create_app(config_name) # defining the configuration to be used
 
 if __name__ == "__main__": # the interpreter inserts this at the top of the module when run as the main program.
     app.run()
-    
