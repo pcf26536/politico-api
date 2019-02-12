@@ -111,4 +111,7 @@ venv.bak/
 # vscode
 .vscode/
 
+# idea
+.idea
+
 test-reporter-0.6.3-linux-amd64

@@ -1,7 +1,7 @@
-from api.strings import id_key, name_key, type_key, status_201, ok_str
+from api.strings import id_key, name_key, type_key, status_201
 from api.ver1.utils import generate_id, success, exists, not_found_resp
 from api.ver1.offices.strings import office_id_str, office_key
-from api.ver1.validators import validate_dict
+from api.ver1.validators import add_entity_check
 from api.ver1.offices.models import political_offices
 
 
@@ -14,12 +14,8 @@ class OfficeCont:
     # create a political office
     def add_office(self):
         """"Add a political office passed on instantiation, generates auto id"""
-        office = { id_key: generate_id(political_offices), name_key:self.name, type_key: self.type }
-        status = validate_dict(office, office_key)
-        if status == ok_str:
-            political_offices.append(office)
-            return success(code=status_201, data=[office])
-        return status
+        office = { id_key: generate_id(political_offices), name_key: self.name, type_key: self.type }
+        return add_entity_check(office_key, office, political_offices)
         
     # gets a specific office.
     def get_office(self):
