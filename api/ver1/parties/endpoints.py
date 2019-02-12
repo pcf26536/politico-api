@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp, not_found_resp
+from api.ver1.utils import error, no_entry_resp, field_missing_resp, method_not_allowed, runtime_error_resp, not_found_resp, check_form_data
 from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, patch_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
@@ -11,15 +11,8 @@ party_bp = Blueprint('parties', __name__) # init the blueprint for parties modul
 def add_or_get_all_ep():
     if request.method == post_method:
         """ create party endpoint """
-        
-        data = request.get_json()
-        form_data = request.form
         fields = [name_key, hqAddKey, logoUrlKey]
-        if not data or not len(data):
-            if form_data:
-                data = form_data
-            else:
-                return no_entry_resp(party_key, fields)
+        data = check_form_data(party_key, request, fields)
         try:
             validate_dict(data, party_key)
             name = data[name_key]
