@@ -14,7 +14,7 @@ class OfficeCont:
     # create a political office
     def add_office(self):
         """"Add a political office passed on instantiation, generates auto id"""
-        office = { id_key: generate_id(political_offices), name_key:self.name, type_key: self.type }
+        office = { id_key: generate_id(political_offices), name_key: self.name, type_key: self.type }
         status = validate_dict(office, office_key)
         if status == ok_str:
             political_offices.append(office)

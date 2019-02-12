@@ -3,6 +3,7 @@ from api.strings import ok_str, name_key, not_found
 from api.ver1.utils import error, name_format_resp, name_length_resp
 from .models import political_offices
 from api.ver1.utils import exists, exists_resp
+from api.ver1.validators import validate_name_base
 import re
 
 def validate_officeType(value):
@@ -15,10 +16,4 @@ def validate_officeType(value):
         return error("Please provide ['type'] value(s) for the office", 400)
 
 def validate_officeName(name):
-    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
-        return name_format_resp(office_key, name)
-    elif not (len(name) > 2):
-        return name_length_resp(office_key, name)
-    elif not exists(name, political_offices, name_key) == not_found:
-        return exists_resp(office_key, name, name_key)
-    return ok_str
+    return validate_name_base(office_key, name, political_offices)
