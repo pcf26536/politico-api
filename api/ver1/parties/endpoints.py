@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import field_missing_resp, runtime_error_resp, not_found_resp, check_form_data
+from api.ver1.utils import field_missing_resp, runtime_error_resp, not_found_resp, check_form_data, no_entry_resp
 from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
@@ -15,15 +15,19 @@ def add_or_get_all_ep():
         """ create party endpoint """
         fields = [name_key, hqAddKey, logoUrlKey]
         data = check_form_data(party_key, request, fields)
+        if not data:
+            return no_entry_resp(party_key, fields)
         try:
-            validate_dict(data, party_key)
+            status = validate_dict(data, party_key)
+            if not status == ok_str:
+                return status
             name = data[name_key]
             hq_address = data[hqAddKey]
             logo_url = data[logoUrlKey]
             party = PartyCont(name=name, hqAddress=hq_address, logoUrl=logo_url)
             return party.add_party()
         except KeyError as e:
-            field_missing_resp(party_key, fields, e.args[0])
+            return field_missing_resp(party_key, fields, e.args[0])
 
     elif request.method == get_method:
         return PartyCont().get_parties()
@@ -40,7 +44,7 @@ def get_or_delete_ep(id):
                 return party.delete_party()
         not_found_resp(party_key)  
     except Exception as e:
-        runtime_error_resp(e)
+        return runtime_error_resp(e)
 
 
 @party_bp.route('/parties/<int:id>/name', methods=['PATCH'])

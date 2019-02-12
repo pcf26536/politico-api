@@ -15,7 +15,7 @@ def validate_dict(data_dict, entity):
                 fields.append(key)
                 continue
             if len(fields) > 0:
-                provide_field_value(party_key, fields)
+                return provide_field_value(entity, fields)
             elif key == hqAddKey:
                 status = validate_hqadd(value)
                 if not status == ok_str:
@@ -37,7 +37,7 @@ def validate_dict(data_dict, entity):
                 if not status == ok_str:
                     return status
         if fields:
-            provide_field_value(party_key, fields)
+            return provide_field_value(entity, fields)
         return ok_str
 
 

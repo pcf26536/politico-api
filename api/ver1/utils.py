@@ -39,10 +39,14 @@ def check_form_data(entity, request, fields):
     form_data = request.form # check for any form data
     if not data or not len(data):
         if form_data:
-            data = form_data
+            return form_data
         else:
-            return no_entry_resp(entity, fields)
+            return None
     return data
+
+
+def name_length_resp(entity, name):
+    return error(message="The {} name [{}] provided is too short".format(entity, name), code=400)
 
 
 def check_name_base(entity, name, data_list):
@@ -81,10 +85,6 @@ def runtime_error_resp(e):
 
 def name_format_resp(entity, name):
     return error(message="The {} name [{}] provided is invalid/wrong format".format(entity, name), code=status_400)
-
-
-def name_length_resp(entity, name):
-    return error(message="The {} name [{}] provided is too short".format(entity, name), code=status_400)
 
 
 def exists_resp(entity, value, field):

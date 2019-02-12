@@ -1,6 +1,7 @@
 import unittest
 from api import create_app
 
+
 class TestBase(unittest.TestCase):
     """Default super class for api ver 1 tests"""
 

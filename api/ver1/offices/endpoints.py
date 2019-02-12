@@ -1,5 +1,5 @@
 from flask import Blueprint, request
-from api.ver1.utils import field_missing_resp, runtime_error_resp, not_found_resp, check_form_data
+from api.ver1.utils import field_missing_resp, runtime_error_resp, not_found_resp, check_form_data, no_entry_resp
 from api.ver1.offices.controllers import OfficeCont
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
@@ -14,14 +14,18 @@ def add_or_get_all_ep():
     if request.method == post_method:
         fields = [name_key, type_key]
         data = check_form_data(office_key, request, fields)
+        if not data:
+            return no_entry_resp(office_key, fields)
         try:
-            validate_dict(data, office_key)
+            status = validate_dict(data, office_key)
+            if not status == ok_str:
+                return status
             name = data[name_key]
             office_type = data[type_key]
             office = OfficeCont(name=name, office_type=office_type)
             return office.add_office()
         except KeyError as e:
-            field_missing_resp(office_key, fields, e.args[0])
+            return field_missing_resp(office_key, fields, e.args[0])
 
     elif request.method == get_method:
         return OfficeCont().get_offices()
@@ -35,6 +39,6 @@ def get_office_ep(id):
             office = OfficeCont(Id=id)
             if request.method == get_method:
                 return office.get_office()
-        not_found_resp(office_key) 
+        return not_found_resp(office_key)
     except Exception as e:
-        runtime_error_resp(e)
+        return runtime_error_resp(e)
