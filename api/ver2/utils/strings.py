@@ -1,4 +1,5 @@
 status_202 = 200
+status_401 = 401
 v2_url_prefix = '/api/v2'
 password_key = 'password'
 password_1 = 'password1'
