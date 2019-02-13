@@ -24,7 +24,7 @@ petition_with_wrong_body_format = correct_petition
 petition_with_wrong_body_format[body_key] = '!!@#$%%^^&&*(()'
 
 petition_with_no_evidence = correct_petition
-del petition_with_no_evidence[evidence_value]
+del petition_with_no_evidence[evidence_key]
 
 petition_with_wrong_evidence_format = correct_petition
-petition_with_wrong_evidence_format[evidence_value] = ['fdffdfd.asd', 'image.wemmm']
+petition_with_wrong_evidence_format[evidence_key] = ['fdffdfd.asd', 'image.wemmm']
