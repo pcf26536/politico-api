@@ -1,4 +1,16 @@
-table_queries = [
+""" Tables and Queries """
+
+table_names = [
+    'politico_users',
+    'politico_auth',
+    'politico_parties',
+    'politico_offices',
+    'politico_candidates',
+    'politico_votes'
+    'politico_petitions'
+]
+
+create_table_queries = [
     """
     CREATE TABLE IF NOT EXISTS politico_users(
         id SERIAL PRIMARY KEY NOT NULL,
@@ -76,15 +88,4 @@ table_queries = [
         FOREIGN KEY (candidate) REFERENCES candidates(candidate) ON DELETE CASCADE
     )
     """
-]
-
-
-table_names = [
-    'politico_users',
-    'politico_auth',
-    'politico_parties',
-    'politico_offices',
-    'politico_candidates',
-    'politico_votes'
-    'politico_petitions'
 ]
