@@ -1,5 +1,5 @@
 from api.tests.test_base import TestBase
-from api.ver2.utils.strings import status_202, v2_url_prefix, status_401
+from api.ver2.utils.strings import status_202, v2_url_prefix
 from api.strings import status_key, name_key, data_key, error_key, status_400
 from api.ver2.utils.login_test_data import *
 
@@ -32,9 +32,9 @@ class TestLogin(TestBase):
             json=user_with_incorrect_credentials)
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_401)
+        self.assertEqual(data[status_key], status_400)
         self.assertEqual(data[error_key], 'Your email or password is incorrect')
-        self.assertEqual(res.status_code, status_401)
+        self.assertEqual(res.status_code, status_400)
 
     def test_login_empty_mail_pass(self):
         """ Tests login success """
