@@ -1,5 +1,6 @@
 status_202 = 200
 status_401 = 401
+status_415 = 415
 v2_url_prefix = '/api/v2'
 password_key = 'password'
 password_1 = 'password1'
@@ -10,3 +11,4 @@ evidence_key = 'evidence'
 evidence_value = ['video.mp4', 'video2.mp4', 'image.jpg']
 user_key = 'user'
 token_key = 'token'
+text_key = 'text'

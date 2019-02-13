@@ -1,5 +1,3 @@
-from os import error
-
 from api.tests.test_base import TestBase
 from api.ver2.utils.strings import status_202, v2_url_prefix, status_401, user_key, token_key
 from api.strings import status_key, name_key, data_key, error_key, status_400
