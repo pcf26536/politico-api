@@ -1,5 +1,5 @@
 from api.ver1.ballot.models import petitions
-from api.ver1.ballot.strings import *
+from api.ver1.ballot.strings import createdOn_key, createdBy_key, body_key
 from api.ver2.utils.strings import evidence_key, evidence_value
 from api.ver1.offices.strings import office_key
 from api.strings import id_key

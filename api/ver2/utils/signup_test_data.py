@@ -1,13 +1,14 @@
-from api.strings import *
+from api.strings import id_key
 from api.ver1.users.strings import *
 from api.ver1.users.models import users
-from api.ver2.utils.strings import password_key, password_1, password_2, correct_pass, short_pass
+from api.ver2.utils.strings import password_1, password_2, correct_pass, short_pass
 
 
 user_with_correct_signup_data = users[0]
 user_with_correct_signup_data[password_1] = correct_pass
 user_with_correct_signup_data[password_2] = correct_pass
 del user_with_correct_signup_data[admin]
+del user_with_correct_signup_data[id_key]
 
 user_with_missing_signup_data = user_with_correct_signup_data
 del user_with_missing_signup_data[fname]
