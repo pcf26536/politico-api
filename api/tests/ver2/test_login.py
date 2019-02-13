@@ -17,7 +17,7 @@ class TestLogin(TestBase):
     def test_login(self):
         """ Tests login success """
         res = self.client.post(
-            v2_url_prefix + '/auth/signup',
+            v2_url_prefix + '/auth/login',
             json=user_with_correct_credentials)
         data = res.get_json()
 
@@ -28,7 +28,7 @@ class TestLogin(TestBase):
     def test_login_wrong_mail_pass(self):
         """ Tests login success """
         res = self.client.post(
-            v2_url_prefix + '/auth/signup',
+            v2_url_prefix + '/auth/login',
             json=user_with_incorrect_credentials)
         data = res.get_json()
 
@@ -39,7 +39,7 @@ class TestLogin(TestBase):
     def test_login_empty_mail_pass(self):
         """ Tests login success """
         res = self.client.post(
-            v2_url_prefix + '/auth/signup',
+            v2_url_prefix + '/auth/login',
             json=user_with_missing_credentials)
         data = res.get_json()
 
