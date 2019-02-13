@@ -1,0 +1,9 @@
+status_202 = 200
+v2_url_prefix = '/api/v2'
+password_key = 'password'
+password_1 = 'password1'
+password_2 = 'password2'
+correct_pass = 'Asdfghjkl;11'
+short_pass = 'abc'
+evidence_key = 'evidence'
+evidence_value = ['video.mp4', 'video2.mp4', 'image.jpg']
