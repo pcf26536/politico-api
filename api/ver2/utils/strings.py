@@ -8,3 +8,5 @@ correct_pass = 'Asdfghjkl;11'
 short_pass = 'abc'
 evidence_key = 'evidence'
 evidence_value = ['video.mp4', 'video2.mp4', 'image.jpg']
+user_key = 'user'
+token_key = 'token'
