@@ -7,6 +7,7 @@ from api.ver1.offices.endpoints import office_bp
 from api.ver1.site_endpoints import route_bp
 from api.strings import status_400, status_404, status_405
 
+
 def create_app(config_name):
     """ create flask app with specified configs """
     if not config_name:
