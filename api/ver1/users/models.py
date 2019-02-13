@@ -11,14 +11,14 @@ users = [
         fname : 'john',
         lname : 'doe',
         email: 'johndoe@andela.com',
-        phone: '+254 713 972 278',
+        phone: '0713972278',
         pspt : 'passport.jpg', admin: False
     },
     { id_key : 2,
       fname : 'maina',
       lname : 'maenor',
       email: 'maenor@slack.fr',
-      phone: '+254 782 632 854',
+      phone: '0782632854',
       pspt : 'pass2.png',
       admin: False
     }
