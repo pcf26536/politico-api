@@ -14,6 +14,5 @@ candidate_id_unexisting_infor[candidate_key] = 100000000
 office_id_unexisting_info = correct_candidate_infor
 office_id_unexisting_info[office_key] = 100000
 
-
 party_id_unexisting_info = correct_candidate_infor
 party_id_unexisting_info[party_key] = 1000000
