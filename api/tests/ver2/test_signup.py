@@ -1,6 +1,6 @@
 from api.tests.test_base import TestBase
-from api.ver2.utils.strings import status_202, v2_url_prefix, status_401, user_key, token_key
-from api.strings import status_key, name_key, data_key, error_key, status_400
+from api.ver2.utils.strings import status_202, v2_url_prefix, user_key, token_key
+from api.strings import status_key, data_key, error_key, status_400
 from api.ver2.utils.signup_test_data import *
 
 
@@ -15,7 +15,6 @@ class TestSignUp(TestBase):
         # close the db connection
 
     def test_signup(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_correct_signup_data)
@@ -27,7 +26,6 @@ class TestSignUp(TestBase):
         self.assertEqual(res.status_code, status_202)
 
     def test_signup_missing_fields(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_missing_signup_data)
@@ -39,7 +37,6 @@ class TestSignUp(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_name_format(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_wrong_name_format)
@@ -51,7 +48,6 @@ class TestSignUp(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_email_format(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_wrong_mail_format)
@@ -63,7 +59,6 @@ class TestSignUp(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_password_length(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_wrong_pass_length)
@@ -75,7 +70,6 @@ class TestSignUp(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_passport_format(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_wrong_passport_url)
@@ -87,7 +81,6 @@ class TestSignUp(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_phone_number(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_wrong_phone_format)

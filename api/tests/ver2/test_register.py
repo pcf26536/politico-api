@@ -1,6 +1,6 @@
 from api.tests.test_base import TestBase
-from api.ver2.utils.strings import status_202, v2_url_prefix, status_403
-from api.strings import status_key, name_key, data_key, error_key, status_400, status_404
+from api.ver2.utils.strings import status_202, v2_url_prefix
+from api.strings import status_key, data_key, error_key, status_404
 from api.ver2.utils.register_test_data import *
 from api.ver1.offices.strings import office_key
 
@@ -16,7 +16,6 @@ class TestRegister(TestBase):
         # close the db connection
 
     def test_register(self):
-        """ Tests vote success """
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor)
@@ -27,7 +26,6 @@ class TestRegister(TestBase):
         self.assertEqual(res.status_code, status_202)
 
     def test_user_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=candidate_id_unexisting_infor)
@@ -38,7 +36,6 @@ class TestRegister(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_party_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=party_id_unexisting_info)
@@ -49,7 +46,6 @@ class TestRegister(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_office_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=office_id_unexisting_info)

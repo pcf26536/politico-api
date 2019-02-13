@@ -26,7 +26,6 @@ class TestLogin(TestBase):
         self.assertEqual(res.status_code, status_202)
 
     def test_login_wrong_mail_pass(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/login',
             json=user_with_incorrect_credentials)
@@ -37,7 +36,6 @@ class TestLogin(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_login_empty_mail_pass(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/login',
             json=user_with_missing_credentials)

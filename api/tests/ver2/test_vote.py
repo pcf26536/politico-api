@@ -1,6 +1,6 @@
 from api.tests.test_base import TestBase
 from api.ver2.utils.strings import status_202, v2_url_prefix, status_403
-from api.strings import status_key, name_key, data_key, error_key, status_400, status_404
+from api.strings import status_key, data_key, error_key, status_404
 from api.ver2.utils.vote_test_data import *
 from api.ver1.ballot.strings import createdBy_key
 
@@ -39,7 +39,6 @@ class TestVote(TestBase):
         self.assertEqual(res.status_code, status_403)
 
     def test_vote_office_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/votes/',
             json=office_does_not_exist_vote)
@@ -50,7 +49,6 @@ class TestVote(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_voter_user_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/votes/',
             json=voter_does_not_exist_vote)
@@ -61,7 +59,6 @@ class TestVote(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_vote_candidate_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/votes/',
             json=candidate_does_not_exist_vote)

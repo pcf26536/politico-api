@@ -15,7 +15,6 @@ class TestPetition(TestBase):
         # close the db connection
 
     def test_create_petition(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/petitions/',
             json=correct_petition)
@@ -26,7 +25,6 @@ class TestPetition(TestBase):
         self.assertEqual(res.status_code, status_201)
 
     def test_create_petition_office_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/petitions/',
             json=petition_with_wrong_office_id)
@@ -37,7 +35,6 @@ class TestPetition(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_create_petition_user_not_found(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/petitions/',
             json=petition_with_wrong_user_id)
@@ -48,7 +45,6 @@ class TestPetition(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_create_petition_wrong_body_format(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/petitions/',
             json=petition_with_wrong_body_format)
@@ -59,7 +55,6 @@ class TestPetition(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_create_petition_no_evidence(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/petitions/',
             json=petition_with_no_evidence)
@@ -70,7 +65,6 @@ class TestPetition(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_create_petition_wrong_evidence_format(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/petitions/',
             json=petition_with_wrong_evidence_format)

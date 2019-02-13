@@ -15,7 +15,6 @@ class TestResetPassword(TestBase):
         # close the db connection
 
     def test_reset(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/reset',
             json=user_with_correct_email)
@@ -26,7 +25,6 @@ class TestResetPassword(TestBase):
         self.assertEqual(res.status_code, status_205)
 
     def test_reset_with_wrong_mail(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/reset',
             json=user_with_unexisting_email)
@@ -37,7 +35,6 @@ class TestResetPassword(TestBase):
         self.assertEqual(res.status_code, status_404)
 
     def test_reset_invalid_mail(self):
-        """ Tests login success """
         res = self.client.post(
             v2_url_prefix + '/auth/reset',
             json=user_with_invalid_email)
