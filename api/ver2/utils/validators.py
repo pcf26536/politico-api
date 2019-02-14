@@ -41,9 +41,9 @@ def is_not_admin():
 
     if not user[admin_key]:
         return error(
-            "Forbidden: This action is reserved to Admins only", status_401)
-    return None"""
-
+            "Unauthorized: This action is reserved to Admins only", status_401)
+    return None
+"""
 
 def is_valid_email(email):
     if not re.match(r"^[A-Za-z0-9\.\+_-]+@[A-Za-z0-9\._-]+\.[a-zA-Z]*$", email):
