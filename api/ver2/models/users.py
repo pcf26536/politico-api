@@ -1,7 +1,7 @@
 from flask_jwt_extended import (create_access_token, create_refresh_token)
 from werkzeug.security import generate_password_hash
 from .skeleton import Skeleton
-from api.ver2.utils.validators import is_bool, is_string, is_valid_email, has_min_length
+from api.ver2.utils.validators import is_bool, is_string, is_valid_email, has_min_pass_length
 from api.ver1.users.strings import *
 from api.strings import id_key, status_409
 from api.ver2.utils.strings import password_key, user_id_key, status_422
@@ -80,7 +80,7 @@ class Users(Skeleton):
             self.code = status_422
             return False
 
-        if not (has_min_length(self.password1) or has_min_length(self.password2)):
+        if not (has_min_pass_length(self.password1) or has_min_pass_length(self.password2)):
             self.message = "Password must be at least 6 characters long"
             self.code = status_422
             return False

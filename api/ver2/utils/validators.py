@@ -42,7 +42,12 @@ def is_valid_email(email):
     return True
 
 
-def has_min_length(value):
+def has_min_pass_length(value):
     if len(value) < 6:
+        return False
+    return True
+
+def has_min_name_length(name):
+    if len(name) < 3:
         return False
     return True
