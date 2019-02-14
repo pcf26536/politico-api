@@ -6,6 +6,7 @@ from api.ver1.parties.endpoints import party_bp
 from api.ver1.offices.endpoints import office_bp
 from api.ver1.site_endpoints import route_bp
 from api.strings import status_400, status_404, status_405
+from api.ver2.database.model import Database
 
 
 def create_app(config_name):
@@ -29,6 +30,12 @@ def create_app(config_name):
 
     #register office blueprint
     app.register_blueprint(office_bp, url_prefix=ver_1_url_prefix)
+
+    # DB initializer
+    db = Database(config_name)
+    db.connect()
+    db.create_db_tables()
+    db.create_root_user()
 
     @app.errorhandler(status_400)
     def bad_request(error):

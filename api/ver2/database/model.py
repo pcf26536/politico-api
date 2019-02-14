@@ -40,9 +40,10 @@ class Database:
         user = cursor.fetchone()
 
         if not user:
-            cursor.execute("INSERT INTO politico_auth (email, password, admin) "
-                           "VALUES ('w.gichuhi5@students.ku.ac.ke', '{}', True)\
-            ".format(generate_password_hash('kadanieet')))
+            cursor.execute(
+                "INSERT INTO politico_auth (email, password, admin) "
+                "VALUES ('w.gichuhi5@students.ku.ac.ke', '{}', True)"
+                    .format(generate_password_hash('kadanieet')))
             connection.commit()
 
     def insert(self, query):
