@@ -1,15 +1,14 @@
-from flask import Blueprint, request
+from flask import request, Blueprint
 from api.ver1.utils import field_missing_resp, runtime_error_resp, not_found_resp, check_form_data, no_entry_resp
 from api.ver1.validators import validate_dict, validate_id
 from api.strings import name_key, post_method, get_method, delete_method, ok_str
 from .strings import hqAddKey, logoUrlKey, party_key
 from api.ver1.parties.controllers import PartyCont
 
+party_v1 = Blueprint('parties_v1', __name__)
 
-party_bp = Blueprint('parties', __name__) # init the blueprint for parties module
 
-
-@party_bp.route('/parties', methods=[post_method, get_method])
+@party_v1.route('/parties', methods=[post_method, get_method])
 def add_or_get_all_ep():
     if request.method == post_method:
         """ create party endpoint """
@@ -33,7 +32,7 @@ def add_or_get_all_ep():
         return PartyCont().get_parties()
 
 
-@party_bp.route('/parties/<int:id>', methods=[delete_method, get_method])
+@party_v1.route('/parties/<int:id>', methods=[delete_method, get_method])
 def get_or_delete_ep(id):
     try:
         party = PartyCont(Id=id)
@@ -47,7 +46,7 @@ def get_or_delete_ep(id):
         return runtime_error_resp(e)
 
 
-@party_bp.route('/parties/<int:id>/name', methods=['PATCH'])
+@party_v1.route('/parties/<int:id>/name', methods=['PATCH'])
 def edit_ep(id):
     if request.method == 'PATCH':
         if validate_id(party_key,id) == ok_str:

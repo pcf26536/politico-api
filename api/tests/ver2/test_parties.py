@@ -25,7 +25,7 @@ class TestParties(TestBase):
 
     # tests for POST parties
     def test_add_party_ep(self):
-        """ Tests add party success """
+        """ Tests create party success """
         res = self.client.post(v2_url_prefix + '/parties', json=self.ex_party)
         data = res.get_json()
 
@@ -56,7 +56,7 @@ class TestParties(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_add_party_exits_ep(self):
-        """ Tests add party success """
+        """ Tests create party success """
         self.client.post(v2_url_prefix + '/parties', json=self.ex_party)
         res = self.client.post(v2_url_prefix + '/parties',
                                json={
@@ -104,7 +104,7 @@ class TestParties(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_add_party_no_data(self):
-        """ Tests when no data is provided for add party"""
+        """ Tests when no data is provided for create party"""
         res = self.client.post(v2_url_prefix + '/parties')
         data = res.get_json()
 
@@ -150,7 +150,7 @@ class TestParties(TestBase):
     # tests for DELETE party
     def test_delete_party_ep(self):
         """ Tests when DELETE reuest made to /parties/<int:id> """
-        self.client.post(v2_url_prefix + '/parties', json=self.ex_party) # add a party cause of teardown clearing list
+        self.client.post(v2_url_prefix + '/parties', json=self.ex_party) # create a party cause of teardown clearing list
         res = self.client.post(v2_url_prefix + '/parties', json=self.ex_party)
 
         res = self.client.delete(v2_url_prefix + '/parties/1')
@@ -173,7 +173,7 @@ class TestParties(TestBase):
     # tests for PATCH party
     def test_patch_party(self):
         """ Tests PATCH request made to /parties/<int:id> """
-        self.client.post(v2_url_prefix + '/parties', json=self.ex_party) # add a party cause of teardown clearing list
+        self.client.post(v2_url_prefix + '/parties', json=self.ex_party) # create a party cause of teardown clearing list
         res = self.client.patch(v2_url_prefix + '/parties/1/name', json={name_key: 'Iskerebete'})
         data = res.get_json()
 

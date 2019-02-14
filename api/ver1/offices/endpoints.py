@@ -1,15 +1,14 @@
-from flask import Blueprint, request
+from flask import request, Blueprint
 from api.ver1.utils import field_missing_resp, runtime_error_resp, not_found_resp, check_form_data, no_entry_resp
 from api.ver1.offices.controllers import OfficeCont
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
 from api.ver1.validators import validate_dict, validate_id
 
+office_v1 = Blueprint('offices_v1', __name__)
 
-office_bp = Blueprint('offices', __name__) # init the blueprint for offices module
 
-
-@office_bp.route('/offices', methods=[post_method, get_method])
+@office_v1.route('/offices', methods=[post_method, get_method])
 def add_or_get_all_ep():
     if request.method == post_method:
         fields = [name_key, type_key]
@@ -31,7 +30,7 @@ def add_or_get_all_ep():
         return OfficeCont().get_offices()
 
 
-@office_bp.route('/offices/<int:id>', methods=[get_method])
+@office_v1.route('/offices/<int:id>', methods=[get_method])
 def get_office_ep(id):
     """" get specific offce by id """
     try:

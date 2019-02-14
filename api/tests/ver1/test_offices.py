@@ -23,7 +23,7 @@ class TestOffices(TestBase):
 
     # tests for POST offices
     def test_add_office_ep(self):
-        """ Tests add office success """
+        """ Tests create office success """
         res = self.client.post('/api/v1/offices', json=self.office)
         data = res.get_json()
 
@@ -32,7 +32,7 @@ class TestOffices(TestBase):
         self.assertEqual(res.status_code, status_201)
 
     def test_add_office_exists(self):
-        """ Tests add office success """
+        """ Tests create office success """
         self.client.post('/api/v1/offices', json=self.office)
         res = self.client.post('/api/v1/offices', json=self.office)
         data = res.get_json()
@@ -76,7 +76,7 @@ class TestOffices(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_no_data(self):
-        """ Tests when no data is provided for add office"""
+        """ Tests when no data is provided for create office"""
         res = self.client.post('/api/v1/offices')
         data = res.get_json()
 
@@ -102,7 +102,7 @@ class TestOffices(TestBase):
     # tests for GET single office
     def test_get_office_ep(self):
         """ Tests get specific office """
-        # add a office cause of teardown clearing list
+        # create a office cause of teardown clearing list
         self.client.post('/api/v1/offices', json=self.office)
         res = self.client.get('/api/v1/offices/1')
         data = res.get_json()
