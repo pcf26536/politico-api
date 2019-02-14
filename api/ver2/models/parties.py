@@ -8,7 +8,7 @@ from api.ver1.parties.validators import validate_hqadd, validate_logourl, valida
 
 class Party(Skeleton):
     def __init__(self, Id=None, name=None, hqAddress=None, logoUrl=None):
-        super().__init__('Party', 'parties')
+        super().__init__('Party', 'politico_parties')
 
         self.Id = Id
         self.name = name
@@ -44,12 +44,7 @@ class Party(Skeleton):
         self.name = new_name
         return super().patch(name_key, new_name, self.Id)
 
-    def validate_object(self):
-        if not is_string(self.name):
-            self.message = "Integer types are not allowed for a name field"
-            self.code = status_422
-            return False
-
+    def validate_party(self):
         name_valid = validate_partyname(self.name)
         if not name_valid == ok_str:
             self.message = name_valid[error_key]

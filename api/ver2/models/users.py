@@ -58,7 +58,7 @@ class Users(Skeleton):
         self.id = json[id_key]
         return self
 
-    def validate_object(self):
+    def validate_user(self):
         if not is_string(self.fname, self.lname):
             self.message = "Integer types are not allowed for a name"
             self.code = status_422
