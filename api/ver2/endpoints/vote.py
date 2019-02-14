@@ -7,16 +7,26 @@ from api.ver1.offices.strings import office_id_str
 from api.ver2.models.votes import Vote
 
 
-vote = Blueprint('vote', __name__)
+votes = Blueprint('vote', __name__)
 
 
-@vote.route('/votes/', methods=[post_method])
-def vote():
+@votes.route('/votes/', methods=[post_method])
+def votes():
     fields = [user_id_key, createdBy_key, createdOn_key, candidate_key, office_id_str]
     data = check_form_data(vote_key, request, fields)
     if data:
         try:
-            pass
+            vote = Vote(
+                created_by=data[createdBy_key],
+                created_on=data[createdOn_key],
+                office_id=data[office_id_str],
+                candidate_id=data[candidate_key]
+            )
+            if vote.validate_vote():
+                vote.create()
+                return success(status_201, [vote.to_json()])
+            else:
+                return error(vote.message, vote.code)
         except Exception as e:
             return field_missing_resp(vote_key, fields, e.args[0])
     else:

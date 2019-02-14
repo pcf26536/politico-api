@@ -45,7 +45,7 @@ class Vote(Skeleton):
         self.Id = json[id_key]
         return self
 
-    def validate_candidate(self):
+    def validate_vote(self):
         if not is_number(self.created_by):
             self.message = "String types are not allowed for Created By field"
             self.code = status_400
