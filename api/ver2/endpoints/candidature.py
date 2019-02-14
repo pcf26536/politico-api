@@ -1,12 +1,15 @@
 from flask import request, Blueprint
 from flask_jwt_extended import (jwt_required)
-from api.strings import post_method, status_201
-from api.ver1.utils import check_form_data, no_entry_resp, field_missing_resp, error, success
+from api.strings import post_method, status_201, get_method
+from api.ver1.utils import check_form_data, no_entry_resp, \
+    field_missing_resp, error, success, runtime_error_resp, not_found_resp
 from api.ver2.utils.strings import user_id_key
 from api.ver1.parties.strings import party_id_key
+from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key
 from api.ver2.utils import is_not_admin
 from api.ver2.models.candidates import Candidate
+from api.ver2.models.votes import Vote
 
 register = Blueprint('api_ver2', __name__)
 
@@ -34,3 +37,15 @@ def register(id):
             return field_missing_resp(candidate_key, fields, e.args[0])
     else:
         return no_entry_resp(candidate_key, fields)
+
+
+@register.route('/office/<int:id>/results', methods=[get_method])
+def results(id):
+    try:
+        votes = Vote(office_id=id).get_by(office_key, id)
+        data = []
+        for vote in votes:
+            data.append(vote.to_json())
+        return success(200, data)
+    except Exception as e:
+        return runtime_error_resp(e)
