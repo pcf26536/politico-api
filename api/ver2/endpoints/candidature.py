@@ -42,6 +42,10 @@ def register(id):
 @register.route('/office/<int:id>/results', methods=[get_method])
 def results(id):
     try:
-        item = Vote(office_id=id).get_by(office_key, id)
+        votes = Vote(office_id=id).get_by(office_key, id)
+        data = []
+        for vote in votes:
+            data.append(vote.to_json())
+        return success(200, data)
     except Exception as e:
         return runtime_error_resp(e)
