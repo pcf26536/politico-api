@@ -1,0 +1,999 @@
+[33mcommit f08c751fe81932e6d7c89403349aa5375cbe0eb6[m[33m ([m[1;36mHEAD -> [m[1;32mch-db-configs-163901869[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 14 04:11:53 2019 +0300
+
+    updated skeleton base model
+
+[33mcommit de4ff242cad74af7dceb161ca8045ff01ed75476[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 23:55:51 2019 +0300
+
+    added base model
+
+[33mcommit ecae336f44a2a35d700b4b75687215bdb6bf022c[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 23:53:01 2019 +0300
+
+    updated database model
+
+[33mcommit bf58dc72f8b109163bd7653faec16e6138885986[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 21:14:26 2019 +0300
+
+    tables creation scripts
+
+[33mcommit c9621a2c36d48c8ded7b9ba4c100a7ff4c42c042[m[33m ([m[1;31morigin/ch-write-tests-163902379[m[33m, [m[1;32mdevelop-v2[m[33m, [m[1;32mch-write-tests-163902379[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 20:09:50 2019 +0300
+
+    added offices tests for v2
+
+[33mcommit eb4179af2a42197538284a899b1bc67d5414ec31[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 20:04:39 2019 +0300
+
+    added parties tests for v2
+
+[33mcommit dbfbd6773218b28bc76bbbcd5478a23f1bf9008b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 19:25:18 2019 +0300
+
+    fixed evidence key error
+
+[33mcommit 92e05a303779e96a1ae19873ecb21d2eb2deaf11[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 19:04:23 2019 +0300
+
+    removed unused imports and unneccessary comments
+
+[33mcommit c3c6c16c100c901d09ee79d956b6fb5d235dc566[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 18:50:46 2019 +0300
+
+    added get results tests
+
+[33mcommit 99cfe53d875a06545af4025d34a45d6b81426415[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 18:42:13 2019 +0300
+
+    added reset password test and test data
+
+[33mcommit 09211c4960defb6e9c88feb04f6f0b6f36bff934[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 18:25:17 2019 +0300
+
+    added register candidate tests
+
+[33mcommit d67afad8706a25651ae1d3703d3f7ac4cd68662d[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 18:15:29 2019 +0300
+
+    added voting tests
+
+[33mcommit 1e8354303c6fab2999556742e02734a3f473adcf[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 17:22:05 2019 +0300
+
+    correcte login urls
+
+[33mcommit cc64cfc2dc792195d3fc23bb0b709ebaf6bbc16e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 17:20:23 2019 +0300
+
+    added create petition tests
+
+[33mcommit 89f3a51824416ddd47c7950bc8d222647e169eea[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 17:06:43 2019 +0300
+
+    corrected login error status code
+
+[33mcommit c3563c61306d9986b813b64866440e3820214c0d[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 17:05:46 2019 +0300
+
+    added signup tests
+
+[33mcommit 1c02fc8da28af77ae74066c76d85323ed45d191e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 16:36:46 2019 +0300
+
+    added login endpoints tests
+
+[33mcommit 06296f96b34971042d561d6367469a6dc981b76d[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 16:03:23 2019 +0300
+
+    removed auto id from test data
+
+[33mcommit 1715aa470e523545a6211b10963860ee78de05fb[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 16:01:16 2019 +0300
+
+    added register candidate data
+
+[33mcommit 9eb62e979e1b244b4b895d970b3d80ed66a0882d[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 15:47:44 2019 +0300
+
+    added vote test data
+
+[33mcommit 1296ff33ed1c71d192ba4f11a397d5325cd17f69[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 15:44:01 2019 +0300
+
+    added petition test data
+
+[33mcommit d6de76163573aa100e3b4c1ea144544305ae46bb[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 11:52:46 2019 +0300
+
+    added auth tests and petition tests
+
+[33mcommit 14ba1c3274a4bb7e46b96bba5a78f8d2a833805d[m
+Merge: 3a64f26 9f17c21
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 09:46:06 2019 +0300
+
+    Merge branch 'develop-v2' of https://github.com/wainainad60/politico-api into ch-write-tests-163902379
+
+[33mcommit 9f17c21fc3a4fc25849918f10d8454c9ed827bac[m[33m ([m[1;31morigin/develop-v2[m[33m)[m
+Merge: d10e423 3db1be2
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Wed Feb 13 09:39:14 2019 +0300
+
+    Merge pull request #23 from wainainad60/ch-v2dir-struct-163934346
+    
+    #163934346 created the base directory structure for v2
+
+[33mcommit 3db1be20c166c8bf426ab72c2015cdd79541430d[m[33m ([m[1;31morigin/ch-v2dir-struct-163934346[m[33m, [m[1;32mch-v2dir-struct-163934346[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 13 09:31:39 2019 +0300
+
+    [finish #163934346] created the base directory structure for v2
+
+[33mcommit 3a64f26b3717e4ee87ccfab5976c7bd816a2b336[m
+Merge: a960540 d10e423
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 16:51:42 2019 +0300
+
+    fixed merge conflict from develop
+
+[33mcommit d10e42317e2bb5aebada46979711522e852c404d[m[33m ([m[1;31morigin/develop[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mdevelop[m[33m)[m
+Merge: cb41a24 2a46c4c
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Tue Feb 12 16:18:51 2019 +0300
+
+    Merge pull request #22 from wainainad60/ch-lint-warnings-163894616
+    
+    #163894616 reduced long lines of code
+
+[33mcommit 2a46c4c6996ac578d40186dab3e1bcc152623b52[m[33m ([m[1;31morigin/ch-lint-warnings-163894616[m[33m, [m[1;32mch-lint-warnings-163894616[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 16:13:57 2019 +0300
+
+    [finish #163894616] reduced too long lines
+
+[33mcommit a960540115afc6e15cf4fd3f3cb2f9e8005e2116[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 15:42:34 2019 +0300
+
+    updated test users with SetUp and TearDown
+
+[33mcommit c7d626b538c4e6f596d7556749e6a0a48ce121a7[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 14:42:30 2019 +0300
+
+    added test users, restructed test files
+
+[33mcommit cb41a24e36ea54d5f58ae6abb3eeffc4cbeb39e6[m
+Merge: a9b0d35 cf41121
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Tue Feb 12 13:16:50 2019 +0300
+
+    Merge pull request #21 from wainainad60/ch-lint-warnings-163894616
+    
+    #163894616 - Removed unused imports linting errors, unnecessary return statements and fixed test errors
+
+[33mcommit cf4112175c5e1b1b40ead66bdc30ccef49b665df[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 13:11:37 2019 +0300
+
+    removed errors from codacy review
+
+[33mcommit b3d91fe7aee7096e589aace2f39635409a748067[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 13:03:33 2019 +0300
+
+    fixed test errors after removing unused imports, linting errors and unnecessary return statements
+
+[33mcommit afad44976b3f166de344cb596dde392246194284[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 12 12:09:41 2019 +0300
+
+    removed unused imports, linting errors and uneccessary return statements
+
+[33mcommit 670ab3e0ce5de657efd8faad9663ebccaced58fd[m
+Author: pcf26536 <kadanieet>
+Date:   Tue Feb 12 10:34:01 2019 +0300
+
+    updated parties form data endpoint check
+
+[33mcommit ecb87760a9cdea7c7b27ce38b853a7d731abd8c6[m
+Author: pcf26536 <kadanieet>
+Date:   Tue Feb 12 10:10:25 2019 +0300
+
+    updated offices form data endpoint check
+
+[33mcommit e7db7c013382ccbca0d5841e34569b757e45d344[m
+Author: pcf26536 <kadanieet>
+Date:   Tue Feb 12 08:19:26 2019 +0300
+
+    fixed redundat validate name function
+
+[33mcommit a9b0d35be304241154198a37facd9e1404ff7f2d[m[33m ([m[1;32mch-validate-edge-163782104[m[33m)[m
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Mon Feb 11 20:47:57 2019 +0300
+
+    Updated README.md, add environment setup
+
+[33mcommit 6ff3ce8c9c632bd704eafdb771e3619695da890c[m
+Merge: ab0ce4f 5fe4bfd
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Mon Feb 11 18:54:12 2019 +0300
+
+    Merge pull request #18 from wainainad60/ch-validate-edge-163782104
+    
+    #163782104 -  fixed error handlers, added specific error, fixed address defect
+
+[33mcommit 5fe4bfd38ce40e020361a21adb830c89d8c286be[m
+Merge: 8269641 ab0ce4f
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Mon Feb 11 18:53:45 2019 +0300
+
+    Merge branch 'develop' into ch-validate-edge-163782104
+
+[33mcommit 8269641bc8824b91a11efcdc2a97e5ea36b818a7[m[33m ([m[1;31morigin/ch-validate-edge-163782104[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Mon Feb 11 18:40:49 2019 +0300
+
+    fixed test cases for altered respond messages
+
+[33mcommit 4f8bdc5b37962cc3b0009c4ee55a68ebb5f32f44[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Mon Feb 11 18:33:44 2019 +0300
+
+    fixed error handlers, added specific error, fixed address defect
+
+[33mcommit ab0ce4fe5ecfe9407e425c6fec6027737c64d36f[m
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 19:47:00 2019 +0300
+
+    Added space between secure key and key value
+
+[33mcommit 332e7500cb795124bf230ead550fe98241ceaad8[m
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 19:44:45 2019 +0300
+
+    Added Code Climate repo token
+
+[33mcommit 1588fdc0d17d8131c80e50e2b4099ea20a280589[m
+Merge: a10cc7e 3ffb7b9
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 12:55:08 2019 +0300
+
+    Merge pull request #17 from wainainad60/ch-hosting-api-163722738
+    
+    added error handlers for Heroku hosting
+
+[33mcommit 3ffb7b9afeaf0ea6cbd0e3070f4945a278d070c5[m[33m ([m[1;31morigin/ch-hosting-api-163722738[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 12:53:06 2019 +0300
+
+    added error handlers for Heroku hosting
+
+[33mcommit a10cc7ed04938b95abb857df243bd5fd5a8b8571[m
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 12:24:46 2019 +0300
+
+    Update __init__.py for production enviroment
+
+[33mcommit 7606f8e558d6cbd7e5983e882ee1c0efa50f695a[m
+Merge: 5013f57 08be381
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 12:10:23 2019 +0300
+
+    Merge pull request #16 from wainainad60/ch-hosting-api-163722738
+    
+    Changed configurations for hosting
+
+[33mcommit 08be3818da4eae2ea708167336fe2670586afdb4[m
+Merge: 1bff352 5013f57
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 12:10:14 2019 +0300
+
+    Merge branch 'develop' into ch-hosting-api-163722738
+
+[33mcommit 1bff35266dfd7f51a77fdffb0c5e166278ebcbe6[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 12:08:04 2019 +0300
+
+    Changed configurations for hosting
+
+[33mcommit 5013f5794148276f9a340c328a242627866ede65[m
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 11:41:49 2019 +0300
+
+    [#163722738] Create Procfile for Heroku hosting
+
+[33mcommit 4cce04a2691dbccbb25840322e49d3609eaf6b86[m
+Author: Wainaina Gichuhi <muffwaindan@gmail.com>
+Date:   Fri Feb 8 11:40:04 2019 +0300
+
+    Update requirements.txt
+
+[33mcommit 1cf883e61e89ddf57e3510cde0107998f141b488[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 09:32:45 2019 +0300
+
+    Updated Coverage Badge
+
+[33mcommit 5a131d8cf1ff210ae23815555e11bb66e6715828[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 09:00:18 2019 +0300
+
+    delete .pyc
+
+[33mcommit d1fb77e6dd3c59d2e6fa6061d16a87b082921919[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 09:00:00 2019 +0300
+
+    Delet.pyc
+
+[33mcommit beae878e587e9d64d96691d859233827ee919682[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 00:53:39 2019 +0300
+
+    Added Codacy Badge
+
+[33mcommit 10d926bf34f12631cb19bb9c82ccded36557c790[m
+Merge: 6eba703 deaebd3
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 00:47:47 2019 +0300
+
+    Merge pull request #15 from wainainad60/ch-code-quality-163782228
+    
+    Ch code quality 163782228
+
+[33mcommit deaebd3ce1f59617af5d058dd03dce7aa5d6e5e6[m[33m ([m[1;31morigin/ch-code-quality-163782228[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 00:45:24 2019 +0300
+
+    fixed test errors
+
+[33mcommit 5cb017f43a44d8ff82543ebcb534f3737d9a8b5d[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Fri Feb 8 00:03:16 2019 +0300
+
+    removed unused imports, trailing spaces and structured readme.md
+
+[33mcommit 6eba7038fd8012df42ac8fad33e3379a44f69070[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:38:31 2019 +0300
+
+    Updated virtualenv directory path
+
+[33mcommit d2aca27c4ff734f1e8d277eb4fbf2b3950aa6ed4[m
+Merge: 0912b7e 44bae9c
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:34:19 2019 +0300
+
+    Merge pull request #13 from wainainad60/ch-test-parties-ep-163692324
+    
+    #163692324 - Tests, Validation, Restructuring App
+
+[33mcommit 44bae9c73837b82add44ee29f2a800819c8e26cd[m[33m ([m[1;31morigin/ch-test-parties-ep-163692324[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:30:05 2019 +0300
+
+    updated README.md
+
+[33mcommit 14da0f32f72b2bb7c788ca50f9f5a55e3efbcc8b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:24:43 2019 +0300
+
+    updated .travis.yml
+
+[33mcommit 92eff15fd6622eab2de21f71033af7049a1d775a[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:24:22 2019 +0300
+
+    update README.md
+
+[33mcommit 8b2dafddf788728526ddceff68c2e91dd55b8f94[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:20:21 2019 +0300
+
+    update .coveralls.yml
+
+[33mcommit ecb865a93a1cd1f2104d5705ee8e53d33acdf547[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:19:25 2019 +0300
+
+    added .coveralls.yml
+
+[33mcommit ecf5f1b6e7e92e62cc0fa4dac61cdd66766294b3[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:17:25 2019 +0300
+
+    updated .travis.yml
+
+[33mcommit bf87d3b9f1672deb6719ad53a85d63835f62ab51[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 22:14:11 2019 +0300
+
+    Added tests for parties and offices validating existing values
+
+[33mcommit f54ea8ce8165d2a52feecbb3d4b9832308d47c28[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 21:52:23 2019 +0300
+
+    added if exists validation checks
+
+[33mcommit 50a6768ad890277fe518f02579ca36c25445add1[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 21:35:46 2019 +0300
+
+    changed exists method signature
+
+[33mcommit 7d879260382578d91d1242f5512786bb3c938221[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 21:31:20 2019 +0300
+
+    fixed none type error with patch party
+
+[33mcommit 8e83503ef195d15077cdfc4d230fe0fe7c2011e4[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 20:34:11 2019 +0300
+
+    added validate office type
+
+[33mcommit bd40dd0d1be76f6ee7f08fe6f38aa5e7e4036b49[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 20:28:30 2019 +0300
+
+    added validate HQ and no field value
+
+[33mcommit e5633d397639488233f6adc6e5c082aebddeaf69[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 19:43:41 2019 +0300
+
+    added validate logo Url
+
+[33mcommit 90728683d1e768a008eb44d9147b515feba5211c[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 18:45:07 2019 +0300
+
+    added validate name for party and office
+
+[33mcommit 0912b7e1de700a8d74ccee7a9b204e26fc8d5f7d[m
+Merge: 5dda442 9d179f4
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 16:17:08 2019 +0300
+
+    Merge pull request #12 from wainainad60/ch-validate-edge-163782104
+    
+    #163782104 - Added validation of data to edge cases
+
+[33mcommit 9d179f45483cc0e103b899df66cc3f42c3d51207[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 16:08:51 2019 +0300
+
+    fixed buit-in type and id name user
+
+[33mcommit 48231444b22163d64150b69d42ed4c97c9bb66a0[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 16:01:45 2019 +0300
+
+    added method not allowed to missing endpoints
+
+[33mcommit 67d91eed7841244c4a02b3ae686fe1e5d653e88b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:56:59 2019 +0300
+
+    changed patch party endpoint url
+
+[33mcommit 4830cc05bbff7f692f33d81d6047dca7a3ef50f4[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:53:20 2019 +0300
+
+    changed container class name for readability
+
+[33mcommit 451178d5de2395df07e3ab964f2fd408a449e852[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:50:53 2019 +0300
+
+    fixed test fails, id argument
+
+[33mcommit 31697678bd3c5753fb3af57f886164aac91ae1ed[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:30:41 2019 +0300
+
+    added endpoint runtime exception handler
+
+[33mcommit d376847bd22b41e9bed172d618e6ca2e625a20bb[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:25:01 2019 +0300
+
+    added validate id for parties and offices
+
+[33mcommit c08f04618e5a3c338326fffcf0f04ae8e8df57aa[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:19:17 2019 +0300
+
+    validate unallowed methods on endpoints
+
+[33mcommit b4bc2d0f7527cec1819bd574e4f0e5a3b22d1e1f[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:13:44 2019 +0300
+
+    validate unallowed methods on endpoints
+
+[33mcommit a1f705fb4e93fbab1e4d456183d441f79590a508[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 15:12:30 2019 +0300
+
+     validate no create office data
+
+[33mcommit 33fb6e36937e24ad8d77cd94e7aad089f13fd756[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 14:44:19 2019 +0300
+
+    [start #163782104] validate no data
+
+[33mcommit 5dda442cd551566525ac8df1e08bce63ce679c6a[m
+Merge: c073adb 2328e44
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 10:51:14 2019 +0300
+
+    Merge pull request #11 from wainainad60/ch-code-quality-163782228
+    
+    [start #163782228] removed unused imports
+
+[33mcommit 2328e446baab304a7c3880e985d89a0d2fd4e47e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 10:33:33 2019 +0300
+
+    [start #163782228] removed unused imports
+
+[33mcommit c073adbb904ec243c87bdeaf3e2a72074b0cda77[m
+Merge: 9efb48b fa5bcfb
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 10:27:47 2019 +0300
+
+    Merge pull request #10 from wainainad60/ft-user-models
+    
+    #163773011 - fixes test bugs locally, #163772148 - reorganize files and folder structure
+
+[33mcommit fa5bcfbfe4685c72d785fa72489e4ca39317b25a[m[33m ([m[1;31morigin/ft-user-models[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 10:12:58 2019 +0300
+
+    [#163773011 #163772148] fixed test bug, proper file organization
+
+[33mcommit ad577d0176f69d4042453b777e6754a203fd896b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 06:03:15 2019 +0300
+
+    file sanitization applied
+
+[33mcommit 1b8c990e9c9980ad22165b068adcc6e68b849773[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 05:22:34 2019 +0300
+
+    added new modules with models and strings file
+
+[33mcommit c22a1de92238e87bd2afb392935cf61a57ce611e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 04:42:27 2019 +0300
+
+    added models for users
+
+[33mcommit 9efb48b296740a85d41997ea87dd9366bcb91262[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 03:11:24 2019 +0300
+
+    Delete settings.json from .vscode folder
+
+[33mcommit e4ec8e91cac59c30a8766b6addb967ad3899c255[m
+Merge: 5891bec 86a9019
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 03:06:12 2019 +0300
+
+    Merge pull request #9 from wainainad60/ft-offices-endpoints
+    
+    #163772148 - code cleanup
+
+[33mcommit 86a90196cdc06fc69e454f53f1b5536d0d86a550[m[33m ([m[1;31morigin/ft-offices-endpoints[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 02:56:23 2019 +0300
+
+    [#163772148] code cleanup
+
+[33mcommit 18e42ec81fdbd5a0ea627f29877ca29b4a4cba68[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 02:49:35 2019 +0300
+
+    [#163773011] fix test bug - cleared lists
+
+[33mcommit 5891bec444e64847b9de7cf196a81b26c8586de2[m
+Merge: 0ae32b0 0857e0a
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 02:07:21 2019 +0300
+
+    Merge pull request #8 from wainainad60/ft-offices-endpoints
+    
+    #Office Endpoints
+
+[33mcommit 0857e0a4d87abbff716e0b64f485dd023d64f6a4[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 02:02:29 2019 +0300
+
+    endpoints and tests written, updated test parties
+
+[33mcommit b75aea34efbb0be207f514481ec4db76da23214a[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:47:56 2019 +0300
+
+    updated test offices
+
+[33mcommit c0572ee1a6d5fa5cd7ab05533878d67ff821e741[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:43:00 2019 +0300
+
+    register office blueprints in offices api/__init__.py
+
+[33mcommit c9ca87afc7efb7132b4b18a4a112528e41274888[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:40:43 2019 +0300
+
+    updated offices endpoints
+
+[33mcommit 761fc9bfe3930155b0b66b1fe919accf489ccb28[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:34:01 2019 +0300
+
+    [starts #163691645 #163691651 #163691639] added office endpoints file
+
+[33mcommit 0ae32b09b0136020ca138fd79be2274af31bcb20[m
+Merge: 6885845 f2413ea
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:31:27 2019 +0300
+
+    Merge pull request #7 from wainainad60/ft-offices-endpoints
+    
+    #163773270 - Offices Test Cases
+
+[33mcommit f2413ea44fa5613c45a061c3f190876c0cccf211[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:28:37 2019 +0300
+
+    [feature #163773270] test offices
+
+[33mcommit 4d4bed791e8cd0f56b75f54d4daf21fad57898c7[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:26:24 2019 +0300
+
+    updated offices test file
+
+[33mcommit 9aac52e6b107434317f716b65ddb41df4df0070e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:23:06 2019 +0300
+
+    added string constants for tests(tests/strings.py)
+
+[33mcommit 0aed1c14fd4c80b592026cd0fb372adc469a7afd[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:17:15 2019 +0300
+
+    [start #163773270] added offices test file
+
+[33mcommit a341bbf5edfc347697e6e669d11d73e18baf56e4[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:07:38 2019 +0300
+
+    updated controller class for offices module
+
+[33mcommit a0e04224f8478c09f0280686b7a510d3af5fc034[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 01:04:01 2019 +0300
+
+    added validators and utils for api
+
+[33mcommit c40310d2db7433ebef48cae682dffb25075d37e0[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:41:58 2019 +0300
+
+    updated controller class for offices module
+
+[33mcommit ea4cda07a6a421da62ea63abefdb646b6e39ebde[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:32:48 2019 +0300
+
+    created controller class for offices module
+
+[33mcommit 561f878edc1541b153b53ebbc3529d2f16809427[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:29:22 2019 +0300
+
+    added offices/models.py with office list
+
+[33mcommit 08392889fd004bcfe4dd219c9bbbe1bc125fe37a[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:20:53 2019 +0300
+
+    [feature #163772148] added strings.py for offices module
+
+[33mcommit 85959fc86c51ac8c97eec8240323f40c73bfd66e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:13:44 2019 +0300
+
+    [feature #163772148] fix .vscode/ gitignore
+
+[33mcommit 688584556025ba2cbb5bba70b2ac81dd065234b1[m
+Merge: 8dd64bb 282d92f
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:05:20 2019 +0300
+
+    Merge pull request #6 from wainainad60/bg-test-fail-163773011
+    
+    #163773011 - Fix test bugs
+
+[33mcommit 282d92f0dbcfc9538a84b47a9c17f8fd6931ee2e[m[33m ([m[1;31morigin/bg-test-fail-163773011[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:03:18 2019 +0300
+
+    [feature #163772148] add .pyc to git ignore
+
+[33mcommit 8384cd19a6a23ee026fed05c9540a43d59532d49[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Thu Feb 7 00:01:54 2019 +0300
+
+    [starts #163773011] fixed 2 bugs
+
+[33mcommit 8dd64bb85737be8b31b6b7d30920ca7de745d0d9[m
+Merge: a571e38 bb54b75
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:58:57 2019 +0300
+
+    Merge pull request #5 from wainainad60/ft-add-or-get-all-parties-163691595
+    
+    #163691595 Parties endpoints
+
+[33mcommit bb54b759e8e26bbc697606e763a8d7615f6ea2fe[m[33m ([m[1;31morigin/ft-add-or-get-all-parties-163691595[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:56:16 2019 +0300
+
+    [finish #163703164] edit specific party
+
+[33mcommit f15d652884ade85064468de3e162793054564b57[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:55:22 2019 +0300
+
+    [finish #163691620 #163691603] get or delete specific party
+
+[33mcommit 2ef84b4fccfcca9bc1aeb3131f1e080f8694b4ec[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:53:28 2019 +0300
+
+    [finishes #163691595 #163691579] add and get all parties
+
+[33mcommit c8c187994d5d1d6bdc8d0d7204eb18cb6ebfc00e[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:52:48 2019 +0300
+
+    [feature #163691595 #163691579] starts add and get all parties
+
+[33mcommit a571e38d297ef5425236176ce1b5a406ec1e5507[m
+Merge: cce21fd caa78b8
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:45:58 2019 +0300
+
+    Merge pull request #4 from wainainad60/ch-test-parties-ep-163692324
+    
+    #163692324 - Unit Test for parties module
+
+[33mcommit caa78b898bc176549a4ba83445e71e5e444e7d49[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:44:17 2019 +0300
+
+    [feature  #163692324] added test parties unittest class
+
+[33mcommit b82f5f987fd31e0f98e1a71e429dbf34ea8af7d6[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:42:40 2019 +0300
+
+    [feature  #163692324] added test configuration classes
+
+[33mcommit 682b7b65929c346a04d9fe5268c9437ba96452a8[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:41:46 2019 +0300
+
+    [starts #163692324] added base test class
+
+[33mcommit cce21fd37d10cff871ba02975319718869e3ff3c[m
+Merge: 56727da 9ad7d60
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:38:05 2019 +0300
+
+    Merge pull request #3 from wainainad60/ft-create-party-163691639
+    
+    #163772148 - Directory structuring, adding controllers, models and strings
+
+[33mcommit 9ad7d6001404aad32f779fdaa425c9292879cf0d[m[33m ([m[1;31morigin/ft-create-party-163691639[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:34:36 2019 +0300
+
+    [starts #163772148] added parties/utils.py with reusable methods
+
+[33mcommit fa3bc036cec1c5a779c850c812e735d16f4a9e78[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:29:24 2019 +0300
+
+    [feature #163691639, starts #163691651 #163691645 #163691639 #163691620 #163703164 #163691603 #163691595] Controller class
+
+[33mcommit 1e84d276acbd30454dce7f2de212c3cb49d80754[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:23:35 2019 +0300
+
+    [feature #163691639] added utils.py with reusable methods
+
+[33mcommit 5390020e321d7000d4a4df979e31b7766fa9542b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:18:08 2019 +0300
+
+    [feature #163691639] moved api/ver1/strings.py to api/strings.py
+
+[33mcommit 9510c1e9dd73f9d76e5130bed8b8b287f15ffe11[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:16:41 2019 +0300
+
+    [feature #163691639] added models.py with political  party list
+
+[33mcommit 26ed6d06a4a109ceba68d0b8dde94babc78db8b4[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:12:31 2019 +0300
+
+    [feature #163691639] added string constants for parties module
+
+[33mcommit dd3a421b38b38767559560398d049364b0515844[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:10:06 2019 +0300
+
+    [feature #163691639] updates gitignore file
+
+[33mcommit 51039b55b925741bce56b0093b358d3afa2d709c[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 23:09:10 2019 +0300
+
+    [starts #163691639] variable constants used in the api
+
+[33mcommit 56727da215fa74d9fc1486aa69007ec53c7ec8d0[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 18:24:20 2019 +0300
+
+    Added Coveralls Badge
+
+[33mcommit 32228cda04d63e017c5931f741f69fa5c6300473[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 18:17:20 2019 +0300
+
+    Removed new line between badges
+
+[33mcommit 1d61b667c914bb521589998128d922079d6fa1ee[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 18:16:39 2019 +0300
+
+    Updated Python version
+
+[33mcommit 9e688d8c7db48184b9e557a7101e29363467509b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 18:15:50 2019 +0300
+
+    Added Badges from Code climate
+    
+    Maintainability Badge
+    
+    Test Coverage Badge
+
+[33mcommit ee94b8c37b70c63809ac5255e0fdae4c394b8c42[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 16:37:59 2019 +0300
+
+    Update README.md
+    
+    new line between badges and paragraph
+
+[33mcommit 8f920de7ff9e95861a5db019a8c80c1c60d08877[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 16:36:10 2019 +0300
+
+    Added Travis CI badge
+
+[33mcommit f35015f8aca2bceaf6e2833e17ba13d6dfe4244d[m
+Merge: 4e3bde0 33d4b7b
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:56:02 2019 +0300
+
+    Merge pull request #2 from wainainad60/ch-config-files-163755762
+    
+    #163755762 - Adding Configurations file for API endpoint.
+
+[33mcommit 33d4b7ba36f13db43621b9adfe16922fcf105e0d[m[33m ([m[1;31morigin/ch-config-files-163755762[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:50:23 2019 +0300
+
+    [finish #163755762] updated instance/config.py file
+
+[33mcommit 8b3b9b921f0c50b69917311faa6f5cb96e0f9340[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:43:44 2019 +0300
+
+    [Chore #163755762] updated app/__init__.py file
+
+[33mcommit 7d97a83bc9df2c0fe1a6283d8cc0738153f90e74[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:40:01 2019 +0300
+
+    [Chore #163755762] added .travis.yml file
+
+[33mcommit 88c74605f8124afc92e1a2b780030b32e903c1b1[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:36:42 2019 +0300
+
+    [Chore #163755762] added requirements.txt and .env files
+
+[33mcommit 4fa299e194718c433ff25f3862adb99f34600dc2[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:25:39 2019 +0300
+
+    [starts #163755762] added run.py
+
+[33mcommit 4e3bde00b5b43a856399c4b62f6379fb17770ba6[m
+Merge: e76067f 61831f5
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 15:01:43 2019 +0300
+
+    Merge pull request #1 from wainainad60/ch-dir-structure-163692451
+    
+    #163692451 - Set up the API endpoints challenge directory structure.
+
+[33mcommit 61831f56673ab079af7c3252dce292dc77c0f291[m[33m ([m[1;31morigin/ch-dir-structure-163692451[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 14:53:24 2019 +0300
+
+    [starts #163692451] added gitignore file
+
+[33mcommit 425b4fa2ea43b55e1333aa5939c13f3b1243d91b[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Wed Feb 6 14:51:27 2019 +0300
+
+    [starts #163692451] creating directory structure
+
+[33mcommit e76067faaf140d8731ec1a0699284f5af046ea08[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 5 22:49:13 2019 +0300
+
+    Update LICENSE
+
+[33mcommit 48efb28534b09d174928b365662667be3fb542d9[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 5 22:26:31 2019 +0300
+
+    Create README.md
+
+[33mcommit e58d70c9539296b2f83c734904b699e26b7e6d25[m
+Author: wainainad60 <muffwaindan@gmail.com>
+Date:   Tue Feb 5 21:58:26 2019 +0300
+
+    Initial commit
