@@ -14,3 +14,4 @@ evidence_value = ['video.mp4', 'video2.mp4', 'image.jpg']
 user_key = 'user'
 token_key = 'token'
 text_key = 'text'
+admin_key = 'admin'
