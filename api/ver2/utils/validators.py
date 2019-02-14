@@ -32,7 +32,7 @@ def is_not_admin():
 
     if not user[admin_key]:
         return error(
-            "Forbidden: This action is reserved to Admins only", status_401)
+            "Unauthorized: This action is reserved to Admins only", status_401)
     return None
 
 
