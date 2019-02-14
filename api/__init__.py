@@ -1,10 +1,9 @@
 """creating app"""
-import os
 from flask import Flask, jsonify
 from instance.config import app_config
 from api.ver1.parties.endpoints import party_bp
 from api.ver1.offices.endpoints import office_bp
-from api.ver1.site_endpoints import route_bp
+from api.site_endpoints import route_bp
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 

@@ -9,10 +9,10 @@ from api.ver2.utils.strings import password_key, user_id_key, status_422
 
 class User(Skeleton):
     def __init__(
-            self, id=None, fname=None, lname=None, email=None, phone=None,
+            self, Id=None, fname=None, lname=None, email=None, phone=None,
             passport_url=None, password1=None, password2=None, is_admin=False):
         super().__init__('User', 'politico_users')
-        self.id = id
+        self.Id = Id
         self.fname = fname
         self.lname = lname
         self.email = email
@@ -26,7 +26,7 @@ class User(Skeleton):
         self.access_token = create_access_token(identity=self.id)
         self.refresh_token = create_refresh_token(identity=self.id)
 
-    def add(self, *args):
+    def create(self, *args):
         data = super().add(
             email + ', ' + password_key + ', ' + admin,
             self.email, generate_password_hash(self.password1), self.is_admin
@@ -34,7 +34,7 @@ class User(Skeleton):
         self.id = data.get(id_key)
         super().add(
             user_id_key + ', ' + fname + ', ' + lname + ', ' + phone,
-            self.id, self.fname, self.lname, self.phone
+            self.Id, self.fname, self.lname, self.phone
         )
         self.create_auth_tokens()
         return data
@@ -42,7 +42,7 @@ class User(Skeleton):
     def to_json(self):
         # get the object as a json
         return {
-            id_key: self.id,
+            id_key: self.Id,
             fname: self.fname,
             lname: self.lname,
             email: self.email,
