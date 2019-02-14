@@ -1,7 +1,7 @@
 from .skeleton import Skeleton
 from .users import User
-from .parties import Party
 from .offices import Office
+from .parties import Party
 from api.strings import id_key, status_400, status_404, status_409
 from api.ver1.offices.strings import office_key
 from api.ver1.parties.strings import party_key
