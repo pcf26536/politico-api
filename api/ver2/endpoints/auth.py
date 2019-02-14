@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from werkzeug.security import check_password_hash
-from api.strings import post_method, status_201, id_key
+from api.strings import post_method, status_201, id_key, status_404, status_200, status_400
 from api.ver1.utils import error, no_entry_resp, check_form_data, field_missing_resp, success
 from api.ver1.users.strings import *
 from api.ver2.utils.strings import password_1, password_2, admin_key, user_entity, token_key, user_key, password_key
@@ -36,39 +36,3 @@ def signup():
             return field_missing_resp(user_entity, fields, e.args[0])
     else:
         return no_entry_resp(user_entity, fields)
-
-
-@auth.route('/auth/login', methods=[post_method])
-def login():
-    fields = [email, password_key]
-    res_data = check_form_data(user_key, request, fields)
-    if res_data:
-        try:
-            code = None
-            message = ''
-            mail = res_data[email]
-            password = res_data[password_key]
-            login_user = User().get_by(email, mail)
-            if not login_user:
-                code = 404
-                message = "user does not exits in the database"
-            elif not check_password_hash(login_user.to_json()[password_key], password):
-                code = 400
-                message = 'Incorrect password provided'
-            else:
-                user = User(Id=login_user.to_json()[id_key])
-                user.create_auth_tokens()
-                code = 200
-                data = {
-                    token_key: user.access_token,
-                    user_key: user
-                }
-                return success(code, [data])
-            return error(message, code)
-        except Exception as e:
-            return field_missing_resp(user_entity, fields, e.args[0])
-    else:
-        return no_entry_resp(user_entity, fields)
-
-
-
