@@ -6,7 +6,7 @@ class Config(object):
     """Parent configuration class."""
     DEBUG = False
     SECRET = os.getenv('SECRET')
-    DATABASE_URI = os.getenv('DATABASE_URL')
+    DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 class DevelopmentConfig(Config):
