@@ -1,15 +1,13 @@
-from flask import Blueprint, request
+from flask import request
 from api.strings import post_method, status_201
 from api.ver1.utils import error, no_entry_resp, check_form_data, field_missing_resp, success
 from api.ver1.users.strings import *
 from api.ver2.utils.strings import password_1, password_2, admin_key, user_entity, token_key, user_key
 from api.ver2.models.users import User
-
-# blueprint for auth
-auth_bp = Blueprint('auth', __name__)
+from api.blueprints import v2
 
 
-@auth_bp.route('/auth/signup', methods=[post_method])
+@v2.route('/auth/signup', methods=[post_method])
 def signup():
     fields = [fname, lname, email, pspt, phone, password_1, password_2, admin_key]
     res_data = check_form_data(user_entity, request, fields)
