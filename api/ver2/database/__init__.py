@@ -22,12 +22,12 @@ create_table_queries = [
     """,
     """
     CREATE TABLE IF NOT EXISTS politico_users(
-        user_id INTEGER PRIMARY KEY NOT NULL,
+        id INTEGER PRIMARY KEY NOT NULL,
         fname VARCHAR(250) NOT NULL,
         lname VARCHAR(250) NOT NULL,
         phone VARCHAR(250) NULL,
-        UNIQUE(phone, user_id)
-        FOREIGN KEY (user_id) REFERENCES politico_auth(id) ON DELETE CASCADE,
+        UNIQUE(phone, id),
+        FOREIGN KEY (id) REFERENCES politico_auth(id) ON DELETE CASCADE
     )
     """,
     """
@@ -57,7 +57,7 @@ create_table_queries = [
         UNIQUE(candidate),
         FOREIGN KEY (candidate) REFERENCES politico_users(id) ON DELETE CASCADE,
         FOREIGN KEY (party) REFERENCES politico_parties(id) ON DELETE CASCADE,
-        FOREIGN KEY (office) REFERENCES politico_offices(id) ON DELETE CASCADE,
+        FOREIGN KEY (office) REFERENCES politico_offices(id) ON DELETE CASCADE
     )
     """,
     """
