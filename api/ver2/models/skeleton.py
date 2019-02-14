@@ -1,20 +1,24 @@
 from api.ver2.database.model import Database
+from api.strings import status_200
 import os
 
 
 class Skeleton(Database):
     """ the skeleton model """
-    def __init__(self, table):
+    def __init__(self, entity, table):
         super().__init__(os.getenv('APP_SETTINGS'))
         self.table = table
+        self.entity = entity
+        self.message = ""
+        self.code = status_200
 
-    def as_json(self):
+    def to_json(self):
         pass
 
     def from_json(self, json):
         return self
 
-    def validate_object(self):
+    def validate_self(self):
         """ validates an object """
         return True
 
