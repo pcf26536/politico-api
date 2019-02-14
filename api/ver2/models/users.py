@@ -7,7 +7,7 @@ from api.strings import id_key, status_409
 from api.ver2.utils.strings import password_key, user_id_key, status_422
 
 
-class Users(Skeleton):
+class User(Skeleton):
     def __init__(
             self, id=None, fname=None, lname=None, email=None, phone=None,
             passport_url=None, password1=None, password2=None, is_admin=False):
