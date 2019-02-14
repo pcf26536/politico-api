@@ -1,8 +1,9 @@
 from flask_jwt_extended import (get_jwt_identity)
 from api.ver1.utils import error
 from api.ver2.utils.strings import status_401, admin_key
-from api.ver2.models.users import Users
+from api.ver2.models.users import User
 from api.strings import id_key
+import datetime
 import re
 
 
@@ -27,8 +28,15 @@ def is_number(*args):
     return True
 
 
+def is_int(*args):
+    for arg in args:
+        if not isinstance(arg, int):
+            return False
+    return True
+
+
 def is_not_admin():
-    user = Users().get_by(id_key, get_jwt_identity())
+    user = User().get_by(id_key, get_jwt_identity())
 
     if not user[admin_key]:
         return error(
@@ -42,7 +50,30 @@ def is_valid_email(email):
     return True
 
 
-def has_min_length(value):
+def has_min_pass_length(value):
     if len(value) < 6:
         return False
     return True
+
+
+def has_min_name_length(name):
+    if len(name) < 3:
+        return False
+    return True
+
+
+def valid_date(date):
+    try:
+        datetime.datetime.strptime(date, "%d/%m/%y")
+        return True
+    except ValueError:
+        return False
+
+
+def no_date_diff(date):
+    d = datetime.datetime.strptime(date, "%d/%m/%y")
+    diff = datetime.datetime.now() - d
+    if diff.days:
+        return False
+    return True
+
