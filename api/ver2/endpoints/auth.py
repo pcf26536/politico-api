@@ -36,3 +36,36 @@ def signup():
             return field_missing_resp(user_entity, fields, e.args[0])
     else:
         return no_entry_resp(user_entity, fields)
+
+
+@auth.route('/auth/login', methods=[post_method])
+def login():
+    fields = [email, password_key]
+    res_data = check_form_data(user_key, request, fields)
+    if res_data:
+        try:
+            code = None
+            message = ''
+            mail = res_data[email]
+            password = res_data[password_key]
+            login_user = User().get_by(email, mail)
+            if not login_user:
+                code = status_404
+                message = "user does not exits in the database"
+            elif not check_password_hash(login_user.to_json()[password_key], password):
+                code = status_400
+                message = 'Incorrect password provided'
+            else:
+                user = User(Id=login_user.to_json()[id_key])
+                user.create_auth_tokens()
+                code = status_200
+                data = {
+                    token_key: user.access_token,
+                    user_key: user
+                }
+                return success(code, [data])
+            return error(message, code)
+        except Exception as e:
+            return field_missing_resp(user_entity, fields, e.args[0])
+    else:
+        return no_entry_resp(user_entity, fields)
