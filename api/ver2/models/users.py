@@ -3,8 +3,8 @@ from werkzeug.security import generate_password_hash
 from .skeleton import Skeleton
 from api.ver2.utils.validators import is_bool, is_string, is_valid_email, has_min_length
 from api.ver1.users.strings import *
-from api.strings import id_key, status_409
-from api.ver2.utils.strings import password_key, user_id_key, status_406
+from api.strings import id_key, status_409, status_400
+from api.ver2.utils.strings import password_key, user_id_key
 
 
 class Users(Skeleton):
@@ -61,7 +61,7 @@ class Users(Skeleton):
     def validate_object(self):
         if not is_string(self.fname, self.lname):
             self.message = "Integer types are not allowed for a name"
-            self.code = status_406
+            self.code = status_400
             return False
 
         if self.get_by(email, self.email):
@@ -72,22 +72,22 @@ class Users(Skeleton):
 
         if not is_valid_email(self.email):
             self.message = "Invalid email"
-            self.code = status_406
+            self.code = status_400
             return False
 
         if not self.password1 == self.password2:
             self.message = "Passwords mismatch"
-            self.code = status_406
+            self.code = status_400
             return False
 
         if not (has_min_length(self.password1) or has_min_length(self.password2)):
             self.message = "Password must be at least 6 characters long"
-            self.code = status_406
+            self.code = status_400
             return False
 
         if not is_bool(self.is_admin):
             self.message = "isAdmin is supposed to be a boolean value"
-            self.code = status_406
+            self.code = status_400
             return False
 
         return super().validate_self()
