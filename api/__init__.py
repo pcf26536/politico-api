@@ -5,6 +5,7 @@ from api.blueprints import v1, v2
 from api.site_endpoints import route_bp
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
+from flask_jwt_extended import JWTManager
 from .strings import *
 
 
@@ -33,6 +34,8 @@ def create_app(config_name):
     db.connect()
     db.create_db_tables()
     db.create_root_user()
+
+    jwt = JWTManager(app)
 
     @app.errorhandler(status_400)
     def bad_request(error):
