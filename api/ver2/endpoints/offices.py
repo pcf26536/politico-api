@@ -4,7 +4,6 @@ from api.ver1.utils import field_missing_resp, runtime_error_resp, \
 from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
-from api.ver1.validators import validate_dict, validate_id
 
 office_v1 = Blueprint('offices_v1', __name__)
 
