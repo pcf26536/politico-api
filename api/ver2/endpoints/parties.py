@@ -46,8 +46,9 @@ def get_or_delete_ep(id):
                 return success(200, [p.to_json()])
             elif request.method == delete_method:
                 party.delete(id)
+                return success(200, [party.to_json()])
         else:
-            not_found_resp(party_key)
+            return not_found_resp(party_key)
     except Exception as e:
         return runtime_error_resp(e)
 
