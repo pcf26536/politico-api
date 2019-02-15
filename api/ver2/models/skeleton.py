@@ -9,7 +9,7 @@ class Skeleton(Database):
         super().__init__(os.getenv('APP_SETTINGS'))
         self.table = table
         self.entity = entity
-        self.message = ""
+        self.message = ''
         self.code = status_200
 
     def to_json(self):

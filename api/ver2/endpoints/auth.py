@@ -7,6 +7,7 @@ from api.ver2.utils.strings import password_1, password_2, admin_key, user_entit
 from api.ver2.models.users import User
 from api.ver2.models.auth import Auth
 from api.ver2.utils.validators import is_valid_email
+import traceback
 
 auth = Blueprint('auth', __name__)
 
@@ -26,19 +27,23 @@ def signup():
                 password1=res_data[password_1],
                 password2=res_data[password_2],
             )
+        except Exception as e:
+            return field_missing_resp(user_entity, fields, e.args[0])
+        try:
             if not user.validate_user():
                 return error(user.message, user.code)
             user_auth = Auth(email=res_data[email], password=res_data[password_1])
             if not user_auth.validate_auth():
                 return error(user_auth.message, user_auth.code)
             user_auth.create()
+            user.Id = user_auth.Id
             user.create()
             return success(status_201, [{
                 token_key: user_auth.access_token,
-                user_key: {user.to_json()}
+                user_key: user.to_json()
             }])
         except Exception as e:
-            return field_missing_resp(user_entity, fields, e.args[0])
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         return no_entry_resp(user_entity, fields)
 
@@ -53,25 +58,28 @@ def login():
             message = ''
             mail = res_data[email]
             password = res_data[password_key]
+        except Exception as e:
+            return field_missing_resp(user_entity, fields, e.args[0])
+        try:
             login_user = Auth().get_by(email, mail)
             if not login_user:
                 code = status_404
                 message = "user does not exits in the database"
-            elif not check_password_hash(login_user.to_json()[password_key], password):
+            elif not check_password_hash(login_user[password_key], password):
                 code = status_400
                 message = 'Incorrect password provided'
             else:
-                user = Auth(Id=login_user.to_json()[id_key])
+                user = Auth(Id=login_user[id_key], email=mail)
                 user.create_auth_tokens()
                 code = status_200
                 data = {
                     token_key: user.access_token,
-                    user_key: user
+                    user_key: user.to_json()
                 }
                 return success(code, [data])
             return error(message, code)
         except Exception as e:
-            return field_missing_resp(user_entity, fields, e.args[0])
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         return no_entry_resp(user_entity, fields)
 

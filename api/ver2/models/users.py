@@ -1,12 +1,8 @@
-from flask_jwt_extended import (create_access_token, create_refresh_token)
-from werkzeug.security import generate_password_hash
 from .skeleton import Skeleton
-from .auth import Auth
 from api.ver2.utils.validators import is_bool, is_string, is_valid_email, has_min_pass_length, invalid_name
 from api.ver1.users.strings import *
 from api.ver1.parties.strings import imageTypes
-from api.strings import id_key, status_409, status_400
-from api.ver2.utils.strings import password_key, admin_key
+from api.strings import id_key, status_400
 import re
 
 
@@ -26,13 +22,8 @@ class User(Skeleton):
         self.is_admin = is_admin
 
     def create(self):
-        data = Auth().add(
-            email + ', ' + password_key + ', ' + admin_key,
-            self.email, generate_password_hash(self.password1), self.is_admin
-        )
-        self.Id = data.get(id_key)
-        super().add(
-            id_key + ', ' + 'fname' + ', ' + 'lname' + ', ' + phone,
+        data = super().add(
+            id_key + ', ' + 'fname' + ', ' + 'lname' + ', ' + 'phone',
             self.Id, self.fname, self.lname, self.phone
         )
         return data
@@ -53,7 +44,7 @@ class User(Skeleton):
         self.__init__(
             json[fname], json[fname], json[email], json[phone],
             json[pspt], json[admin])
-        self.id = json[id_key]
+        self.Id = json[id_key]
         return self
 
     def validate_user(self):
