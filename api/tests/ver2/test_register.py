@@ -17,7 +17,7 @@ class TestRegister(TestBase):
 
     def test_register(self):
         res = self.client.post(
-            v2_url_prefix + '/office/1/register',
+            v2_url_prefix + '/office/1/candids',
             json=correct_candidate_infor)
         data = res.get_json()
 
@@ -27,7 +27,7 @@ class TestRegister(TestBase):
 
     def test_user_not_found(self):
         res = self.client.post(
-            v2_url_prefix + '/office/1/register',
+            v2_url_prefix + '/office/1/candids',
             json=candidate_id_unexisting_infor)
         data = res.get_json()
 
@@ -37,7 +37,7 @@ class TestRegister(TestBase):
 
     def test_party_not_found(self):
         res = self.client.post(
-            v2_url_prefix + '/office/1/register',
+            v2_url_prefix + '/office/1/candids',
             json=party_id_unexisting_info)
         data = res.get_json()
 
@@ -47,7 +47,7 @@ class TestRegister(TestBase):
 
     def test_office_not_found(self):
         res = self.client.post(
-            v2_url_prefix + '/office/1/register',
+            v2_url_prefix + '/office/1/candids',
             json=office_id_unexisting_info)
         data = res.get_json()
 

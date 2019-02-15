@@ -7,10 +7,10 @@ from api.ver1.offices.strings import office_id_str
 from api.ver2.models.votes import Vote
 
 
-votes = Blueprint('vote', __name__)
+vote_bp = Blueprint('vote', __name__)
 
 
-@votes.route('/votes/', methods=[post_method])
+@vote_bp.route('/vote_bp/', methods=[post_method])
 def votes():
     fields = [user_id_key, createdBy_key, createdOn_key, candidate_key, office_id_str]
     data = check_form_data(vote_key, request, fields)

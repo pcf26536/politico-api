@@ -11,10 +11,10 @@ from api.ver2.utils import is_not_admin
 from api.ver2.models.candidates import Candidate
 from api.ver2.models.votes import Vote
 
-register = Blueprint('api_ver2', __name__)
+candids = Blueprint('candidates', __name__)
 
 
-@register.route('/office/<int:id>/register', methods=[post_method])
+@candids.route('/office/<int:id>/candids', methods=[post_method])
 @jwt_required
 def register(id):
     if is_not_admin():
@@ -39,7 +39,7 @@ def register(id):
         return no_entry_resp(candidate_key, fields)
 
 
-@register.route('/office/<int:id>/results', methods=[get_method])
+@candids.route('/office/<int:id>/results', methods=[get_method])
 def results(id):
     try:
         votes = Vote(office_id=id).get_by(office_key, id)

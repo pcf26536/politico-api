@@ -7,10 +7,10 @@ from api.ver1.offices.strings import office_id_str
 from api.ver2.models.petitions import Petition
 
 
-petitions = Blueprint('petitions', __name__)
+petitions_bp = Blueprint('petitions_bp', __name__)
 
 
-@petitions.route('/petitions/', methods=[post_method])
+@petitions_bp.route('/petitions_bp/', methods=[post_method])
 def petitions():
     fields = [createdBy_key, createdOn_key, office_id_str, body_key, evidence_key]
     data = check_form_data(petition_key, request, fields)

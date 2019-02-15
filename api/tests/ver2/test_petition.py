@@ -16,7 +16,7 @@ class TestPetition(TestBase):
 
     def test_create_petition(self):
         res = self.client.post(
-            v2_url_prefix + '/petitions/',
+            v2_url_prefix + '/petitions_bp/',
             json=correct_petition)
         data = res.get_json()
 
@@ -26,7 +26,7 @@ class TestPetition(TestBase):
 
     def test_create_petition_office_not_found(self):
         res = self.client.post(
-            v2_url_prefix + '/petitions/',
+            v2_url_prefix + '/petitions_bp/',
             json=petition_with_wrong_office_id)
         data = res.get_json()
 
@@ -36,7 +36,7 @@ class TestPetition(TestBase):
 
     def test_create_petition_user_not_found(self):
         res = self.client.post(
-            v2_url_prefix + '/petitions/',
+            v2_url_prefix + '/petitions_bp/',
             json=petition_with_wrong_user_id)
         data = res.get_json()
 
@@ -46,7 +46,7 @@ class TestPetition(TestBase):
 
     def test_create_petition_wrong_body_format(self):
         res = self.client.post(
-            v2_url_prefix + '/petitions/',
+            v2_url_prefix + '/petitions_bp/',
             json=petition_with_wrong_body_format)
         data = res.get_json()
 
@@ -56,7 +56,7 @@ class TestPetition(TestBase):
 
     def test_create_petition_no_evidence(self):
         res = self.client.post(
-            v2_url_prefix + '/petitions/',
+            v2_url_prefix + '/petitions_bp/',
             json=petition_with_no_evidence)
         data = res.get_json()
 
@@ -66,7 +66,7 @@ class TestPetition(TestBase):
 
     def test_create_petition_wrong_evidence_format(self):
         res = self.client.post(
-            v2_url_prefix + '/petitions/',
+            v2_url_prefix + '/petitions_bp/',
             json=petition_with_wrong_evidence_format)
         data = res.get_json()
 
