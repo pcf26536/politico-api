@@ -5,6 +5,8 @@ from api.ver1.offices.endpoints import office_v1
 from api.ver1.parties.endpoints import party_v1
 from api.ver2.endpoints.auth import auth
 from api.site_endpoints import route_bp
+from api.ver2.endpoints.candidature import register
+from api.ver2.endpoints.offices import office_v2
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
@@ -31,6 +33,8 @@ def create_app(config_name):
 
     #register v2 blueprints
     app.register_blueprint(auth,  url_prefix=ver_2_url_prefix)
+    app.register_blueprint(register, url_prefix=ver_2_url_prefix)
+    app.register_blueprint(office_v2, url_prefix=ver_2_url_prefix)
 
     # DB initializer
     db = Database(config_name)

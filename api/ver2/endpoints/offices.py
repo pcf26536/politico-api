@@ -5,10 +5,10 @@ from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
 
-office_v1 = Blueprint('offices_v1', __name__)
+office_v2 = Blueprint('offices_v2', __name__)
 
 
-@office_v1.route('/offices', methods=[post_method, get_method])
+@office_v2.route('/offices', methods=[post_method, get_method])
 def add_or_get_all_ep():
     if request.method == post_method:
         fields = [name_key, type_key]
@@ -34,7 +34,7 @@ def add_or_get_all_ep():
         return success(200, data)
 
 
-@office_v1.route('/offices/<int:id>', methods=[get_method])
+@office_v2.route('/offices/<int:id>', methods=[get_method])
 def get_office_ep(id):
     """" get specific office by id """
     try:

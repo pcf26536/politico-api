@@ -7,7 +7,7 @@ from api.ver2.utils.strings import password_1, password_2, admin_key, user_entit
 from api.ver2.models.users import User
 from api.ver2.utils.validators import is_valid_email
 
-auth = Blueprint('api_ver2', __name__)
+auth = Blueprint('auth', __name__)
 
 
 @auth.route('/auth/signup', methods=[post_method])
