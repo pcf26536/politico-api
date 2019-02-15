@@ -56,10 +56,13 @@ def get_or_delete_ep(id):
 @party_v2.route('/parties/<int:id>/name', methods=['PATCH'])
 def edit_ep(id):
     if request.method == 'PATCH':
-        if validate_id(party_key,id) == ok_str:
+        party = Party().get_by('id', id)
+        if party:
+            party.to_json()
             data = request.get_json()
             if not data:
                 data = request.form
             new_name = data[name_key]
-            party = PartyCont(Id=id, name=new_name)
-            return party.edit_party()
+            party.patch('name', new_name, id)
+            return success(200, [party.to_json()])
+        return not_found_resp(party_key)
