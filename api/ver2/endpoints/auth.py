@@ -5,6 +5,7 @@ from api.ver1.utils import error, no_entry_resp, check_form_data, field_missing_
 from api.ver1.users.strings import *
 from api.ver2.utils.strings import password_1, password_2, admin_key, user_entity, token_key, user_key, password_key
 from api.ver2.models.users import User
+from api.ver2.utils.validators import is_valid_email
 
 auth = Blueprint('api_ver2', __name__)
 
@@ -69,3 +70,32 @@ def login():
             return field_missing_resp(user_entity, fields, e.args[0])
     else:
         return no_entry_resp(user_entity, fields)
+
+
+@auth.route('/auth/reset', methods=[post_method])
+def reset():
+    message = ''
+    code = status_400
+    fields = [email]
+    data = check_form_data(user_key, request, fields)
+    if data:
+        try:
+            mail = data[email]
+            if is_valid_email(mail):
+                if User().get_by(email, mail):
+                    res_data = [{
+                        'message': 'Check your email for password reset link',
+                        'email': mail
+                    }]
+                    code = status_200
+                    return success(code, res_data)
+                else:
+                    message = 'No user is registered with that email'
+                    code = status_404
+            else:
+                message = 'Please enter a valid email'
+        except Exception as e:
+            message = 'Please provide an email to reset you password'
+    else:
+        message = 'No Input Received: Please input an email to reset you password'
+    return error(message, code)
