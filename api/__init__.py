@@ -7,6 +7,9 @@ from api.ver2.endpoints.auth import auth
 from api.site_endpoints import route_bp
 from api.ver2.endpoints.candidature import register
 from api.ver2.endpoints.offices import office_v2
+from api.ver2.endpoints.parties import party_v2
+from api.ver2.endpoints.petitions import petitions
+from api.ver2.endpoints.vote import votes
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
@@ -27,14 +30,17 @@ def create_app(config_name):
     # register error handler blueprints
     app.register_blueprint(route_bp)
 
-    #register v1 blueprints
+    # register v1 blueprints
     app.register_blueprint(office_v1, url_prefix=ver_1_url_prefix)
     app.register_blueprint(party_v1, url_prefix=ver_1_url_prefix)
 
-    #register v2 blueprints
+    # register v2 blueprints
     app.register_blueprint(auth,  url_prefix=ver_2_url_prefix)
     app.register_blueprint(register, url_prefix=ver_2_url_prefix)
     app.register_blueprint(office_v2, url_prefix=ver_2_url_prefix)
+    app.register_blueprint(party_v2, url_prefix=ver_2_url_prefix)
+    app.register_blueprint(petitions, url_prefix=ver_2_url_prefix)
+    app.register_blueprint(votes, url_prefix=ver_2_url_prefix)
 
     # DB initializer
     db = Database(config_name)
