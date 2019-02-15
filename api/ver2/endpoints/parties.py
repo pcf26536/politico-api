@@ -40,13 +40,11 @@ def add_or_get_all_ep():
 @party_v2.route('/parties/<int:id>', methods=[delete_method, get_method])
 def get_or_delete_ep(id):
     try:
-        party = PartyCont(Id=id)
-        if validate_id(party_key, id) == ok_str:
-            if request.method == get_method:
-                return party.get_party()
-            elif request.method == delete_method:
-                return party.delete_party()
-        not_found_resp(party_key)
+        party = Party(Id=id)
+        if party.get_by('id', id):
+            party.delete(id)
+        else:
+            not_found_resp(party_key)
     except Exception as e:
         return runtime_error_resp(e)
 
