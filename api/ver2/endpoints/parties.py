@@ -1,8 +1,7 @@
 from flask import request, Blueprint
 from api.ver1.utils import field_missing_resp, runtime_error_resp, \
     not_found_resp, check_form_data, no_entry_resp, error, success
-from api.ver1.validators import validate_id
-from api.strings import name_key, post_method, get_method, delete_method, ok_str
+from api.strings import name_key, post_method, get_method, delete_method
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver2.models.parties import Party
 
