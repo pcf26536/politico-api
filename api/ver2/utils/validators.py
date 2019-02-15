@@ -25,7 +25,9 @@ def is_number(*args):
 
 def is_int(*args):
     for arg in args:
-        if not isinstance(arg, int):
+        try:
+            int(arg)
+        except:
             return False
     return True
 

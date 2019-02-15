@@ -10,6 +10,7 @@ from api.ver1.ballot.strings import candidate_key
 from api.ver2.utils import is_not_admin
 from api.ver2.models.candidates import Candidate
 from api.ver2.models.votes import Vote
+import traceback
 
 candids = Blueprint('candidates', __name__)
 
@@ -28,13 +29,16 @@ def register(id):
                 office_id=id,
                 candid_id=data[user_id_key]
             )
+        except Exception as e:
+            return field_missing_resp(candidate_key, fields, e.args[0])
+        try:
             if candidate.validate_candidate():
                 candidate.create()
                 return success(status_201, [candidate.to_json()])
             else:
                 return error(candidate.message, candidate.code)
         except Exception as e:
-            return field_missing_resp(candidate_key, fields, e.args[0])
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         return no_entry_resp(candidate_key, fields)
 
@@ -43,6 +47,8 @@ def register(id):
 def results(id):
     try:
         votes = Vote(office_id=id).get_by(office_key, id)
+        if not votes:
+            return error('The specified office has no results yet!', 404)
         data = []
         for vote in votes:
             data.append(vote.to_json())
