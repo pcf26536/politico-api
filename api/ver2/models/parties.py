@@ -1,8 +1,6 @@
 from .skeleton import Skeleton
 from api.strings import id_key, name_key, ok_str, status_key, error_key
 from api.ver1.parties.strings import hqAddKey, logoUrlKey
-from api.ver2.utils.validators import is_string
-from api.ver2.utils.strings import status_422
 from api.ver1.parties.validators import validate_hqadd, validate_logourl, validate_partyname
 
 
