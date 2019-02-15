@@ -69,3 +69,16 @@ def login():
             return field_missing_resp(user_entity, fields, e.args[0])
     else:
         return no_entry_resp(user_entity, fields)
+
+
+@auth.route('/auth/reset', methods=[post_method])
+def reset():
+    fields = [email]
+    data = check_form_data(user_key, request, fields)
+    if data:
+        try:
+            pass
+        except Exception as e:
+            return field_missing_resp(user_entity, fields, e.args[0])
+    else:
+        return no_entry_resp(user_entity, fields)
