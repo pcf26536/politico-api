@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from api.ver1.utils import field_missing_resp, runtime_error_resp, \
-    not_found_resp, check_form_data, no_entry_resp, success
+    not_found_resp, check_form_data, no_entry_resp, success, error
 from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
@@ -17,13 +17,13 @@ def add_or_get_all_ep():
         if not data:
             return no_entry_resp(office_key, fields)
         try:
-            status = validate_dict(data, office_key)
-            if not status == ok_str:
-                return status
             name = data[name_key]
             office_type = data[type_key]
-            office = OfficeCont(name=name, office_type=office_type)
-            return office.add_office()
+            office = Office(name=name, office_type=office_type)
+            if office.validate_office():
+                return success(201, [office.to_json()])
+            else:
+                return error(office.message, office.code)
         except KeyError as e:
             return field_missing_resp(office_key, fields, e.args[0])
 
