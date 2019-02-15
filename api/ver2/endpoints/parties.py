@@ -43,7 +43,7 @@ def get_or_delete_ep(id):
         if party.get_by('id', id):
             if request.method == get_method:
                 p = party.get_by('id', id)
-                return success(200, [party])
+                return success(200, [p.to_json()])
             elif request.method == delete_method:
                 party.delete(id)
         else:

@@ -37,12 +37,13 @@ def add_or_get_all_ep():
 
 @office_v1.route('/offices/<int:id>', methods=[get_method])
 def get_office_ep(id):
-    """" get specific offce by id """
+    """" get specific office by id """
     try:
-        if validate_id(office_key, id) == ok_str:
-            office = OfficeCont(Id=id)
-            if request.method == get_method:
-                return office.get_office()
-        return not_found_resp(office_key)
+        office = Office(Id=id)
+        if office.get_by('id', id):
+            o = office.get_by('id', id)
+            return success(200, [o.to_json()])
+        else:
+            not_found_resp(office_key)
     except Exception as e:
         return runtime_error_resp(e)
