@@ -92,9 +92,13 @@ def reset():
     data = check_form_data(user_key, request, fields)
     if data:
         try:
+            data[email]
+        except Exception as e:
+            message = 'Please provide an email to reset you password'
+        try:
             mail = data[email]
             if is_valid_email(mail):
-                if User().get_by(email, mail):
+                if Auth().get_by(email, mail):
                     res_data = [{
                         'message': 'Check your email for password reset link',
                         'email': mail
@@ -107,7 +111,7 @@ def reset():
             else:
                 message = 'Please enter a valid email'
         except Exception as e:
-            message = 'Please provide an email to reset you password'
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         message = 'No Input Received: Please input an email to reset you password'
     return error(message, code)
