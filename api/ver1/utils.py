@@ -1,4 +1,5 @@
 from flask import make_response, jsonify
+from api.ver1.parties.strings import imageTypes
 from api.strings import *
 import re
 
@@ -99,3 +100,19 @@ def name_format_resp(entity, name):
 
 def exists_resp(entity, value, field):
     return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)
+
+
+def validate_image(entity, value):
+    if not re.match(r'^[^.]*.[^.]*$', value):
+        return error('Bad {} format [{}], only one dot(.) should be present.'.format(entity, value), 400)
+    else:
+        try:
+            name, ext = value.split('.')
+            if not ext in imageTypes:
+                return error('Only {} image types allowed'.format(imageTypes), 405)
+            elif not re.match(r'[\w.-]{1,256}', name):
+                return error('Bad {} format [{}]. No spaces allowed.'.format(entity, name), 400)
+            else:
+                return None
+        except Exception:
+            return error('Bad {} format [{}] has no file extension.'.format(entity, value), 400)

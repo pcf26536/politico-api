@@ -1,7 +1,7 @@
 from api.ver1.parties.strings import party_key
 from api.ver1.utils import error, exists, exists_resp
 from api.strings import ok_str, not_found
-from .strings import logoTypes, hqAddKey
+from .strings import imageTypes, hqAddKey
 from .models import political_parties
 from api.ver1.utils import check_name_base
 import re
@@ -24,8 +24,8 @@ def validate_logourl(value):
     else:
         try:
             name, ext = value.split('.')
-            if not ext in logoTypes:
-                return error('Only {} image types allowed'.format(logoTypes), 405)
+            if not ext in imageTypes:
+                return error('Only {} image types allowed'.format(imageTypes), 405)
             elif not re.match(r'[\w.-]{1,256}', name):
                 return error('Bad image logo format [{}]. No spaces allowed.'.format(name), 400)
             else:

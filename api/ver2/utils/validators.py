@@ -63,3 +63,11 @@ def no_date_diff(date):
         return False
     return True
 
+
+def invalid_name(name, entity):
+    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
+        return {'message': "The {} [{}] provided is invalid/wrong format".format(entity, name), 'code': 400}
+    elif not (len(name) > 2):
+        return {'message' : "The {} [{}] provided is too short".format(entity, name), 'code': 400}
+    return None
+
