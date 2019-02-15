@@ -42,7 +42,11 @@ def get_or_delete_ep(id):
     try:
         party = Party(Id=id)
         if party.get_by('id', id):
-            party.delete(id)
+            if request.method == get_method:
+                p = party.get_by('id', id)
+                return success(200, [party])
+            elif request.method == delete_method:
+                party.delete(id)
         else:
             not_found_resp(party_key)
     except Exception as e:
