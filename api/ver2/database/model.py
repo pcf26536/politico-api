@@ -32,7 +32,6 @@ class Database:
     def drop_db_tables(self):
         for table in table_names:
             cursor.execute('DROP TABLE IF EXISTS {} CASCADE'.format(table))
-
         connection.commit()
 
     def create_root_user(self):

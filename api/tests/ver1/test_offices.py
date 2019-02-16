@@ -1,4 +1,4 @@
-from api.tests.test_base import TestBase
+from api.tests.ver1.test_base import TestBase
 from api.ver1.offices.models import political_offices
 from api.strings import *
 from api.ver1.offices.strings import *

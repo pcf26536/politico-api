@@ -1,4 +1,4 @@
-from api.tests.test_base import TestBase
+from api.tests.ver1.test_base import TestBase
 from api.ver2.utils.strings import status_202, v2_url_prefix
 from api.strings import status_key, name_key, data_key, error_key, status_400
 from api.ver2.utils.login_test_data import *
