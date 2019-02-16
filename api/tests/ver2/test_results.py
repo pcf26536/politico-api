@@ -2,12 +2,32 @@ from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix
 from api.strings import status_key, data_key, error_key, status_404, status_200
 from api.ver1.offices.strings import office_key
+from api.ver2.utils.office_test_data import correct_office
+from api.ver2.utils.party_test_data import correct_party
+from api.ver2.utils.signup_test_data import user_with_correct_signup_data
+from api.ver2.utils.register_test_data import correct_candidate_infor
+from api.ver2.utils.vote_test_data import correct_vote
 
 
 class TestResults(TestBase):
     def setUp(self):
         """ setup objects required for these tests """
         super().setUp()
+        self.client.post(
+            v2_url_prefix + '/auth/signup',
+            json=user_with_correct_signup_data
+        )  # user
+        self.client.post(v2_url_prefix + '/parties', json=correct_party)
+        self.client.post(v2_url_prefix + '/offices', json=correct_office)
+        res = self.client.post(
+            v2_url_prefix + '/office/1/register',
+            json=correct_candidate_infor,
+            headers=self.headers
+        )
+        self.client.post(
+            v2_url_prefix + '/votes/',
+            json=correct_vote
+        )
 
     # clear all lists after tests
     def tearDown(self):
@@ -32,4 +52,14 @@ class TestResults(TestBase):
 
         self.assertEqual(data[status_key], status_404)
         self.assertEqual(data[error_key], 'The office id was not found')
+        self.assertEqual(res.status_code, status_404)
+
+    def test_get_results_not_voted(self):
+        """ Tests invalid office id """
+        res = self.client.get(
+            v2_url_prefix + '/office/1/result')
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_404)
+        self.assertEqual(data[error_key], 'The specified office has no results yet!')
         self.assertEqual(res.status_code, status_404)

@@ -1,3 +1,4 @@
+from api.ver1.parties.strings import imageTypes
 status_202 = 202
 status_205 = 205
 status_401 = 401
@@ -22,3 +23,4 @@ vote_key = 'Vote'
 petition_key = 'Petition'
 office_id_key = 'office_id'
 authorization_key = 'Authorization'
+evidence_types = imageTypes + ['pdf', 'mp4', '3gp', 'mkv', 'mp3']

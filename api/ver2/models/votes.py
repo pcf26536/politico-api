@@ -87,7 +87,6 @@ class Vote(Skeleton):
             self.code = status_400
             return False
 
-        print(self.created_on)
         if not no_date_diff(self.created_on):
             self.message = "The date entered doesn't match today's date"
             self.code = status_400
