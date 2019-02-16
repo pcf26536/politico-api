@@ -78,7 +78,11 @@ def no_entry_resp(entity, fields):
         status_400)
 
 
-def field_missing_resp(entity, fields, field):
+def field_missing_resp(entity, fields, field, action=None):
+    if action:
+        return error(
+            "{} field is required to {}".format(field, action),
+            status_400)
     return error(
         "{} field is required to create {}".format(field, entity),
         status_400)

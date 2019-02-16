@@ -1,9 +1,12 @@
 from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix, user_key, token_key, user_entity
 from api.ver2.utils.validators import invalid_name
-from api.strings import status_key, data_key, error_key, status_400
 from api.ver2.utils.signup_test_data import *
 from api.strings import status_201
+from api.ver2.utils.strings import status_202
+from api.strings import status_key, name_key, data_key, error_key, status_400
+from api.ver2.utils.login_test_data import *
+from api.strings import ver_2_url_prefix
 
 
 class TestSignUp(TestBase):

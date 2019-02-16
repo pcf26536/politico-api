@@ -59,7 +59,7 @@ def login():
             mail = res_data[email]
             password = res_data[password_key]
         except Exception as e:
-            return field_missing_resp(user_entity, fields, e.args[0])
+            return field_missing_resp(user_entity, fields, e.args[0], 'login')
         try:
             login_user = Auth().get_by(email, mail)
             if not login_user:
