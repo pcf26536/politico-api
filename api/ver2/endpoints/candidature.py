@@ -4,7 +4,7 @@ from api.strings import post_method, status_201, get_method
 from api.ver1.utils import check_form_data, no_entry_resp, \
     field_missing_resp, error, success, runtime_error_resp, not_found_resp
 from api.ver2.utils.strings import user_id_key
-from api.ver1.parties.strings import party_id_key
+from api.ver1.parties.strings import party_id_key, party_key
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key
 from api.ver2.utils import is_not_admin
@@ -15,19 +15,19 @@ import traceback
 candids = Blueprint('candidates', __name__)
 
 
-@candids.route('/office/<int:id>/candids', methods=[post_method])
+@candids.route('/office/<int:id>/register', methods=[post_method])
 @jwt_required
 def register(id):
     if is_not_admin():
         return is_not_admin()
-    fields = [party_id_key, user_id_key]
+    fields = [party_key, candidate_key]
     data = check_form_data(candidate_key, request, fields)
     if data:
         try:
             candidate = Candidate(
-                party_id=data[party_id_key],
+                party_id=data[party_key],
                 office_id=id,
-                candid_id=data[user_id_key]
+                candid_id=data[candidate_key]
             )
         except Exception as e:
             return field_missing_resp(candidate_key, fields, e.args[0])

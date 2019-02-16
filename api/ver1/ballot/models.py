@@ -14,9 +14,9 @@ petitions = [
 ]
 
 candidates = [
-    {id_key: 1, office_key: 1, party_key: 1, candidate_key: 1},
-    {id_key: 2, office_key: 1, party_key: 2, candidate_key: 2},
-    {id_key: 3, office_key: 1, party_key: 3, candidate_key: 3},
-    {id_key: 4, office_key: 2, party_key: 1, candidate_key: 4},
-    {id_key: 5, office_key: 2, party_key: 2, candidate_key: 5}
+    {id_key: 1, office_key: 1, party_key: 1, candidate_key: 2},
+    {id_key: 2, office_key: 1, party_key: 2, candidate_key: 3},
+    {id_key: 3, office_key: 1, party_key: 3, candidate_key: 4},
+    {id_key: 4, office_key: 2, party_key: 1, candidate_key: 5},
+    {id_key: 5, office_key: 2, party_key: 2, candidate_key: 6}
 ]
