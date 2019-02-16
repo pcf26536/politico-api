@@ -24,7 +24,6 @@ class Database:
             return False
 
     def create_db_tables(self):
-        print(cursor)
         for query in create_table_queries:
             cursor.execute(query)
         connection.commit()

@@ -1,7 +1,8 @@
 from api.tests.ver1.test_base import TestBase
-from api.ver2.utils.strings import status_202, v2_url_prefix
+from api.ver2.utils.strings import status_202
 from api.strings import status_key, name_key, data_key, error_key, status_400
 from api.ver2.utils.login_test_data import *
+from api.strings import ver_2_url_prefix
 
 
 class TestLogin(TestBase):
@@ -17,8 +18,9 @@ class TestLogin(TestBase):
     def test_login(self):
         """ Tests login success """
         res = self.client.post(
-            v2_url_prefix + '/auth/login',
-            json=user_with_correct_credentials)
+            ver_2_url_prefix + '/auth/login',
+            json=user_with_correct_credentials
+        )
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_202)
@@ -27,8 +29,9 @@ class TestLogin(TestBase):
 
     def test_login_wrong_mail_pass(self):
         res = self.client.post(
-            v2_url_prefix + '/auth/login',
-            json=user_with_incorrect_credentials)
+            ver_2_url_prefix + '/auth/login',
+            json=user_with_incorrect_credentials
+        )
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
@@ -37,8 +40,9 @@ class TestLogin(TestBase):
 
     def test_login_empty_mail_pass(self):
         res = self.client.post(
-            v2_url_prefix + '/auth/login',
-            json=user_with_missing_credentials)
+            ver_2_url_prefix + '/auth/login',
+            json=user_with_missing_credentials
+        )
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
