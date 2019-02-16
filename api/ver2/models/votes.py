@@ -61,7 +61,6 @@ class Vote(Skeleton):
             self.code = status_400
             return False
 
-        print(self.created_by)
         if not User().get_by(id_key, self.created_by):
             self.message = 'Selected User does not exist'
             self.code = status_404

@@ -118,5 +118,5 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], office_id_str + not_found)
+        self.assertEqual(data[error_key], office_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)

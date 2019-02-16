@@ -39,7 +39,7 @@ class TestVote(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_201)
-        self.assertEqual(data[data_key][0][createdBy_key], correct_vote[createdBy_key])
+        self.assertEqual(data[data_key][0]['createdby'], correct_vote[createdBy_key])
         self.assertEqual(res.status_code, status_201)
 
     def test_vote_voted(self):

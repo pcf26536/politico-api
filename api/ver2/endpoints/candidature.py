@@ -43,15 +43,27 @@ def register(id):
         return no_entry_resp(candidate_key, fields)
 
 
-@candids.route('/office/<int:id>/results', methods=[get_method])
+@candids.route('/office/<int:id>/result', methods=[get_method])
 def results(id):
     try:
-        votes = Vote(office_id=id).get_by(office_key, id)
-        if not votes:
-            return error('The specified office has no results yet!', 404)
-        data = []
-        for vote in votes:
-            data.append(vote.to_json())
-        return success(200, data)
+        print(Vote().get_by(office_key, id))
+        if Vote().get_by(office_key, id):
+            votes = Vote(
+                office_id=id
+            ).get_group(
+                col1=office_key,
+                col2=candidate_key,
+                count_col=candidate_key,
+                grp_col1=office_key,
+                grp_col2=candidate_key
+            )
+            if not votes:
+                return error('The specified office has no results yet!', 404)
+            data = []
+            for vote in votes:
+                data.append(vote)
+            return success(200, data)
+        else:
+            return error('Voting for the specified office has not commenced yet!', 404)
     except Exception as e:
         return runtime_error_resp(e)

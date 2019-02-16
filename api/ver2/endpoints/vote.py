@@ -27,8 +27,8 @@ def votes():
             return field_missing_resp(vote_key, fields, e.args[0])
         try:
             if vote.validate_vote():
-                vote.create()
-                return success(status_201, [vote.to_json()])
+                data = vote.create()
+                return success(status_201, [data])
             else:
                 return error(vote.message, vote.code)
         except Exception as e:

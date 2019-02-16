@@ -121,7 +121,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
 
     # tests for DELETE party
@@ -144,7 +144,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
 
     # tests for PATCH party
@@ -166,5 +166,5 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
