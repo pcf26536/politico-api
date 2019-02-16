@@ -53,8 +53,8 @@ class Office(Skeleton):
             return False
 
         if self.get_by('name', self.name):
-            self.message = "Conflict: office with Women Representative as name already exists"
+            self.message = "Conflict: office with {} as name already exists".format(self.name)
             self.code = 409
-            return True
+            return False
 
         return super().validate_self()

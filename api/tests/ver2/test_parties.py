@@ -41,7 +41,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], 'The party name provided is too short')
+        self.assertEqual(data[error_key], 'The party name [ab] provided is invalid/wrong format')
         self.assertEqual(res.status_code, status_400)
         
     def test_add_office_int_name(self):
@@ -55,12 +55,12 @@ class TestParties(TestBase):
         self.assertEqual(data[error_key], 'Integer types are not allowed for a name field')
         self.assertEqual(res.status_code, status_400)
 
-    def test_add_party_exits_ep(self):
+    def test_add_party_exists_ep(self):
         """ Tests create party success """
         self.client.post(v2_url_prefix + '/parties', json=self.ex_party)
         res = self.client.post(v2_url_prefix + '/parties',
                                json={
-                                   name_key: "A party",
+                                   name_key: "Aparty",
                                    hqAddKey: "14588-0100, Mombasa",
                                    logoUrlKey: "122fd.png"})
         data = res.get_json()
@@ -96,7 +96,7 @@ class TestParties(TestBase):
     def test_add_party_wrong_value_format(self):
         """ Tests when some political party fields are missing e.g logo url """
         res = self.client.post(v2_url_prefix + '/parties',
-                               json={ name_key: "A party", hqAddKey: "14588-0100, Mombasa", logoUrlKey: "122fd"})
+                               json={ name_key: "Aparty", hqAddKey: "14588-0100, Mombasa", logoUrlKey: "122fd"})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
@@ -122,9 +122,9 @@ class TestParties(TestBase):
         res = self.client.get(v2_url_prefix + '/parties')
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_201)
+        self.assertEqual(data[status_key], status_200)
         self.assertEqual(len(data[data_key]), no_of_parties)
-        self.assertEqual(res.status_code, status_201)
+        self.assertEqual(res.status_code, status_200)
 
     # tests for GET single party
     def test_get_specific_party_ep(self):
@@ -133,10 +133,10 @@ class TestParties(TestBase):
         res = self.client.get(v2_url_prefix + '/parties/1')
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_201)
+        self.assertEqual(data[status_key], status_200)
         self.assertEqual(len(data[data_key]), 1)
         self.assertEqual(data[data_key][0][id_key], 1)
-        self.assertEqual(res.status_code, status_201)
+        self.assertEqual(res.status_code, status_200)
 
     def test_get_specific_party_id_not_found(self):
         """ Tests request made with id that does not exist """
@@ -144,7 +144,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_key + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
 
     # tests for DELETE party
@@ -167,7 +167,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_key + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
 
     # tests for PATCH party
@@ -189,5 +189,5 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_key + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)

@@ -42,5 +42,6 @@ class Auth(Skeleton):
             self.message = "A {} with that email already exists".format('User')
             self.code = status_409
             return False
+
         return super().validate_self()
 
