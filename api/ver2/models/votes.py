@@ -2,7 +2,7 @@ from .skeleton import Skeleton
 from .users import User
 from .offices import Office
 from .candidates import Candidate
-from api.strings import id_key, status_400, status_404
+from api.strings import id_key, status_400, status_404, status_409
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key, createdBy_key, createdOn_key
 from api.ver2.utils.validators import is_int, valid_date, no_date_diff
@@ -61,6 +61,7 @@ class Vote(Skeleton):
             self.code = status_400
             return False
 
+        print(self.created_by)
         if not User().get_by(id_key, self.created_by):
             self.message = 'Selected User does not exist'
             self.code = status_404
@@ -78,7 +79,7 @@ class Vote(Skeleton):
 
         if self.get_by(createdBy_key, self.created_by) and self.get_by(office_key, self.office):
             self.message = 'User has already voted for specified office'
-            self.code = status_404
+            self.code = status_409
             return False
 
         if not valid_date(self.created_on):
@@ -86,6 +87,7 @@ class Vote(Skeleton):
             self.code = status_400
             return False
 
+        print(self.created_on)
         if not no_date_diff(self.created_on):
             self.message = "The date entered doesn't match today's date"
             self.code = status_400

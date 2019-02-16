@@ -4,8 +4,8 @@ from api.ver1.offices.strings import office_key
 from api.ver1.parties.strings import party_key
 
 votes = [
-    { id_key: 1, createdOn_key: '11/11/18', createdBy_key: 1, office_key: 2, candidate_key: 1 },
-    { id_key: 2, createdOn_key: '11/11/18', createdBy_key: 1, office_key: 1, candidate_key: 2 }
+    { id_key: 1, createdOn_key: '16/02/19', createdBy_key: 2, office_key: 1, candidate_key: 2 },
+    { id_key: 2, createdOn_key: '11/11/19', createdBy_key: 2, office_key: 1, candidate_key: 2 }
 ]
 
 petitions = [
