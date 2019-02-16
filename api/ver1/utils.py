@@ -62,6 +62,14 @@ def check_name_base(entity, name, data_list):
     return ok_str
 
 
+def invalid_name(entity, name):
+    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
+        return name_format_resp(entity, name)
+    elif not (len(name) > 2):
+        return name_length_resp(entity, name)
+    return None
+
+
 def provide_field_value(entity, fields):
     return error(
         message="Please provide {} value(s) for the {}".format(fields, entity),
@@ -69,7 +77,7 @@ def provide_field_value(entity, fields):
 
 
 def not_found_resp(entity):
-    return error(entity + not_found, status_404)
+    return error(entity + ' ' + not_found, status_404)
 
 
 def no_entry_resp(entity, fields):

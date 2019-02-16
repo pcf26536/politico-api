@@ -1,6 +1,8 @@
 from .skeleton import Skeleton
-from api.strings import id_key, name_key, type_key, status_201, ok_str, error_key, status_key
+from api.strings import id_key, name_key, type_key, ok_str, error_key, status_key, status_400
 from api.ver1.offices.validators import validate_officeName, validate_officeType
+from api.ver2.utils.validators import is_string
+from api.ver1.utils import invalid_name
 
 
 class Office(Skeleton):
@@ -28,16 +30,31 @@ class Office(Skeleton):
         return self
 
     def validate_office(self):
-        valid_type = validate_officeType(self.type)
-        if valid_type == ok_str:
-            self.message = valid_type[error_key]
-            self.code = valid_type[status_key]
-            return True
+        if not is_string(self.name):
+            self.message = "Integer types are not allowed for a name field"
+            self.code = status_400
+            return False
 
-        valid_name = validate_officeName(self.name)
-        if valid_name == ok_str:
-            self.message = valid_name[error_key]
-            self.code = valid_name[status_key]
+        if not is_string(self.type):
+            self.message = "Integer types are not allowed for type field"
+            self.code = status_400
+            return False
+
+        valid_type = validate_officeType(self.type)
+        if not valid_type == ok_str:
+            self.message = valid_type.get_json()[error_key]
+            self.code = valid_type.get_json()[status_key]
+            return False
+
+        invalid = invalid_name('office', self.name)
+        if invalid:
+            self.message = invalid.get_json()[error_key]
+            self.code = invalid.get_json()[status_key]
+            return False
+
+        if self.get_by('name', self.name):
+            self.message = "Conflict: office with Women Representative as name already exists"
+            self.code = 409
             return True
 
         return super().validate_self()

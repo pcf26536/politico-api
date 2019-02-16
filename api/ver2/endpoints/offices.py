@@ -43,6 +43,6 @@ def get_office_ep(id):
             o = office.get_by('id', id)
             return success(200, [o.to_json()])
         else:
-            not_found_resp(office_key)
+            return not_found_resp(office_key)
     except Exception as e:
         return runtime_error_resp(e)
