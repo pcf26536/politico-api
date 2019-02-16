@@ -22,7 +22,7 @@ env:
 
 # command to automate tests
 script:
-  - pytest --cov=api api/tests/ver1/ -v
+  - pytest --cov=api -v
 
 after_success:
   - coveralls
