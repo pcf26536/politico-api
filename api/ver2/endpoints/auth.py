@@ -74,7 +74,7 @@ def login():
                 code = status_200
                 data = {
                     token_key: user.access_token,
-                    user_key: user.to_json()
+                    user_key: login_user
                 }
                 return success(code, [data])
             return error(message, code)
