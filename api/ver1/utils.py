@@ -80,7 +80,7 @@ def no_entry_resp(entity, fields):
 
 def field_missing_resp(entity, fields, field):
     return error(
-        "{} field is required. NOTE: required fields {} to create {}".format(field, fields, entity),
+        "{} field is required to create {}".format(field, entity),
         status_400)
 
 

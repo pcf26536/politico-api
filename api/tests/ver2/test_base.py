@@ -6,7 +6,7 @@ from api.ver2.utils.strings import password_key, token_key, authorization_key
 from api.strings import data_key
 
 
-class Base(unittest.TestCase):
+class TestBase(unittest.TestCase):
     """ This is the super class for all tests """
 
     def setUp(self):

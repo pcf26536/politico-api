@@ -1,4 +1,4 @@
-status_202 = 200
+status_202 = 202
 status_205 = 205
 status_401 = 401
 status_415 = 415
