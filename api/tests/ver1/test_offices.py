@@ -51,7 +51,7 @@ class TestOffices(TestBase):
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            "name field is required. NOTE: required fields ['name', 'type'] to create office")
+            "name field is required to create office")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_missing_fields_value(self):

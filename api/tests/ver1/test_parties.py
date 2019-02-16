@@ -56,7 +56,7 @@ class TestParties(TestBase):
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party"
+            "name field is required to create party"
         )
         self.assertEqual(res.status_code, status_400)
 
