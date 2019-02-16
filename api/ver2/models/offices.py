@@ -1,6 +1,6 @@
 from .skeleton import Skeleton
 from api.strings import id_key, name_key, type_key, ok_str, error_key, status_key, status_400
-from api.ver1.offices.validators import validate_officeName, validate_officeType
+from api.ver1.offices.validators import validate_officeType
 from api.ver2.utils.validators import is_string
 from api.ver1.utils import invalid_name
 
@@ -52,7 +52,9 @@ class Office(Skeleton):
             self.code = invalid.get_json()[status_key]
             return False
 
+        print(self.table)
         if self.get_by('name', self.name):
+            print('after')
             self.message = "Conflict: office with {} as name already exists".format(self.name)
             self.code = 409
             return False

@@ -25,7 +25,7 @@ class Party(Skeleton):
 
     def create(self):
         data = super().add(
-            name_key + ',' + ', ' + hqAddKey + ',' +  logoUrlKey,
+            name_key + ',' + 'hq_address' + ',' +  'logo_url',
             self.name, self.hqAddress, self.logoUrl)
 
         self.Id = data.get(id_key)

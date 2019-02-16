@@ -1,4 +1,4 @@
-from api.tests.ver1.test_base import TestBase
+from api.tests.ver2.test_base import TestBase
 from api.strings import *
 from api.ver1.offices.strings import *
 from api.ver2.utils.strings import v2_url_prefix
@@ -32,7 +32,6 @@ class TestOffices(TestBase):
 
     def test_add_office_int_name(self):
         """ Tests when integer is provided for name """
-
         self.office[name_key] = 22
         res = self.client.post(v2_url_prefix + '/offices', json=self.office)
         data = res.get_json()
@@ -43,7 +42,6 @@ class TestOffices(TestBase):
 
     def test_add_office_short_name(self):
         """ Tests when short name is provided """
-
         self.office[name_key] = 'ab'
         res = self.client.post(v2_url_prefix + '/offices', json=self.office)
         data = res.get_json()

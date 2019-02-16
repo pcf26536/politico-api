@@ -40,20 +40,20 @@ class Skeleton(Database):
 
         query = "UPDATE {} SET {} = '{}' WHERE id = '{}' \
             RETURNING *".format(self.table, key, value, id)
-        return self.insert(query)
+        return super().insert(query)
 
     def get_all(self):
         """  fetches all items in a table """
         query = "SELECT * FROM {}".format(self.table)
-        return self.fetch_all(query)
+        return super().fetch_all(query)
 
-    def delete(self, id):
+    def delete(self, Id):
         """ deletes an item from a table """
-        query = "DELETE FROM {} WHERE id = {}".format(self.table, id)
-        self.execute(query)
+        query = "DELETE FROM {} WHERE id = {}".format(self.table, Id)
+        super().execute(query)
 
     def get_by(self, key, value):
         """ search for a row in a table """
         query = "SELECT * FROM {} WHERE {} = '{}'".format(
             self.table, key, value)
-        return self.fetch_one(query)
+        return super().fetch_one(query)

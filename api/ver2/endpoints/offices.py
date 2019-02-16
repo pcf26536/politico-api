@@ -20,6 +20,7 @@ def add_or_get_all_ep():
             office_type = data[type_key]
             office = Office(name=name, office_type=office_type)
             if office.validate_office():
+                office.create()
                 return success(201, [office.to_json()])
             else:
                 return error(office.message, office.code)
@@ -41,7 +42,7 @@ def get_office_ep(id):
         office = Office(Id=id)
         if office.get_by('id', id):
             o = office.get_by('id', id)
-            return success(200, [o.to_json()])
+            return success(200, [o])
         else:
             return not_found_resp(office_key)
     except Exception as e:

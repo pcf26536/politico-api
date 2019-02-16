@@ -1,4 +1,4 @@
-from api.tests.ver1.test_base import TestBase
+from api.tests.ver2.test_base import TestBase
 from api.ver1.parties.models import political_parties
 from api.strings import *
 from api.ver1.parties.strings import *
@@ -151,13 +151,12 @@ class TestParties(TestBase):
     def test_delete_party_ep(self):
         """ Tests when DELETE reuest made to /parties/<int:id> """
         self.client.post(v2_url_prefix + '/parties', json=self.ex_party) # create a party cause of teardown clearing list
-        res = self.client.post(v2_url_prefix + '/parties', json=self.ex_party)
 
         res = self.client.delete(v2_url_prefix + '/parties/1')
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
-        self.assertEqual(data[data_key][0][msg_key], 'African National Congress deleted successfully')
+        self.assertEqual(data[data_key][0]['message'], 'African National Congress deleted successfully')
         self.assertEqual(len(data[data_key]), 1)
         self.assertEqual(res.status_code, status_200)
 
