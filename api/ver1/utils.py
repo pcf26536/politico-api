@@ -1,4 +1,5 @@
 from flask import make_response, jsonify
+from api.ver1.parties.strings import imageTypes
 from api.strings import *
 import re
 
@@ -61,6 +62,14 @@ def check_name_base(entity, name, data_list):
     return ok_str
 
 
+def invalid_name(entity, name):
+    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
+        return name_format_resp(entity, name)
+    elif not (len(name) > 2):
+        return name_length_resp(entity, name)
+    return None
+
+
 def provide_field_value(entity, fields):
     return error(
         message="Please provide {} value(s) for the {}".format(fields, entity),
@@ -68,7 +77,7 @@ def provide_field_value(entity, fields):
 
 
 def not_found_resp(entity):
-    return error(entity + not_found, status_404)
+    return error(entity + ' ' + not_found, status_404)
 
 
 def no_entry_resp(entity, fields):
@@ -77,9 +86,13 @@ def no_entry_resp(entity, fields):
         status_400)
 
 
-def field_missing_resp(entity, fields, field):
+def field_missing_resp(entity, fields, field, action=None):
+    if action:
+        return error(
+            "{} field is required to {}".format(field, action),
+            status_400)
     return error(
-        "{} field is required. NOTE: required fields {} to create {}".format(field, fields, entity),
+        "{} field is required to create {}".format(field, entity),
         status_400)
 
 
@@ -99,3 +112,19 @@ def name_format_resp(entity, name):
 
 def exists_resp(entity, value, field):
     return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)
+
+
+def validate_image(entity, value):
+    if not re.match(r'^[^.]*.[^.]*$', value):
+        return error('Bad {} format [{}], only one dot(.) should be present.'.format(entity, value), 400)
+    else:
+        try:
+            name, ext = value.split('.')
+            if not ext in imageTypes:
+                return error('Only {} image types allowed'.format(imageTypes), 405)
+            elif not re.match(r'[\w.-]{1,256}', name):
+                return error('Bad {} format [{}]. No spaces allowed.'.format(entity, name), 400)
+            else:
+                return None
+        except Exception:
+            return error('Bad {} format [{}] has no file extension.'.format(entity, value), 400)

@@ -5,10 +5,10 @@ from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
 
-office_v1 = Blueprint('offices_v1', __name__)
+office_v2 = Blueprint('offices_v2', __name__)
 
 
-@office_v1.route('/offices', methods=[post_method, get_method])
+@office_v2.route('/offices', methods=[post_method, get_method])
 def add_or_get_all_ep():
     if request.method == post_method:
         fields = [name_key, type_key]
@@ -20,6 +20,7 @@ def add_or_get_all_ep():
             office_type = data[type_key]
             office = Office(name=name, office_type=office_type)
             if office.validate_office():
+                office.create()
                 return success(201, [office.to_json()])
             else:
                 return error(office.message, office.code)
@@ -34,15 +35,15 @@ def add_or_get_all_ep():
         return success(200, data)
 
 
-@office_v1.route('/offices/<int:id>', methods=[get_method])
+@office_v2.route('/offices/<int:id>', methods=[get_method])
 def get_office_ep(id):
     """" get specific office by id """
     try:
         office = Office(Id=id)
         if office.get_by('id', id):
             o = office.get_by('id', id)
-            return success(200, [o.to_json()])
+            return success(200, [o])
         else:
-            not_found_resp(office_key)
+            return not_found_resp(office_key)
     except Exception as e:
         return runtime_error_resp(e)

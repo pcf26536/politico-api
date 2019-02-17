@@ -6,7 +6,7 @@ table_names = [
     'politico_parties',
     'politico_offices',
     'politico_candidates',
-    'politico_votes'
+    'politico_votes',
     'politico_petitions'
 ]
 

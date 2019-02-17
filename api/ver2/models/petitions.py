@@ -4,13 +4,13 @@ from .offices import Office
 from api.strings import id_key, status_400, status_404
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import createdBy_key, createdOn_key, body_key
-from api.ver2.utils.validators import is_number, valid_date, no_date_diff
+from api.ver2.utils.validators import is_number, valid_date, no_date_diff, invalid_evidence, invalid_body, process_evidence
 from api.ver2.utils.strings import evidence_key
 
 
 class Petition(Skeleton):
     def __init__(self, created_on=None, created_by=None, office_id=None, body=None, evidence=None):
-        super().__init__('Vote', 'politico_votes')
+        super().__init__('Vote', 'politico_petitions')
 
         self.created_on = created_on
         self.created_by = created_by
@@ -21,8 +21,8 @@ class Petition(Skeleton):
 
     def create(self):
         data = super().add(
-            createdOn_key + ',' + createdBy_key + ', ' + office_key + ', ' + body_key+ ', ' + evidence_key,
-            self.created_on, self.created_by, self.office, self.body, self.evidence
+            createdOn_key + ',' + createdBy_key + ', ' + office_key + ', ' + 'text' + ', ' + evidence_key,
+            self.created_on, self.created_by, self.office, self.body, process_evidence(self.evidence)
         )
         self.Id = data.get(id_key)
         return data
@@ -70,14 +70,26 @@ class Petition(Skeleton):
             self.code = status_404
             return False
 
-        if valid_date(self.created_on):
-            self.message = "Invalid date format; expected format is DD/MM/YY e.g 12/12/19"
+        if not valid_date(self.created_on):
+            self.message = "Invalid date format; expected format is YYYY/MM/DD e.g 2019-12-30"
             self.code = status_400
             return False
 
-        if no_date_diff(self.created_on):
+        if not no_date_diff(self.created_on):
             self.message = "The date entered doesn't match today's date"
             self.code = status_400
+            return False
+
+        invalid = invalid_evidence(self.evidence)
+        if invalid:
+            self.message = invalid[0]
+            self.code = invalid[1]
+            return False
+
+        in_body = invalid_body(self.body)
+        if in_body:
+            self.message = in_body[0]
+            self.code = in_body[1]
             return False
 
         return super().validate_self()

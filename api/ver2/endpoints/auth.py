@@ -5,14 +5,16 @@ from api.ver1.utils import error, no_entry_resp, check_form_data, field_missing_
 from api.ver1.users.strings import *
 from api.ver2.utils.strings import password_1, password_2, admin_key, user_entity, token_key, user_key, password_key
 from api.ver2.models.users import User
+from api.ver2.models.auth import Auth
 from api.ver2.utils.validators import is_valid_email
+import traceback
 
-auth = Blueprint('api_ver2', __name__)
+auth = Blueprint('auth', __name__)
 
 
 @auth.route('/auth/signup', methods=[post_method])
 def signup():
-    fields = [fname, lname, email, pspt, phone, password_1, password_2, admin_key]
+    fields = [fname, lname, email, pspt, phone, password_1, password_2]
     res_data = check_form_data(user_entity, request, fields)
     if res_data:
         try:
@@ -24,17 +26,24 @@ def signup():
                 phone=res_data[phone],
                 password1=res_data[password_1],
                 password2=res_data[password_2],
-                is_admin=res_data[admin_key]
             )
-            if not user.validate_user():
-                return error(user.message, user.code)
-            user.create()
-            return success(status_201, [{
-                token_key: user.access_token,
-                user_key: {user.to_json()}
-            }])
         except Exception as e:
             return field_missing_resp(user_entity, fields, e.args[0])
+        try:
+            if not user.validate_user():
+                return error(user.message, user.code)
+            user_auth = Auth(email=res_data[email], password=res_data[password_1])
+            if not user_auth.validate_auth():
+                return error(user_auth.message, user_auth.code)
+            user_auth.create()
+            user.Id = user_auth.Id
+            user.create()
+            return success(status_201, [{
+                token_key: user_auth.access_token,
+                user_key: user.to_json()
+            }])
+        except Exception as e:
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         return no_entry_resp(user_entity, fields)
 
@@ -49,25 +58,28 @@ def login():
             message = ''
             mail = res_data[email]
             password = res_data[password_key]
-            login_user = User().get_by(email, mail)
+        except Exception as e:
+            return field_missing_resp(user_entity, fields, e.args[0], 'login')
+        try:
+            login_user = Auth().get_by(email, mail)
             if not login_user:
                 code = status_404
                 message = "user does not exits in the database"
-            elif not check_password_hash(login_user.to_json()[password_key], password):
+            elif not check_password_hash(login_user[password_key], password):
                 code = status_400
                 message = 'Incorrect password provided'
             else:
-                user = User(Id=login_user.to_json()[id_key])
+                user = Auth(Id=login_user[id_key], email=mail)
                 user.create_auth_tokens()
                 code = status_200
                 data = {
                     token_key: user.access_token,
-                    user_key: user
+                    user_key: login_user
                 }
                 return success(code, [data])
             return error(message, code)
         except Exception as e:
-            return field_missing_resp(user_entity, fields, e.args[0])
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         return no_entry_resp(user_entity, fields)
 
@@ -80,9 +92,13 @@ def reset():
     data = check_form_data(user_key, request, fields)
     if data:
         try:
+            data[email]
+        except Exception as e:
+            message = 'Please provide an email to reset you password'
+        try:
             mail = data[email]
             if is_valid_email(mail):
-                if User().get_by(email, mail):
+                if Auth().get_by(email, mail):
                     res_data = [{
                         'message': 'Check your email for password reset link',
                         'email': mail
@@ -95,7 +111,7 @@ def reset():
             else:
                 message = 'Please enter a valid email'
         except Exception as e:
-            message = 'Please provide an email to reset you password'
+            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         message = 'No Input Received: Please input an email to reset you password'
     return error(message, code)

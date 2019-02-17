@@ -9,7 +9,7 @@ class Skeleton(Database):
         super().__init__(os.getenv('APP_SETTINGS'))
         self.table = table
         self.entity = entity
-        self.message = ""
+        self.message = ''
         self.code = status_200
 
     def to_json(self):
@@ -40,20 +40,26 @@ class Skeleton(Database):
 
         query = "UPDATE {} SET {} = '{}' WHERE id = '{}' \
             RETURNING *".format(self.table, key, value, id)
-        return self.insert(query)
+        return super().insert(query)
 
     def get_all(self):
         """  fetches all items in a table """
         query = "SELECT * FROM {}".format(self.table)
-        return self.fetch_all(query)
+        return super().fetch_all(query)
 
-    def delete(self, id):
+    def delete(self, Id):
         """ deletes an item from a table """
-        query = "DELETE FROM {} WHERE id = {}".format(self.table, id)
-        self.execute(query)
+        query = "DELETE FROM {} WHERE id = {}".format(self.table, Id)
+        super().execute(query)
 
     def get_by(self, key, value):
         """ search for a row in a table """
         query = "SELECT * FROM {} WHERE {} = '{}'".format(
             self.table, key, value)
-        return self.fetch_one(query)
+        return super().fetch_one(query)
+
+    def get_group(self, col1, col2, count_col, grp_col1, grp_col2):
+        query = "SELECT {}, {}, COUNT ({}) AS result FROM {} GROUP BY {},{}".format(
+            col1, col2, count_col, self.table, grp_col1, grp_col2)
+        print(query)
+        return super().fetch_all(query)

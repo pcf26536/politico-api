@@ -1,4 +1,4 @@
-from api.tests.test_base import TestBase
+from api.tests.ver1.test_base import TestBase
 from api.ver1.parties.models import political_parties
 from api.strings import *
 from api.ver1.parties.strings import *
@@ -56,7 +56,7 @@ class TestParties(TestBase):
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            "name field is required. NOTE: required fields ['name', 'hqAddress', 'logoUrl'] to create party"
+            "name field is required to create party"
         )
         self.assertEqual(res.status_code, status_400)
 
@@ -121,7 +121,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
 
     # tests for DELETE party
@@ -144,7 +144,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)
 
     # tests for PATCH party
@@ -166,5 +166,5 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], party_id_str + not_found)
+        self.assertEqual(data[error_key], party_id_str + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)

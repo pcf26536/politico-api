@@ -22,6 +22,7 @@ def add_or_get_all_ep():
             logo_url = data[logoUrlKey]
             party = Party(name=name, hqAddress=hq_address, logoUrl=logo_url)
             if party.validate_party():
+                party.create()
                 return success(201, [party.to_json()])
             else:
                 return error(party.message, party.code)
@@ -41,15 +42,16 @@ def get_or_delete_ep(id):
     try:
         party = Party(Id=id)
         if party.get_by('id', id):
+            p = party.get_by('id', id)
             if request.method == get_method:
-                p = party.get_by('id', id)
-                return success(200, [p.to_json()])
+                return success(200, [p])
             elif request.method == delete_method:
                 party.delete(id)
+                return success(200, [{'message': p['name'] + ' deleted successfully'}])
         else:
-            not_found_resp(party_key)
+            return not_found_resp(party_key)
     except Exception as e:
-        return runtime_error_resp(e)
+        return runtime_error_resp(e.args[0])
 
 
 @party_v2.route('/parties/<int:id>/name', methods=['PATCH'])
@@ -57,11 +59,10 @@ def edit_ep(id):
     if request.method == 'PATCH':
         party = Party().get_by('id', id)
         if party:
-            party.to_json()
             data = request.get_json()
             if not data:
                 data = request.form
             new_name = data[name_key]
-            party.patch('name', new_name, id)
-            return success(200, [party.to_json()])
+            new = Party(Id=id).patch('name', new_name, id)
+            return success(200, [new])
         return not_found_resp(party_key)

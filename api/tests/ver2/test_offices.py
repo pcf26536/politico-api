@@ -1,5 +1,4 @@
-from api.tests.test_base import TestBase
-from api.ver1.offices.models import political_offices
+from api.tests.ver2.test_base import TestBase
 from api.strings import *
 from api.ver1.offices.strings import *
 from api.ver2.utils.strings import v2_url_prefix
@@ -20,7 +19,6 @@ class TestOffices(TestBase):
     # clear all lists after tests
     def tearDown(self):
         super().tearDown()
-        political_offices.clear()
 
     # tests for POST offices
     def test_add_office_ep(self):
@@ -34,7 +32,6 @@ class TestOffices(TestBase):
 
     def test_add_office_int_name(self):
         """ Tests when integer is provided for name """
-
         self.office[name_key] = 22
         res = self.client.post(v2_url_prefix + '/offices', json=self.office)
         data = res.get_json()
@@ -45,13 +42,12 @@ class TestOffices(TestBase):
 
     def test_add_office_short_name(self):
         """ Tests when short name is provided """
-
         self.office[name_key] = 'ab'
         res = self.client.post(v2_url_prefix + '/offices', json=self.office)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], 'The office name provided is too short')
+        self.assertEqual(data[error_key], 'The office name [ab] provided is invalid/wrong format')
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_exists(self):
@@ -74,7 +70,7 @@ class TestOffices(TestBase):
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            "name field is required. NOTE: required fields ['name', 'type'] to create office")
+            "name field is required to create office")
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_missing_fields_value(self):
@@ -83,7 +79,7 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "Please provide ['name'] value(s) for the office")
+        self.assertEqual(data[error_key], 'The office name [] provided is invalid/wrong format')
         self.assertEqual(res.status_code, status_400)
 
     def test_wrong_office_type(self):
@@ -113,14 +109,12 @@ class TestOffices(TestBase):
     # tests for GET all offices
     def test_get_all_offices_ep(self):
         """ Tests get all offices """
-        no_of_offices = len(political_offices)
-
         res = self.client.get(v2_url_prefix + '/offices')
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_201)
-        self.assertEqual(len(data[data_key]), no_of_offices)
-        self.assertEqual(res.status_code, status_201)
+        self.assertEqual(data[status_key], status_200)
+        #self.assertEqual(len(data[data_key]), None)
+        self.assertEqual(res.status_code, status_200)
 
     # tests for GET single office
     def test_get_office_ep(self):
@@ -130,10 +124,10 @@ class TestOffices(TestBase):
         res = self.client.get(v2_url_prefix + '/offices/1')
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_201)
+        self.assertEqual(data[status_key], status_200)
         self.assertEqual(len(data[data_key]), 1)
         self.assertEqual(data[data_key][0][id_key], 1)
-        self.assertEqual(res.status_code, status_201)
+        self.assertEqual(res.status_code, status_200)
 
     def test_get_office_id_not_found(self):
         """ Tests request made with id that does not exist """
@@ -141,5 +135,5 @@ class TestOffices(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
-        self.assertEqual(data[error_key], office_id_str + not_found)
+        self.assertEqual(data[error_key], office_key + ' ' + not_found)
         self.assertEqual(res.status_code, status_404)

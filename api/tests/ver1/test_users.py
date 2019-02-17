@@ -1,6 +1,4 @@
-from api.tests.test_base import TestBase
-from api.ver1.users.models import users
-from api.strings import *
+from api.tests.ver1.test_base import TestBase
 from api.ver1.users.models import *
 
 

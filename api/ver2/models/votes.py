@@ -2,10 +2,10 @@ from .skeleton import Skeleton
 from .users import User
 from .offices import Office
 from .candidates import Candidate
-from api.strings import id_key, status_400, status_404
+from api.strings import id_key, status_400, status_404, status_409
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key, createdBy_key, createdOn_key
-from api.ver2.utils.validators import is_number, valid_date, no_date_diff
+from api.ver2.utils.validators import is_int, valid_date, no_date_diff
 
 
 class Vote(Skeleton):
@@ -46,22 +46,22 @@ class Vote(Skeleton):
         return self
 
     def validate_vote(self):
-        if not is_number(self.created_by):
+        if not is_int(self.created_by):
             self.message = "String types are not allowed for Created By field"
             self.code = status_400
             return False
 
-        if not is_number(self.candidate):
+        if not is_int(self.candidate):
             self.message = "String types are not allowed for Candidate ID field"
             self.code = status_400
             return False
 
-        if not is_number(self.office):
+        if not is_int(self.office):
             self.message = "String types are not allowed for Office ID field"
             self.code = status_400
             return False
 
-        if not User().get_by(id_key, self.candidate):
+        if not User().get_by(id_key, self.created_by):
             self.message = 'Selected User does not exist'
             self.code = status_404
             return False
@@ -76,13 +76,13 @@ class Vote(Skeleton):
             self.code = status_404
             return False
 
-        if Candidate().get_by(createdBy_key, self.created_by) and Candidate().get_by(office_key, self.office):
+        if self.get_by(createdBy_key, self.created_by) and self.get_by(office_key, self.office):
             self.message = 'User has already voted for specified office'
-            self.code = status_404
+            self.code = status_409
             return False
 
         if not valid_date(self.created_on):
-            self.message = "Invalid date format; expected format is DD/MM/YY e.g 12/12/19"
+            self.message = "Invalid date format; expected format is YYYY-MM-DD e.g 2019-12-30"
             self.code = status_400
             return False
 
