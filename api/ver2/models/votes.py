@@ -82,7 +82,7 @@ class Vote(Skeleton):
             return False
 
         if not valid_date(self.created_on):
-            self.message = "Invalid date format; expected format is YY/MM/DD e.g 19/12/30"
+            self.message = "Invalid date format; expected format is YYYY-MM-DD e.g 2019-12-30"
             self.code = status_400
             return False
 

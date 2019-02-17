@@ -6,13 +6,13 @@ import datetime
 
 votes = [
     { id_key: 1,
-      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdOn_key: datetime.datetime.now().date().__str__(),
       createdBy_key: 2,
       office_key: 1,
       candidate_key: 2
     },
     { id_key: 2,
-      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdOn_key: datetime.datetime.now().date().__str__(),
       createdBy_key: 2,
       office_key: 1,
       candidate_key: 2
@@ -21,13 +21,13 @@ votes = [
 
 petitions = [
     { id_key: 1,
-      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdOn_key: datetime.datetime.now().date().__str__(),
       createdBy_key: 2,
       office_key: 1,
       body_key: 'The voting was rigged!!'
     },
     { id_key: 2,
-      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdOn_key: datetime.datetime.now().date().__str__(),
       createdBy_key: 3,
       office_key: 2,
       body_key: 'Vifaranga wa compyuta!'
