@@ -31,7 +31,7 @@ def add_or_get_all_ep():
         data = []
         offices = Office().get_all()
         for office in offices:
-            data.append(office.to_json())
+            data.append(office)
         return success(200, data)
 
 
