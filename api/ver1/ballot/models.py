@@ -2,15 +2,36 @@ from api.strings import id_key
 from .strings import *
 from api.ver1.offices.strings import office_key
 from api.ver1.parties.strings import party_key
+import datetime
 
 votes = [
-    { id_key: 1, createdOn_key: '17/02/19', createdBy_key: 2, office_key: 1, candidate_key: 2 },
-    { id_key: 2, createdOn_key: '11/11/19', createdBy_key: 2, office_key: 1, candidate_key: 2 }
+    { id_key: 1,
+      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdBy_key: 2,
+      office_key: 1,
+      candidate_key: 2
+    },
+    { id_key: 2,
+      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdBy_key: 2,
+      office_key: 1,
+      candidate_key: 2
+    }
 ]
 
 petitions = [
-    { id_key: 1, createdOn_key: '17/02/19', createdBy_key: 2, office_key: 1, body_key: 'The voting was rigged!!'},
-    { id_key: 2, createdOn_key: '20/01/19', createdBy_key: 3, office_key: 2, body_key: 'Vifaranga wa compyuta!'}
+    { id_key: 1,
+      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdBy_key: 2,
+      office_key: 1,
+      body_key: 'The voting was rigged!!'
+    },
+    { id_key: 2,
+      createdOn_key: datetime.datetime.now().date().__str__()[2:],
+      createdBy_key: 3,
+      office_key: 2,
+      body_key: 'Vifaranga wa compyuta!'
+      }
 ]
 
 candidates = [

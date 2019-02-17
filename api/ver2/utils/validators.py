@@ -83,14 +83,14 @@ def has_min_name_length(name):
 
 def valid_date(date):
     try:
-        datetime.datetime.strptime(date, "%d/%m/%y")
+        datetime.datetime.strptime(date, "%y-%m-%d")
         return True
     except ValueError:
         return False
 
 
 def no_date_diff(date):
-    d = datetime.datetime.strptime(date, "%d/%m/%y")
+    d = datetime.datetime.strptime(date, "%y-%m-%d")
     diff = datetime.datetime.now() - d
     if diff.days:
         return False
