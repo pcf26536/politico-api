@@ -2,7 +2,6 @@
 [![Build Status](https://travis-ci.com/wainainad60/politico-api.svg?branch=develop)](https://travis-ci.com/wainainad60/politico-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3b017887aca842e598a1f5d9513cacc8)](https://www.codacy.com/app/wainainad60/politico-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wainainad60/politico-api&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/09ac0b6bb9682e362053/maintainability)](https://codeclimate.com/github/wainainad60/politico-api/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/09ac0b6bb9682e362053/test_coverage)](https://codeclimate.com/github/wainainad60/politico-api/test_coverage)
 [![Coverage Status](https://coveralls.io/repos/github/wainainad60/politico-api/badge.svg?branch=develop)](https://coveralls.io/github/wainainad60/politico-api?branch=develop)
 
 This repository holds the API endpoints for politico application. Politico enables citizens give their mandate to politicians running for different government offices while building trust in the process through transparency.
