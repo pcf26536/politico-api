@@ -20,7 +20,7 @@ class TestVote(TestBase):
         ) # user
         self.client.post(v2_url_prefix + '/parties', json=correct_party)
         self.client.post(v2_url_prefix + '/offices', json=correct_office)
-        res = self.client.post(
+        self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
             headers=self.headers

@@ -2,9 +2,8 @@ from flask import request, Blueprint
 from flask_jwt_extended import (jwt_required)
 from api.strings import post_method, status_201, get_method
 from api.ver1.utils import check_form_data, no_entry_resp, \
-    field_missing_resp, error, success, runtime_error_resp, not_found_resp
-from api.ver2.utils.strings import user_id_key
-from api.ver1.parties.strings import party_id_key, party_key
+    field_missing_resp, error, success, runtime_error_resp
+from api.ver1.parties.strings import party_key
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key
 from api.ver2.utils import is_not_admin

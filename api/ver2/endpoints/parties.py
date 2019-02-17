@@ -4,7 +4,6 @@ from api.ver1.utils import field_missing_resp, runtime_error_resp, \
 from api.strings import name_key, post_method, get_method, delete_method
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver2.models.parties import Party
-import traceback
 
 party_v2 = Blueprint('parties_v2', __name__)
 

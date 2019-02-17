@@ -58,7 +58,7 @@ def is_int(*args):
     for arg in args:
         try:
             int(arg)
-        except:
+        except Exception:
             return False
     return True
 
