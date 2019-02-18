@@ -9,7 +9,6 @@ from api.ver1.ballot.strings import candidate_key
 from api.ver2.utils import is_not_admin
 from api.ver2.models.candidates import Candidate
 from api.ver2.models.votes import Vote
-import traceback
 
 candids = Blueprint('candidates', __name__)
 
@@ -37,7 +36,7 @@ def register(id):
             else:
                 return error(candidate.message, candidate.code)
         except Exception as e:
-            return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
+            return error('runtime exception: {}'.format(e.args[0]), 500)
     else:
         return no_entry_resp(candidate_key, fields)
 

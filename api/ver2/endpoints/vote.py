@@ -1,4 +1,5 @@
 from flask import request, Blueprint
+from flask_jwt_extended import (jwt_required)
 from api.ver2.utils.strings import user_id_key, vote_key
 from api.strings import post_method, status_201
 from api.ver1.ballot.strings import candidate_key, createdOn_key, createdBy_key
@@ -11,6 +12,7 @@ vote_bp = Blueprint('vote', __name__)
 
 
 @vote_bp.route('/votes/', methods=[post_method])
+@jwt_required
 def votes():
     fields = [user_id_key, createdBy_key, createdOn_key, candidate_key, office_key]
     data = check_form_data(vote_key, request, fields)

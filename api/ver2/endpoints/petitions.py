@@ -1,4 +1,5 @@
 from flask import request, Blueprint
+from flask_jwt_extended import (jwt_required)
 from api.ver2.utils.strings import evidence_key, petition_key
 from api.strings import post_method, status_201
 from api.ver1.ballot.strings import createdOn_key, createdBy_key, body_key
@@ -11,6 +12,7 @@ petitions_bp = Blueprint('petitions_bp', __name__)
 
 
 @petitions_bp.route('/petitions/', methods=[post_method])
+@jwt_required
 def petitions():
     fields = [createdBy_key, createdOn_key, office_key, body_key, evidence_key]
     data = check_form_data(petition_key, request, fields)

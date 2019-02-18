@@ -76,7 +76,12 @@ class Vote(Skeleton):
             self.code = status_404
             return False
 
-        if self.get_by(createdBy_key, self.created_by) and self.get_by(office_key, self.office):
+        if not Candidate().get_by_two(office_key, self.office, candidate_key, self.candidate):
+            self.message = 'Candidate is not registered for that office'
+            self.code = status_409
+            return False
+
+        if self.get_by_two(createdBy_key, self.created_by, office_key, self.office):
             self.message = 'User has already voted for specified office'
             self.code = status_409
             return False
