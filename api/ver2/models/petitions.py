@@ -4,7 +4,7 @@ from .offices import Office
 from api.strings import id_key, status_400, status_404
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import createdBy_key, createdOn_key, body_key
-from api.ver2.utils.validators import is_number, valid_date, no_date_diff, invalid_evidence, invalid_body, process_evidence
+from api.ver2.utils.validators import is_int, valid_date, no_date_diff, invalid_evidence, invalid_body, process_evidence
 from api.ver2.utils.strings import evidence_key
 
 
@@ -50,12 +50,12 @@ class Petition(Skeleton):
         return self
 
     def validate_petition(self):
-        if not is_number(self.created_by):
+        if not is_int(self.created_by):
             self.message = "String types are not allowed for Created By field"
             self.code = status_400
             return False
 
-        if not is_number(self.office):
+        if not is_int(self.office):
             self.message = "String types are not allowed for Office ID field"
             self.code = status_400
             return False
