@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "3.6.7"
+  - "3.6.8"
 cache: pip
 
 # install dependencies
@@ -18,6 +18,8 @@ before_script:
 env:
   - DATABASE_URL="dbname='politico' host='127.0.0.1' port='5432' user='postgres' password='kadanieet'"
   - TEST_DATABASE_URL="dbname='politico_test' host='127.0.0.1' port='5432' user='postgres' password='kadanieet'"
+  - SECRET="jwt-secret-string"
+  - APP_SETTINGS='testing'
 
 # command to automate tests
 script:
