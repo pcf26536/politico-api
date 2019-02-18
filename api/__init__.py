@@ -14,6 +14,7 @@ from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
 from .strings import *
+import os
 
 
 def create_app(config_name):
@@ -27,7 +28,7 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
-    app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+    app.config['JWT_SECRET_KEY'] = os.getenv('SECRET')
 
     # candids error handler blueprints
     app.register_blueprint(route_bp)
