@@ -6,7 +6,7 @@ from api.strings import id_key, status_400, status_404, status_409
 from api.ver1.offices.strings import office_key
 from api.ver1.parties.strings import party_key
 from api.ver1.ballot.strings import candidate_key
-from api.ver2.utils.validators import is_number
+from api.ver2.utils.validators import is_int
 
 
 class Candidate(Skeleton):
@@ -44,17 +44,17 @@ class Candidate(Skeleton):
         return self
 
     def validate_candidate(self):
-        if not is_number(self.party):
+        if not is_int(self.party):
             self.message = "String types are not allowed for Party ID field"
             self.code = status_400
             return False
         
-        if not is_number(self.candidate):
+        if not is_int(self.candidate):
             self.message = "String types are not allowed for Candidate ID field"
             self.code = status_400
             return False
         
-        if not is_number(self.office):
+        if not is_int(self.office):
             self.message = "String types are not allowed for Office ID field"
             self.code = status_400
             return False

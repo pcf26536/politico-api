@@ -1,7 +1,7 @@
 from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import token_key, user_key
 from api.strings import status_key, data_key, error_key, status_400, status_404, status_200
-from api.ver2.utils.login_test_data import *
+from api.ver2.utils.test_data.login_test_data import *
 from api.strings import ver_2_url_prefix
 
 
