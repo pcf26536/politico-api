@@ -53,12 +53,3 @@ class TestResults(TestBase):
         self.assertEqual(data[status_key], status_404)
         self.assertEqual(data[error_key], 'Voting for the specified office has not commenced yet!')
         self.assertEqual(res.status_code, status_404)
-
-        # def test_get_results_not_voted(self):
-        # res = self.client.get(
-        #    v2_url_prefix + '/office/1/result')
-        # data = res.get_json()
-
-        # self.assertEqual(data[status_key], status_404)
-        # self.assertEqual(data[error_key], 'The specified office has no results yet!')
-        # self.assertEqual(res.status_code, status_404)
