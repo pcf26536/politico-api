@@ -65,15 +65,6 @@ class TestPetition(TestBase):
         self.assertEqual(data[error_key], 'Selected User does not exist')
         self.assertEqual(res.status_code, status_404)
 
-        # def test_create_petition_wrong_body_format(self):
-        # res = self.client.post(
-        #    v2_url_prefix + '/petitions/',
-        #    json=petition_with_wrong_body_format)
-        # data = res.get_json()
-        # self.assertEqual(data, status_400)
-        # self.assertEqual(data[error_key], 'the text entered is invalid')
-        # self.assertEqual(res.status_code, status_400)"""
-
     def test_create_petition_no_evidence(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',
