@@ -4,7 +4,7 @@ from instance.config import app_config
 from api.ver1.offices.endpoints import office_v1
 from api.ver1.parties.endpoints import party_v1
 from api.ver2.endpoints.auth import auth
-from api.site_endpoints import route_bp
+from api.index import route_bp
 from api.ver2.endpoints.offices import office_v2
 from api.ver2.endpoints.parties import party_v2
 from api.ver2.endpoints.petitions import petitions_bp
