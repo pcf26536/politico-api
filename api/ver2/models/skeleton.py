@@ -56,7 +56,7 @@ class Skeleton(Database):
         """ search for a row in a table """
         query = "SELECT * FROM {} WHERE {} = '{}'".format(
             self.table, key, value)
-        return super().fetch_one(query)
+        return super().fetch_all(query)
 
     def get_by_two(self, key1, value1, key2, value2):
         """ search for a row in a table """

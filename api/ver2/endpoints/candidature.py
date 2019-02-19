@@ -13,32 +13,41 @@ from api.ver2.models.votes import Vote
 candids = Blueprint('candidates', __name__)
 
 
-@candids.route('/office/<int:id>/register', methods=[post_method])
+@candids.route('/office/<int:id>/register', methods=[post_method, get_method])
 @jwt_required
 def register(id):
-    if is_not_admin():
-        return is_not_admin()
-    fields = [party_key, candidate_key]
-    data = check_form_data(candidate_key, request, fields)
-    if data:
-        try:
-            candidate = Candidate(
-                party_id=data[party_key],
-                office_id=id,
-                candid_id=data[candidate_key]
-            )
-        except Exception as e:
-            return field_missing_resp(candidate_key, fields, e.args[0])
-        try:
-            if candidate.validate_candidate():
-                candidate.create()
-                return success(status_201, [candidate.to_json()])
-            else:
-                return error(candidate.message, candidate.code)
-        except Exception as e:
-            return error('runtime exception: {}'.format(e.args[0]), 500)
-    else:
-        return no_entry_resp(candidate_key, fields)
+    if request.method == post_method:
+        if is_not_admin():
+            return is_not_admin()
+        fields = [party_key, candidate_key]
+        data = check_form_data(candidate_key, request, fields)
+        if data:
+            try:
+                candidate = Candidate(
+                    party_id=data[party_key],
+                    office_id=id,
+                    candid_id=data[candidate_key]
+                )
+            except Exception as e:
+                return field_missing_resp(candidate_key, fields, e.args[0])
+            try:
+                if candidate.validate_candidate():
+                    candidate.create()
+                    return success(status_201, [candidate.to_json()])
+                else:
+                    return error(candidate.message, candidate.code)
+            except Exception as e:
+                return error('runtime exception: {}'.format(e.args[0]), 500)
+        else:
+            return no_entry_resp(candidate_key, fields)
+    elif request.method == get_method:
+        return success(200, Candidate().get_by('office', id))
+
+
+@candids.route('/candidates', methods=[get_method])
+@jwt_required
+def candidates():
+    return success(200, Candidate().get_all())
 
 
 @candids.route('/office/<int:id>/result', methods=[get_method])
