@@ -112,10 +112,12 @@ def reset():
                     reset_token = res_user.access_token
                     reset_user = mail
                     res_data = [{
-                        'reset_link' : request.base_url + '/link/' + reset_token,
                         'message': 'Check your email for password reset link',
                         'email': mail
                     }]
+                    body = 'Click this link to reset your password:\n'\
+                           + request.base_url + '/link/' + reset_token
+                    recipients = [mail]
                     code = status_200
                     return success(code, res_data)
                 else:
