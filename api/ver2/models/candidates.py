@@ -44,13 +44,24 @@ class Candidate(Skeleton):
         return self
 
     def get_all(self):
-        query = "SELECT politico_users.fname as first_name, politico_users.lname as last_name, " \
+        query = "SELECT politico_candidates.id, politico_users.fname as first_name, politico_users.lname as last_name, " \
                 "politico_parties.name as party, politico_offices.name as office " \
                 "FROM {} " \
                 "JOIN politico_users ON politico_users.id = politico_candidates.candidate " \
                 "JOIN politico_parties ON politico_parties.id = politico_candidates.party " \
                 "JOIN politico_offices ON politico_offices.id = politico_candidates.office".format(
             self.table)
+        return super().fetch_all(query)
+
+    def get_by_param(self, key, value):
+        query = "SELECT politico_candidates.id, politico_users.fname as first_name, politico_users.lname as last_name, " \
+                "politico_parties.name as party, politico_offices.name as office " \
+                "FROM {} " \
+                "JOIN politico_users ON politico_users.id = politico_candidates.candidate " \
+                "JOIN politico_parties ON politico_parties.id = politico_candidates.party " \
+                "JOIN politico_offices ON politico_offices.id = politico_candidates.office " \
+                "WHERE {} = '{}'".format(
+            self.table, key, value)
         return super().fetch_all(query)
 
     def validate_candidate(self):
