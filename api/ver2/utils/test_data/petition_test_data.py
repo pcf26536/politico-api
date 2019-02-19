@@ -27,4 +27,4 @@ petition_with_no_evidence = correct_petition.copy()
 del petition_with_no_evidence[evidence_key]
 
 petition_with_wrong_evidence_format = correct_petition.copy()
-petition_with_wrong_evidence_format[evidence_key] = ['fdffdfd.asd', 'image.wemmm']
+petition_with_wrong_evidence_format[evidence_key] = 'fdffdfd.asd'

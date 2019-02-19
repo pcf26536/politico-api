@@ -2,11 +2,11 @@ from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix
 from api.strings import status_key, data_key, error_key, status_404, status_200
 from api.ver1.offices.strings import office_key
-from api.ver2.utils.office_test_data import correct_office
-from api.ver2.utils.party_test_data import correct_party
-from api.ver2.utils.signup_test_data import user_with_correct_signup_data
-from api.ver2.utils.register_test_data import correct_candidate_infor
-from api.ver2.utils.vote_test_data import correct_vote
+from api.ver2.utils.test_data.office_test_data import correct_office
+from api.ver2.utils.test_data.party_test_data import correct_party
+from api.ver2.utils.test_data.signup_test_data import user_with_correct_signup_data
+from api.ver2.utils.test_data.register_test_data import correct_candidate_infor
+from api.ver2.utils.test_data.vote_test_data import correct_vote
 
 
 class TestResults(TestBase):

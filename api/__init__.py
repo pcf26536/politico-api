@@ -1,10 +1,10 @@
 """creating app"""
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from instance.config import app_config
 from api.ver1.offices.endpoints import office_v1
 from api.ver1.parties.endpoints import party_v1
 from api.ver2.endpoints.auth import auth
-from api.site_endpoints import route_bp
+from api.index import route_bp
 from api.ver2.endpoints.offices import office_v2
 from api.ver2.endpoints.parties import party_v2
 from api.ver2.endpoints.petitions import petitions_bp
@@ -13,7 +13,9 @@ from api.ver2.endpoints.candidature import candids
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
+from flask_mail import Mail, Message
 from .strings import *
+import os
 
 
 def create_app(config_name):
@@ -27,7 +29,13 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
-    app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+    app.config['JWT_SECRET_KEY'] = os.getenv('SECRET')
+    app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+    app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+    app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+    app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS')
+    app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL')
 
     # candids error handler blueprints
     app.register_blueprint(route_bp)
@@ -51,6 +59,18 @@ def create_app(config_name):
     db.create_root_user()
 
     jwt = JWTManager(app)
+    mail = Mail(app)  # Create an instance of Mail class.
+
+    @app.route('/mailer', methods=['POST'])
+    def mailer():
+        data = request.get_json()
+        msg = Message(
+            data['subject'],
+            recipients=data['recipients'],
+            sender=os.getenv('MAIL_USERNAME')
+        )
+        msg.body = data['body']
+        mail.send(msg)
 
     @app.errorhandler(status_400)
     def bad_request(error):

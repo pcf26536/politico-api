@@ -1,15 +1,20 @@
 from flask import request, Blueprint
+from flask_jwt_extended import (jwt_required)
 from api.ver1.utils import field_missing_resp, runtime_error_resp, \
     not_found_resp, check_form_data, no_entry_resp, success, error
 from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
+from api.ver2.utils import is_not_admin
 
 office_v2 = Blueprint('offices_v2', __name__)
 
 
 @office_v2.route('/offices', methods=[post_method, get_method])
+@jwt_required
 def add_or_get_all_ep():
+    if is_not_admin():
+        return is_not_admin()
     if request.method == post_method:
         fields = [name_key, type_key]
         data = check_form_data(office_key, request, fields)
@@ -36,6 +41,7 @@ def add_or_get_all_ep():
 
 
 @office_v2.route('/offices/<int:id>', methods=[get_method])
+@jwt_required
 def get_office_ep(id):
     """" get specific office by id """
     try:

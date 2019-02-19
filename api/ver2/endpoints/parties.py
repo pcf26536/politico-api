@@ -1,17 +1,22 @@
 from flask import request, Blueprint
+from flask_jwt_extended import (jwt_required)
 from api.ver1.utils import field_missing_resp, runtime_error_resp, \
     not_found_resp, check_form_data, no_entry_resp, error, success
 from api.strings import name_key, post_method, get_method, delete_method
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver2.models.parties import Party
+from api.ver2.utils import is_not_admin
 
 party_v2 = Blueprint('parties_v2', __name__)
 
 
 @party_v2.route('/parties', methods=[post_method, get_method])
+@jwt_required
 def add_or_get_all_ep():
     if request.method == post_method:
         """ create party endpoint """
+        if is_not_admin():
+            return is_not_admin()
         fields = [name_key, hqAddKey, logoUrlKey]
         data = check_form_data(party_key, request, fields)
         if not data:
@@ -33,11 +38,12 @@ def add_or_get_all_ep():
         data = []
         parties = Party().get_all()
         for party in parties:
-            data.append(party.to_json())
+            data.append(party)
         return success(200, data)
 
 
 @party_v2.route('/parties/<int:id>', methods=[delete_method, get_method])
+@jwt_required
 def get_or_delete_ep(id):
     try:
         party = Party(Id=id)
@@ -46,6 +52,8 @@ def get_or_delete_ep(id):
             if request.method == get_method:
                 return success(200, [p])
             elif request.method == delete_method:
+                if is_not_admin():
+                    return is_not_admin()
                 party.delete(id)
                 return success(200, [{'message': p['name'] + ' deleted successfully'}])
         else:
@@ -55,7 +63,10 @@ def get_or_delete_ep(id):
 
 
 @party_v2.route('/parties/<int:id>/name', methods=['PATCH'])
+@jwt_required
 def edit_ep(id):
+    if is_not_admin():
+        return is_not_admin()
     if request.method == 'PATCH':
         party = Party().get_by('id', id)
         if party:

@@ -40,6 +40,7 @@ class Skeleton(Database):
 
         query = "UPDATE {} SET {} = '{}' WHERE id = '{}' \
             RETURNING *".format(self.table, key, value, id)
+        print(query)
         return super().insert(query)
 
     def get_all(self):
@@ -56,6 +57,12 @@ class Skeleton(Database):
         """ search for a row in a table """
         query = "SELECT * FROM {} WHERE {} = '{}'".format(
             self.table, key, value)
+        return super().fetch_all(query)
+
+    def get_by_two(self, key1, value1, key2, value2):
+        """ search for a row in a table """
+        query = "SELECT * FROM {} WHERE {} = '{}' and {} = '{}'".format(
+            self.table, key1, value1, key2, value2)
         return super().fetch_one(query)
 
     def get_group(self, col1, col2, count_col, grp_col1, grp_col2):

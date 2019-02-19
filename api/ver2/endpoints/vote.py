@@ -1,6 +1,7 @@
 from flask import request, Blueprint
+from flask_jwt_extended import (jwt_required)
 from api.ver2.utils.strings import user_id_key, vote_key
-from api.strings import post_method, status_201
+from api.strings import post_method, status_201, get_method
 from api.ver1.ballot.strings import candidate_key, createdOn_key, createdBy_key
 from api.ver1.utils import check_form_data, no_entry_resp, field_missing_resp, error, success
 from api.ver2.models.votes import Vote
@@ -11,6 +12,7 @@ vote_bp = Blueprint('vote', __name__)
 
 
 @vote_bp.route('/votes/', methods=[post_method])
+@jwt_required
 def votes():
     fields = [user_id_key, createdBy_key, createdOn_key, candidate_key, office_key]
     data = check_form_data(vote_key, request, fields)
@@ -35,3 +37,9 @@ def votes():
             return error('runtime exception: {}, {}'.format(e.args[0], traceback.print_exc()), 500)
     else:
         return no_entry_resp(vote_key, fields)
+
+
+@vote_bp.route('/votes/<int:id>', methods=[get_method])
+@jwt_required
+def user_votes(id):
+    return success(200, Vote().get_by('createdby', id))
