@@ -6,10 +6,14 @@ from api.ver1.users.strings import *
 from api.ver2.utils.strings import password_1, password_2, admin_key, user_entity, token_key, user_key, password_key
 from api.ver2.models.users import User
 from api.ver2.models.auth import Auth
-from api.ver2.utils.validators import is_valid_email
+from api.ver2.utils.validators import is_valid_email, invalid_passwords
+from api.ver2.utils import is_not_admin
+from werkzeug.security import generate_password_hash
 import traceback
 
 auth = Blueprint('auth', __name__)
+reset_token = None
+reset_user = None
 
 
 @auth.route('/auth/signup', methods=[post_method])
@@ -61,7 +65,7 @@ def login():
         except Exception as e:
             return field_missing_resp(user_entity, fields, e.args[0], 'login')
         try:
-            login_user = Auth().get_by(email, mail)
+            login_user = Auth().get_by(email, mail)[0]
             if not login_user:
                 code = status_404
                 message = "user does not exits in the database"
@@ -86,6 +90,7 @@ def login():
 
 @auth.route('/auth/reset', methods=[post_method])
 def reset():
+    #if is_not_admin():
     message = ''
     code = status_400
     fields = [email]
@@ -98,8 +103,16 @@ def reset():
         try:
             mail = data[email]
             if is_valid_email(mail):
-                if Auth().get_by(email, mail):
+                user = Auth().get_by(email, mail)
+                if user:
+                    global reset_token, reset_user
+                    print(user)
+                    res_user = Auth(Id=user[0]['id'])
+                    res_user.create_auth_tokens()
+                    reset_token = res_user.access_token
+                    reset_user = mail
                     res_data = [{
+                        'reset_link' : request.base_url + '/link/' + reset_token,
                         'message': 'Check your email for password reset link',
                         'email': mail
                     }]
@@ -115,3 +128,32 @@ def reset():
     else:
         message = 'No Input Received: Please input an email to reset you password'
     return error(message, code)
+    #else:
+       # return error('Admin is forbidden to reset password!',  403)
+
+
+@auth.route('/auth/reset/link/<string:token>', methods=[post_method])
+def reset_link(token):
+    if token == reset_token:
+        fields = [password_1, password_2]
+        data = check_form_data(user_key, request, fields)
+        if data:
+            try:
+                pass1 = data[password_1]
+                pass2 = data[password_2]
+                invalid = invalid_passwords(pass1, pass2)
+                if not invalid:
+                    user = Auth().patch(password_key, generate_password_hash(pass1), Auth().get_by('email', reset_user)[0]['id'])
+                    return success(200, [{'message': 'password reset successful', 'user': user}])
+                return error(invalid['message'], invalid['code'])
+            except Exception as e:
+                return error(
+                    'Please provide a value for {} to reset you password'.format(e.args[0]),
+                    status_400
+                )
+        else:
+            return error(
+                'Please input New Password twice to reset current password. fields={}'.format(fields),
+                status_400
+            )
+    return error('Invalid token please try again', status_400)

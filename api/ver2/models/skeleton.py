@@ -40,6 +40,7 @@ class Skeleton(Database):
 
         query = "UPDATE {} SET {} = '{}' WHERE id = '{}' \
             RETURNING *".format(self.table, key, value, id)
+        print(query)
         return super().insert(query)
 
     def get_all(self):

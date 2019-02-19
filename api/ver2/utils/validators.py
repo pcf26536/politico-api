@@ -1,6 +1,31 @@
 import datetime
 import re
 from api.ver2.utils.strings import evidence_types
+from api.strings import status_400
+from api.ver2.utils.strings import password_1, password_2
+
+
+def invalid_passwords(pass1, pass2):
+    if not len(pass1):
+        message = "Please Input a password for {}".format(password_1)
+        code = status_400
+        return {'message': message, 'code': code}
+
+    if not len(pass2):
+        message = "Please Input a password for {}".format(password_2)
+        code = status_400
+        return {'message': message, 'code': code}
+
+    if not pass1 == pass2:
+        message = "Passwords mismatch"
+        code = status_400
+        return {'message': message, 'code': code}
+
+    if not (has_min_pass_length(pass1) or has_min_pass_length(pass2)):
+        message = "Password must be at least 6 characters long"
+        code = status_400
+        return {'message': message, 'code': code}
+    return None
 
 
 def invalid_evidence(evidence):
