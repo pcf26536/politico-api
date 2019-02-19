@@ -41,7 +41,7 @@ def register(id):
         else:
             return no_entry_resp(candidate_key, fields)
     elif request.method == get_method:
-        return success(200, Candidate().get_by('office', id))
+        return success(200, Candidate().get_by_param('office', id))
 
 
 @candids.route('/candidates', methods=[get_method])
@@ -57,13 +57,7 @@ def results(id):
         if Vote().get_by(office_key, id):
             votes = Vote(
                 office_id=id
-            ).get_group(
-                col1=office_key,
-                col2=candidate_key,
-                count_col=candidate_key,
-                grp_col1=office_key,
-                grp_col2=candidate_key
-            )
+            ).get_office_result()
             if not votes:
                 return error('The specified office has no results yet!', 404)
             data = []

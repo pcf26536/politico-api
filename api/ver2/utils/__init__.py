@@ -6,7 +6,7 @@ from api.strings import id_key
 
 
 def is_not_admin():
-    user = Auth().get_by(id_key, get_jwt_identity())
+    user = Auth().get_by(id_key, get_jwt_identity())[0]
 
     if not user[admin_key]:
         return error(

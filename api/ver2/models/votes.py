@@ -45,6 +45,29 @@ class Vote(Skeleton):
         self.Id = json[id_key]
         return self
 
+    def get_office_result(self):
+        query = "SELECT politico_offices.name as office, politico_users.fname as first_name," \
+                " politico_users.lname as last_name " \
+                ", COUNT (politico_votes.candidate) AS votes FROM {} " \
+                "JOIN politico_offices ON politico_offices.id = politico_votes.office " \
+                "JOIN politico_users ON politico_users.id = politico_votes.candidate " \
+                "WHERE politico_votes.office = '{}' " \
+                "GROUP BY politico_users.fname, politico_users.lname, politico_offices.name ".format(
+            self.table, self.office)
+        print(query)
+        return super().fetch_all(query)
+
+    def get_all_results(self):
+        query = "SELECT politico_offices.name as office, politico_users.fname as first_name," \
+                " politico_users.lname as last_name " \
+                ", COUNT (politico_votes.candidate) AS votes FROM {} " \
+                "JOIN politico_offices ON politico_offices.id = politico_votes.office " \
+                "JOIN politico_users ON politico_users.id = politico_votes.candidate " \
+                "GROUP BY politico_users.fname, politico_users.lname, politico_offices.name ".format(
+            self.table, self.office)
+        print(query)
+        return super().fetch_all(query)
+
     def validate_vote(self):
         if not is_int(self.created_by):
             self.message = "String types are not allowed for Created By field"
