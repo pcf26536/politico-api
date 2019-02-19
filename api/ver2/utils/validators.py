@@ -3,18 +3,16 @@ import re
 from api.ver2.utils.strings import evidence_types
 
 
-def invalid_evidence(value):
-    for evidence in value:
-        if not re.match(r'^[^.]*.[^.]*$', evidence):
-            return ['Bad evidence [{}] file extension.'.format(evidence), 400]
-        else:
-            try:
-                name, ext = evidence.split('.')
-                print(name, ext)
-                if not ext in evidence_types:
-                    return ['Only {} types allowed'.format(evidence_types), 400]
-            except Exception:
-                return ['Bad evidence format [{}] has no file extension.'.format(evidence), 400]
+def invalid_evidence(evidence):
+    if not re.match(r'^[^.]*.[^.]*$', evidence):
+        return ['Bad evidence [{}] file extension.'.format(evidence), 400]
+    else:
+        try:
+            name, ext = evidence.split('.')
+            if not ext in evidence_types:
+                return ['Only {} types allowed'.format(evidence_types), 400]
+        except Exception:
+            return ['Bad evidence format [{}] has no file extension.'.format(evidence), 400]
     return None
 
 
