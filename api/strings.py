@@ -25,3 +25,4 @@ too_short_str = 'too short'
 ok_str = 'OK'
 ver_1_url_prefix = '/api/v1'
 ver_2_url_prefix = '/api/v2'
+
