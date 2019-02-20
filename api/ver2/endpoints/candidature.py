@@ -9,6 +9,7 @@ from api.ver1.ballot.strings import candidate_key
 from api.ver2.utils import is_not_admin
 from api.ver2.models.candidates import Candidate
 from api.ver2.models.votes import Vote
+from api.ver2.utils.utilities import system_unavailable
 
 candids = Blueprint('candidates', __name__)
 
