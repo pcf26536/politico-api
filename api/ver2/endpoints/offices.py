@@ -6,6 +6,7 @@ from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, ok_str
 from api.ver1.offices.strings import office_key
 from api.ver2.utils import is_not_admin
+from api.ver2.utils.utilities import system_unavailable
 
 office_v2 = Blueprint('offices_v2', __name__)
 
@@ -13,31 +14,34 @@ office_v2 = Blueprint('offices_v2', __name__)
 @office_v2.route('/offices', methods=[post_method, get_method])
 @jwt_required
 def add_or_get_all_ep():
-    if is_not_admin():
-        return is_not_admin()
-    if request.method == post_method:
-        fields = [name_key, type_key]
-        data = check_form_data(office_key, request, fields)
-        if not data:
-            return no_entry_resp(office_key, fields)
-        try:
-            name = data[name_key]
-            office_type = data[type_key]
-            office = Office(name=name, office_type=office_type)
-            if office.validate_office():
-                office.create()
-                return success(201, [office.to_json()])
-            else:
-                return error(office.message, office.code)
-        except KeyError as e:
-            return field_missing_resp(office_key, fields, e.args[0])
+    try:
+        if is_not_admin():
+            return is_not_admin()
+        if request.method == post_method:
+            fields = [name_key, type_key]
+            data = check_form_data(office_key, request, fields)
+            if not data:
+                return no_entry_resp(office_key, fields)
+            try:
+                name = data[name_key]
+                office_type = data[type_key]
+                office = Office(name=name, office_type=office_type)
+                if office.validate_office():
+                    office.create()
+                    return success(201, [office.to_json()])
+                else:
+                    return error(office.message, office.code)
+            except KeyError as e:
+                return field_missing_resp(office_key, fields, e.args[0])
 
-    elif request.method == get_method:
-        data = []
-        offices = Office().get_all()
-        for office in offices:
-            data.append(office)
-        return success(200, data)
+        elif request.method == get_method:
+            data = []
+            offices = Office().get_all()
+            for office in offices:
+                data.append(office)
+            return success(200, data)
+    except Exception as e:
+            return system_unavailable(e)
 
 
 @office_v2.route('/offices/<int:id>', methods=[get_method])
@@ -52,4 +56,4 @@ def get_office_ep(id):
         else:
             return not_found_resp(office_key)
     except Exception as e:
-        return runtime_error_resp(e)
+        return system_unavailable(e)

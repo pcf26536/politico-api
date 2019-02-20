@@ -6,6 +6,7 @@ from api.strings import name_key, post_method, get_method, delete_method
 from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver2.models.parties import Party
 from api.ver2.utils import is_not_admin
+from api.ver2.utils.utilities import system_unavailable
 
 party_v2 = Blueprint('parties_v2', __name__)
 
@@ -13,33 +14,36 @@ party_v2 = Blueprint('parties_v2', __name__)
 @party_v2.route('/parties', methods=[post_method, get_method])
 @jwt_required
 def add_or_get_all_ep():
-    if request.method == post_method:
-        """ create party endpoint """
-        if is_not_admin():
-            return is_not_admin()
-        fields = [name_key, hqAddKey, logoUrlKey]
-        data = check_form_data(party_key, request, fields)
-        if not data:
-            return no_entry_resp(party_key, fields)
-        try:
-            name = data[name_key]
-            hq_address = data[hqAddKey]
-            logo_url = data[logoUrlKey]
-            party = Party(name=name, hqAddress=hq_address, logoUrl=logo_url)
-            if party.validate_party():
-                party.create()
-                return success(201, [party.to_json()])
-            else:
-                return error(party.message, party.code)
-        except KeyError as e:
-            return field_missing_resp(party_key, fields, e.args[0])
+    try:
+        if request.method == post_method:
+            """ create party endpoint """
+            if is_not_admin():
+                return is_not_admin()
+            fields = [name_key, hqAddKey, logoUrlKey]
+            data = check_form_data(party_key, request, fields)
+            if not data:
+                return no_entry_resp(party_key, fields)
+            try:
+                name = data[name_key]
+                hq_address = data[hqAddKey]
+                logo_url = data[logoUrlKey]
+                party = Party(name=name, hqAddress=hq_address, logoUrl=logo_url)
+                if party.validate_party():
+                    party.create()
+                    return success(201, [party.to_json()])
+                else:
+                    return error(party.message, party.code)
+            except KeyError as e:
+                return field_missing_resp(party_key, fields, e.args[0])
 
-    elif request.method == get_method:
-        data = []
-        parties = Party().get_all()
-        for party in parties:
-            data.append(party)
-        return success(200, data)
+        elif request.method == get_method:
+            data = []
+            parties = Party().get_all()
+            for party in parties:
+                data.append(party)
+            return success(200, data)
+    except Exception as e:
+            return system_unavailable(e)
 
 
 @party_v2.route('/parties/<int:id>', methods=[delete_method, get_method])
@@ -59,21 +63,24 @@ def get_or_delete_ep(id):
         else:
             return not_found_resp(party_key)
     except Exception as e:
-        return runtime_error_resp(e.args[0])
+        return system_unavailable(e)
 
 
 @party_v2.route('/parties/<int:id>/name', methods=['PATCH'])
 @jwt_required
 def edit_ep(id):
-    if is_not_admin():
-        return is_not_admin()
-    if request.method == 'PATCH':
-        party = Party().get_by('id', id)
-        if party:
-            data = request.get_json()
-            if not data:
-                data = request.form
-            new_name = data[name_key]
-            new = Party(Id=id).patch('name', new_name, id)
-            return success(200, [new])
-        return not_found_resp(party_key)
+    try:
+        if is_not_admin():
+            return is_not_admin()
+        if request.method == 'PATCH':
+            party = Party().get_by('id', id)
+            if party:
+                data = request.get_json()
+                if not data:
+                    data = request.form
+                new_name = data[name_key]
+                new = Party(Id=id).patch('name', new_name, id)
+                return success(200, [new])
+            return not_found_resp(party_key)
+    except Exception as e:
+        return system_unavailable(e)
