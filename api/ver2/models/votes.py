@@ -13,12 +13,12 @@ class Vote(Skeleton):
     def __init__(
             self,
             created_on=datetime.datetime.now().date().__str__(),
-            created_by=None, office_id=None, candidate_id=None):
+            created_by=None, candidate_id=None):
         super().__init__('Vote', 'politico_votes')
 
         self.created_on = created_on
         self.created_by = created_by
-        self.office = office_id
+        self.office = None
         self.candidate = candidate_id
         self.Id = None
 
@@ -73,18 +73,8 @@ class Vote(Skeleton):
         return super().fetch_all(query)
 
     def validate_vote(self):
-        if not is_int(self.created_by):
-            self.message = "String types are not allowed for Created By field"
-            self.code = status_400
-            return False
-
         if not is_int(self.candidate):
             self.message = "String types are not allowed for Candidate ID field"
-            self.code = status_400
-            return False
-
-        if not is_int(self.office):
-            self.message = "String types are not allowed for Office ID field"
             self.code = status_400
             return False
 
@@ -93,13 +83,14 @@ class Vote(Skeleton):
             self.code = status_404
             return False
 
-        if not Office().get_by(id_key, self.office):
-            self.message = 'Selected Office does not exist'
-            self.code = status_404
-            return False
-
         if not Candidate().get_by(candidate_key, self.candidate):
             self.message = "Selected Candidate does not exist"
+            self.code = status_404
+            return False
+        self.office = int(Candidate().get_office(self.candidate)[office_key])
+
+        if not Office().get_by(id_key, self.office):
+            self.message = 'Selected Office does not exist'
             self.code = status_404
             return False
 

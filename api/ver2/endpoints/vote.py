@@ -21,10 +21,8 @@ def votes():
             if data:
                 try:
                     user = get_jwt_identity()
-                    office = Candidate().get_office(user)
                     vote = Vote(
                         created_by=user,
-                        office_id=office['office'],
                         candidate_id=data[candidate_key]
                     )
                 except Exception as e:

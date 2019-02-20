@@ -47,7 +47,7 @@ class TestResults(TestBase):
         res = self.client.get(
             v2_url_prefix + '/office/1/result', headers=self.user_headers)
         data = res.get_json()
-        
+
         self.assertEqual(data[status_key], status_200)
         self.assertEqual(data[data_key][0][office_key], "Women Representative")
         self.assertEqual(res.status_code, status_200)
