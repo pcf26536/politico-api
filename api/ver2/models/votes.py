@@ -6,10 +6,14 @@ from api.strings import id_key, status_400, status_404, status_409
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key, createdBy_key, createdOn_key
 from api.ver2.utils.validators import is_int, valid_date, no_date_diff
+import datetime
 
 
 class Vote(Skeleton):
-    def __init__(self, created_on=None, created_by=None, office_id=None, candidate_id=None):
+    def __init__(
+            self,
+            created_on=datetime.datetime.now().date().__str__(),
+            created_by=None, office_id=None, candidate_id=None):
         super().__init__('Vote', 'politico_votes')
 
         self.created_on = created_on

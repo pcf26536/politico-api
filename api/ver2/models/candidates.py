@@ -64,6 +64,11 @@ class Candidate(Skeleton):
             self.table, key, value)
         return super().fetch_all(query)
 
+    def get_office(self, candidate_id):
+        query = "SELECT office FROM {} WHERE candidate = '{}'".format(
+            self.table, candidate_id)
+        return super().fetch_one(query)
+
     def validate_candidate(self):
         if not is_int(self.party):
             self.message = "String types are not allowed for Party ID field"

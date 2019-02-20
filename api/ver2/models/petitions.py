@@ -1,15 +1,16 @@
 from .skeleton import Skeleton
 from .users import User
 from .offices import Office
-from api.strings import id_key, status_400, status_404
+from api.strings import id_key, status_400, status_404, status_409
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import createdBy_key, createdOn_key, body_key
 from api.ver2.utils.validators import is_int, valid_date, no_date_diff, invalid_evidence, invalid_body, process_evidence
 from api.ver2.utils.strings import evidence_key
+import datetime
 
 
 class Petition(Skeleton):
-    def __init__(self, created_on=None, created_by=None, office_id=None, body=None, evidence=None):
+    def __init__(self, created_on=datetime.datetime.now().date().__str__(), created_by=None, office_id=None, body=None, evidence=None):
         super().__init__('Vote', 'politico_petitions')
 
         self.created_on = created_on
@@ -22,7 +23,7 @@ class Petition(Skeleton):
     def create(self):
         data = super().add(
             createdOn_key + ',' + createdBy_key + ', ' + office_key + ', ' + 'text' + ', ' + evidence_key,
-            self.created_on, self.created_by, self.office, self.body, process_evidence(self.evidence)
+            self.created_on, self.created_by, self.office, self.body, self.evidence
         )
         self.Id = data.get(id_key)
         return data
@@ -90,6 +91,11 @@ class Petition(Skeleton):
         if in_body:
             self.message = in_body[0]
             self.code = in_body[1]
+            return False
+
+        if Petition().get_by_two(office_key, self.office, createdBy_key, self.created_by):
+            self.message = 'User has already created a petition for that office'
+            self.code = status_409
             return False
 
         return super().validate_self()

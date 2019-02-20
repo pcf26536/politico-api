@@ -1,8 +1,8 @@
 from flask import request, Blueprint
-from flask_jwt_extended import (jwt_required)
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.ver2.utils.strings import evidence_key, petition_key
 from api.strings import post_method, status_201
-from api.ver1.ballot.strings import createdOn_key, createdBy_key, body_key
+from api.ver1.ballot.strings import body_key
 from api.ver1.utils import check_form_data, no_entry_resp, field_missing_resp, error, success
 from api.ver1.offices.strings import office_key
 from api.ver2.models.petitions import Petition
@@ -16,13 +16,13 @@ petitions_bp = Blueprint('petitions_bp', __name__)
 @jwt_required
 def petitions():
     try:
-        fields = [createdBy_key, createdOn_key, office_key, body_key, evidence_key]
+        fields = [office_key, body_key, evidence_key]
         data = check_form_data(petition_key, request, fields)
         if data:
             try:
+                user = get_jwt_identity()
                 petition = Petition(
-                    created_by=data[createdBy_key],
-                    created_on=data[createdOn_key],
+                    created_by=user,
                     office_id=data[office_key],
                     body=data[body_key],
                     evidence=data[evidence_key]

@@ -37,7 +37,7 @@ def signup():
 
             if not user.validate_user():
                 return error(user.message, user.code)
-            user_auth = Auth(email=res_data[email], password=res_data[password_1])
+            user_auth = Auth(email=res_data[email], password=res_data[password_key])
             if not user_auth.validate_auth():
                 return error(user_auth.message, user_auth.code)
             user_auth.create()
