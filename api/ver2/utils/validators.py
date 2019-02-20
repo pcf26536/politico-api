@@ -3,6 +3,15 @@ import re
 from api.ver2.utils.strings import evidence_types
 from api.strings import status_400
 from api.ver2.utils.strings import password_1, password_2
+from api.ver1.utils import error
+
+
+def system_unavailable(e):
+    print('Runtime Exception: ' + e.args[0])
+    return error(
+        message='System unavailable, please try again later!',
+        code=500
+    )
 
 
 def invalid_passwords(pass1, pass2):
