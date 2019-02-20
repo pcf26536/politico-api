@@ -37,6 +37,13 @@ class Auth(Skeleton):
             admin: self.is_admin
         }
 
+    def get_admin(self, key, value):
+        """ search for a row in a table """
+        query = "SELECT id, email, admin FROM {} WHERE {} = '{}'".format(
+            self.table, key, value)
+        print(query)
+        return super().fetch_one(query)
+
     def validate_auth(self):
         if self.get_by(email, self.email):
             self.message = "A {} with that email already exists".format('User')

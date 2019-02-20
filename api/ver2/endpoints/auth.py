@@ -77,10 +77,14 @@ def login():
             else:
                 user = Auth(Id=login_user[id_key], email=mail)
                 user.create_auth_tokens()
+                if login_user[admin_key]:
+                    user_in4 = Auth().get_admin(email, mail)
+                else:
+                    user_in4 = User().get_by_id(login_user[id_key])
                 code = status_200
                 data = {
                     token_key: user.access_token,
-                    user_key: login_user
+                    user_key: user_in4
                 }
                 return success(code, [data])
             return error(message, code)

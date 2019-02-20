@@ -41,10 +41,18 @@ class User(Skeleton):
 
     def from_json(self, json):
         self.__init__(
-            json[fname], json[fname], json[email], json[phone],
+            json[fname], json[lname], json[email], json[phone],
             json[pspt], json[admin])
         self.Id = json[id_key]
         return self
+
+    def get_by_id(self, value):
+        """ search for a row in a table """
+        query = "SELECT politico_users.fname, politico_users.lname, politico_auth.email, " \
+                "politico_users.phone, politico_auth.admin  FROM {} JOIN  politico_auth " \
+                "ON politico_users.id = politico_auth.id WHERE politico_users.id = '{}'".format(
+                    self.table, value)
+        return super().fetch_one(query)
 
     def validate_user(self):
         if invalid_name(self.fname, fname):
