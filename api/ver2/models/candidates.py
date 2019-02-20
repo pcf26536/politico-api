@@ -100,6 +100,11 @@ class Candidate(Skeleton):
             self.code = status_404
             return False
 
+        if self.get_by_two(party_key, self.party, office_key, self.office):
+            self.message = 'Two candidates from the same Party cannot be vie for one office'
+            self.code = status_409
+            return False
+
         return super().validate_self()
 
 
