@@ -25,6 +25,7 @@ def index():
             {'Add Party v2': request.base_url + ver_2_url_prefix + 'parties', 'method': 'POST'},
             {'Get Party v2': request.base_url + ver_2_url_prefix + 'parties/<int:id>', 'method': 'GET'},
             {'Delete Party v2': request.base_url + ver_2_url_prefix + 'parties/<int:id>', 'method': 'DELETE'},
+            {'Update Party Name v2': request.base_url + ver_2_url_prefix + 'parties/<int:id>/name', 'method': 'PATCH'},
 
             {'Add Office v1': request.base_url + ver_1_url_prefix + 'offices', 'method': 'POST'},
             {'Add Office v2': request.base_url + ver_2_url_prefix + 'offices', 'method': 'POST'},
@@ -35,6 +36,7 @@ def index():
             {'Add Office v2': request.base_url + ver_2_url_prefix + 'offices', 'method': 'POST'},
             {'Get Office v2': request.base_url + ver_2_url_prefix + 'offices/<int:id>', 'method': 'GET'},
             {'Delete Office v2': request.base_url + ver_2_url_prefix + 'offices/<int:id>', 'method': 'DELETE'},
+            {'Update Office Name v2': request.base_url + ver_2_url_prefix + 'offices/<int:id>', 'method': 'PATCH'},
 
             {'Vote': request.base_url + ver_2_url_prefix + 'votes/', 'method': 'POST'},
 
