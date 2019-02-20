@@ -94,7 +94,6 @@ def login():
 @auth.route('/auth/reset', methods=[post_method])
 def reset():
     try:
-        #if is_not_admin():
         message = ''
         code = status_400
         fields = [email]
@@ -134,8 +133,6 @@ def reset():
         else:
             message = 'No Input Received: Please input an email to reset you password'
         return error(message, code)
-        #else:
-           # return error('Admin is forbidden to reset password!',  403)
     except Exception as e:
         return system_unavailable(e)
 
