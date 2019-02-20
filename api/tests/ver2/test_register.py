@@ -17,8 +17,8 @@ class TestRegister(TestBase):
             json=user_with_correct_signup_data
         ) # user
 
-        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.headers)
-        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.headers)
+        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.admin_headers)
+        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.admin_headers)
 
     # clear all lists after tests
     def tearDown(self):
@@ -29,7 +29,7 @@ class TestRegister(TestBase):
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -41,7 +41,7 @@ class TestRegister(TestBase):
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=candidate_id_unexisting_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -53,7 +53,7 @@ class TestRegister(TestBase):
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=party_id_unexisting_info,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -65,7 +65,7 @@ class TestRegister(TestBase):
         res = self.client.post(
             v2_url_prefix + '/office/100000/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -77,12 +77,12 @@ class TestRegister(TestBase):
         self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -94,18 +94,18 @@ class TestRegister(TestBase):
         self.client.post(
             v2_url_prefix + '/auth/signup',
             json=user_with_correct_signup_data_2,
-            headers=self.headers
+            headers=self.admin_headers
         )  # another user
 
         self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         res = self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor_2,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 

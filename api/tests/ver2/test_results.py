@@ -17,16 +17,16 @@ class TestResults(TestBase):
             v2_url_prefix + '/auth/signup',
             json=user_with_correct_signup_data
         )  # user
-        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.headers)
-        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.headers)
+        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.admin_headers)
+        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.admin_headers)
         self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
         self.client.post(
             v2_url_prefix + '/votes/',
-            json=correct_vote, headers=self.headers
+            json=correct_vote, headers=self.admin_headers
         )
 
     # clear all lists after tests
@@ -37,7 +37,7 @@ class TestResults(TestBase):
     def test_get_result(self):
         """ Tests get results success """
         res = self.client.get(
-            v2_url_prefix + '/office/1/result', headers=self.headers)
+            v2_url_prefix + '/office/1/result', headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
@@ -47,7 +47,7 @@ class TestResults(TestBase):
     def test_get_results_office_id_not_found(self):
         """ Tests invalid office id """
         res = self.client.get(
-            v2_url_prefix + '/office/10000000/result', headers=self.headers)
+            v2_url_prefix + '/office/10000000/result', headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)

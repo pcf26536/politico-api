@@ -5,17 +5,19 @@ from api.ver1.parties.strings import party_key
 import datetime
 
 votes = [
-    { id_key: 1,
-      createdOn_key: datetime.datetime.now().date().__str__(),
-      createdBy_key: 2,
-      office_key: 1,
-      candidate_key: 2
+    {
+        id_key: 1,
+        createdOn_key: datetime.datetime.now().date().__str__(),
+        createdBy_key: 2,
+        office_key: 1,
+        candidate_key: 2
     },
-    { id_key: 2,
-      createdOn_key: datetime.datetime.now().date().__str__(),
-      createdBy_key: 2,
-      office_key: 1,
-      candidate_key: 2
+    {
+        id_key: 2,
+        createdOn_key: datetime.datetime.now().date().__str__(),
+        createdBy_key: 2,
+        office_key: 1,
+        candidate_key: 2
     }
 ]
 

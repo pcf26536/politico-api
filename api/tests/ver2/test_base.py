@@ -20,8 +20,8 @@ class TestBase(unittest.TestCase):
         res = self.client.post('/api/v2/auth/login', json={
             email: 'w.gichuhi5@students.ku.ac.ke', password_key: 'kadanieet'})
 
-        self.access_token = res.get_json()[data_key][0][token_key]
-        self.headers = {authorization_key: 'Bearer {}'.format(self.access_token)}
+        self.admin_access_token = res.get_json()[data_key][0][token_key]
+        self.admin_headers = {authorization_key: 'Bearer {}'.format(self.admin_access_token)}
 
     def tearDown(self):
         self.app = None

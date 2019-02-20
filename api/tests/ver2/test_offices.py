@@ -26,7 +26,7 @@ class TestOffices(TestBase):
         res = self.client.post(
             v2_url_prefix + '/offices',
             json=self.office,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
         print(data)
@@ -40,7 +40,7 @@ class TestOffices(TestBase):
         res = self.client.post(
             v2_url_prefix + '/offices',
             json=self.office,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -54,7 +54,7 @@ class TestOffices(TestBase):
         res = self.client.post(
             v2_url_prefix + '/offices',
             json=self.office,
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -64,8 +64,8 @@ class TestOffices(TestBase):
 
     def test_add_office_exists(self):
         """ Tests create office success """
-        self.client.post(v2_url_prefix + '/offices', json=self.office, headers=self.headers)
-        res = self.client.post(v2_url_prefix + '/offices', json=self.office, headers=self.headers)
+        self.client.post(v2_url_prefix + '/offices', json=self.office, headers=self.admin_headers)
+        res = self.client.post(v2_url_prefix + '/offices', json=self.office, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_409)
@@ -76,7 +76,7 @@ class TestOffices(TestBase):
 
     def test_add_office_missing_fields(self):
         """ Tests when some political office fields are missing e.g office name """
-        res = self.client.post(v2_url_prefix + '/offices', json={type_key: leg_type}, headers=self.headers)
+        res = self.client.post(v2_url_prefix + '/offices', json={type_key: leg_type}, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
@@ -90,7 +90,7 @@ class TestOffices(TestBase):
         res = self.client.post(
             v2_url_prefix + '/offices',
             json={type_key: leg_type, name_key: ""},
-            headers=self.headers
+            headers=self.admin_headers
         )
         data = res.get_json()
 
@@ -102,7 +102,7 @@ class TestOffices(TestBase):
         """ Tests when some political office fields are missing e.g office name """
         res = self.client.post(
             v2_url_prefix + '/offices',
-            json={type_key: "Office", name_key: "MCA"}, headers=self.headers)
+            json={type_key: "Office", name_key: "MCA"}, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
@@ -114,7 +114,7 @@ class TestOffices(TestBase):
 
     def test_add_office_no_data(self):
         """ Tests when no data is provided for create office"""
-        res = self.client.post(v2_url_prefix + '/offices', headers=self.headers)
+        res = self.client.post(v2_url_prefix + '/offices', headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
@@ -127,7 +127,7 @@ class TestOffices(TestBase):
     # tests for GET all offices
     def test_get_all_offices_ep(self):
         """ Tests get all offices """
-        res = self.client.get(v2_url_prefix + '/offices', headers=self.headers)
+        res = self.client.get(v2_url_prefix + '/offices', headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
@@ -138,8 +138,8 @@ class TestOffices(TestBase):
     def test_get_office_ep(self):
         """ Tests get specific office """
         # create a office cause of teardown clearing list
-        self.client.post(v2_url_prefix + '/offices', json=self.office, headers=self.headers)
-        res = self.client.get(v2_url_prefix + '/offices/1', headers=self.headers)
+        self.client.post(v2_url_prefix + '/offices', json=self.office, headers=self.admin_headers)
+        res = self.client.get(v2_url_prefix + '/offices/1', headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
@@ -149,7 +149,7 @@ class TestOffices(TestBase):
 
     def test_get_office_id_not_found(self):
         """ Tests request made with id that does not exist """
-        res = self.client.get(v2_url_prefix + '/offices/14', headers=self.headers)
+        res = self.client.get(v2_url_prefix + '/offices/14', headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)

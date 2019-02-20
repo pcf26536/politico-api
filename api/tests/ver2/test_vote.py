@@ -18,12 +18,12 @@ class TestVote(TestBase):
             v2_url_prefix + '/auth/signup',
             json=user_with_correct_signup_data
         ) # user
-        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.headers)
-        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.headers)
+        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.admin_headers)
+        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.admin_headers)
         self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
-            headers=self.headers
+            headers=self.admin_headers
         )
 
     # clear all lists after tests
@@ -35,7 +35,7 @@ class TestVote(TestBase):
         """ Tests vote success """
         res = self.client.post(
             v2_url_prefix + '/votes/',
-            json=correct_vote, headers=self.headers)
+            json=correct_vote, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_201)
@@ -44,10 +44,10 @@ class TestVote(TestBase):
 
     def test_vote_voted(self):
         """ Tests vote voted """
-        self.client.post(v2_url_prefix + '/votes/', json=correct_vote, headers=self.headers)
+        self.client.post(v2_url_prefix + '/votes/', json=correct_vote, headers=self.admin_headers)
         res = self.client.post(
             v2_url_prefix + '/votes/',
-            json=correct_vote, headers=self.headers)
+            json=correct_vote, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_409)
@@ -57,7 +57,7 @@ class TestVote(TestBase):
     def test_vote_office_not_found(self):
         res = self.client.post(
             v2_url_prefix + '/votes/',
-            json=office_does_not_exist_vote, headers=self.headers)
+            json=office_does_not_exist_vote, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
@@ -67,7 +67,7 @@ class TestVote(TestBase):
     def test_voter_user_not_found(self):
         res = self.client.post(
             v2_url_prefix + '/votes/',
-            json=voter_does_not_exist_vote, headers=self.headers)
+            json=voter_does_not_exist_vote, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
@@ -77,7 +77,7 @@ class TestVote(TestBase):
     def test_vote_candidate_not_found(self):
         res = self.client.post(
             v2_url_prefix + '/votes/',
-            json=candidate_does_not_exist_vote, headers=self.headers)
+            json=candidate_does_not_exist_vote, headers=self.admin_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
