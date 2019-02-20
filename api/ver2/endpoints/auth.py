@@ -20,7 +20,7 @@ reset_user = None
 @auth.route('/auth/signup', methods=[post_method])
 def signup():
     try:
-        fields = [fname, lname, email, pspt, phone, password_1, password_2]
+        fields = [fname, lname, email, pspt, phone, password_key]
         res_data = check_form_data(user_entity, request, fields)
         if res_data:
             try:
@@ -30,15 +30,14 @@ def signup():
                     email=res_data[email],
                     passport_url=res_data[pspt],
                     phone=res_data[phone],
-                    password1=res_data[password_1],
-                    password2=res_data[password_2],
+                    password=res_data[password_key],
                 )
             except Exception as e:
                 return field_missing_resp(user_entity, fields, e.args[0])
 
             if not user.validate_user():
                 return error(user.message, user.code)
-            user_auth = Auth(email=res_data[email], password=res_data[password_1])
+            user_auth = Auth(email=res_data[email], password=res_data[password_key])
             if not user_auth.validate_auth():
                 return error(user_auth.message, user_auth.code)
             user_auth.create()
@@ -68,7 +67,7 @@ def login():
                 password = res_data[password_key]
             except Exception as e:
                 return field_missing_resp(user_entity, fields, e.args[0], 'login')
-            login_user = Auth().get_by(email, mail)[0]
+            login_user = Auth().get_by(email, mail)
             if not login_user:
                 code = status_404
                 message = "user does not exits in the database"
@@ -78,10 +77,14 @@ def login():
             else:
                 user = Auth(Id=login_user[id_key], email=mail)
                 user.create_auth_tokens()
+                if login_user[admin_key]:
+                    user_in4 = Auth().get_admin(email, mail)
+                else:
+                    user_in4 = User().get_by_id(login_user[id_key])
                 code = status_200
                 data = {
                     token_key: user.access_token,
-                    user_key: login_user
+                    user_key: user_in4
                 }
                 return success(code, [data])
             return error(message, code)
@@ -109,8 +112,7 @@ def reset():
                     user = Auth().get_by(email, mail)
                     if user:
                         global reset_token, reset_user
-                        print(user)
-                        res_user = Auth(Id=user[0]['id'])
+                        res_user = Auth(Id=user['id'])
                         res_user.create_auth_tokens()
                         reset_token = res_user.access_token
                         reset_user = mail
@@ -122,6 +124,7 @@ def reset():
                                + request.base_url + '/link/' + reset_token
                         recipients = [mail]
                         code = status_200
+                        print(body)
                         return success(code, res_data)
                     else:
                         message = 'No user is registered with that email'

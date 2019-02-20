@@ -7,6 +7,7 @@ from api.ver1.parties.strings import hqAddKey, logoUrlKey, party_key
 from api.ver2.models.parties import Party
 from api.ver2.utils import is_not_admin
 from api.ver2.utils.utilities import system_unavailable
+from api.ver2.utils.validators import invalid_name
 
 party_v2 = Blueprint('parties_v2', __name__)
 
@@ -75,10 +76,16 @@ def edit_ep(id):
         if request.method == 'PATCH':
             party = Party().get_by('id', id)
             if party:
-                data = request.get_json()
+                fields = [name_key]
+                data = check_form_data(party_key, request, fields)
                 if not data:
-                    data = request.form
+                    return error("No data was provided, fields [name] required to edit party", 400)
                 new_name = data[name_key]
+                if Party().get_by('name', new_name):
+                    return error('Name already exists', 409)
+                invalid = invalid_name(new_name, party_key)
+                if invalid:
+                    return error(invalid['message'], invalid['code'])
                 new = Party(Id=id).patch('name', new_name, id)
                 return success(200, [new])
             return not_found_resp(party_key)

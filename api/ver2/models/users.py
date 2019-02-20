@@ -9,7 +9,7 @@ import re
 class User(Skeleton):
     def __init__(
             self, Id=None, fname=None, lname=None, email=None, phone=None,
-            passport_url=None, password1=None, password2=None, is_admin=False, table='politico_users'):
+            passport_url=None, password=None, is_admin=False, table='politico_users'):
         super().__init__('User', table)
         self.Id = Id
         self.fname = fname
@@ -17,8 +17,7 @@ class User(Skeleton):
         self.email = email
         self.phone = phone
         self.passport_url = passport_url
-        self.password1 = password1
-        self.password2 = password2
+        self.password = password
         self.is_admin = is_admin
 
     def create(self):
@@ -42,10 +41,18 @@ class User(Skeleton):
 
     def from_json(self, json):
         self.__init__(
-            json[fname], json[fname], json[email], json[phone],
+            json[fname], json[lname], json[email], json[phone],
             json[pspt], json[admin])
         self.Id = json[id_key]
         return self
+
+    def get_by_id(self, value):
+        """ search for a row in a table """
+        query = "SELECT politico_users.fname, politico_users.lname, politico_auth.email, " \
+                "politico_users.phone, politico_auth.admin  FROM {} JOIN  politico_auth " \
+                "ON politico_users.id = politico_auth.id WHERE politico_users.id = '{}'".format(
+                    self.table, value)
+        return super().fetch_one(query)
 
     def validate_user(self):
         if invalid_name(self.fname, fname):
@@ -68,12 +75,7 @@ class User(Skeleton):
             self.code = status_400
             return False
 
-        if not self.password1 == self.password2:
-            self.message = "Passwords mismatch"
-            self.code = status_400
-            return False
-
-        if not (has_min_pass_length(self.password1) or has_min_pass_length(self.password2)):
+        if not has_min_pass_length(self.password):
             self.message = "Password must be at least 6 characters long"
             self.code = status_400
             return False

@@ -10,7 +10,7 @@ office_does_not_exist_vote = correct_vote.copy()
 office_does_not_exist_vote[office_key] = 100
 
 candidate_does_not_exist_vote = correct_vote.copy()
-candidate_does_not_exist_vote[candidate_key] = 1000
+candidate_does_not_exist_vote[candidate_key] = 10000
 
 voter_does_not_exist_vote = correct_vote.copy()
 voter_does_not_exist_vote[createdBy_key] = 10000
