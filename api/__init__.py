@@ -29,7 +29,7 @@ def create_app(config_name):
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
-    app.config['JWT_SECRET_KEY'] = os.getenv('SECRET')
+    app.config['JWT_SECRET_KEY'] = "jwt-secret-string"
     app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
     app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
     app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')

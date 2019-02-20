@@ -48,6 +48,12 @@ class Skeleton(Database):
         query = "SELECT * FROM {}".format(self.table)
         return super().fetch_all(query)
 
+    def get_all_by(self, key, value):
+        """  fetches all items in a table """
+        query = "SELECT * FROM {} WHERE {} = '{}'".format(
+            self.table, key, value)
+        return super().fetch_all(query)
+
     def delete(self, Id):
         """ deletes an item from a table """
         query = "DELETE FROM {} WHERE id = {}".format(self.table, Id)
@@ -57,7 +63,7 @@ class Skeleton(Database):
         """ search for a row in a table """
         query = "SELECT * FROM {} WHERE {} = '{}'".format(
             self.table, key, value)
-        return super().fetch_all(query)
+        return super().fetch_one(query)
 
     def get_by_two(self, key1, value1, key2, value2):
         """ search for a row in a table """

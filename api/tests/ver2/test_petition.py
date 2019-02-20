@@ -17,8 +17,8 @@ class TestPetition(TestBase):
             v2_url_prefix + '/auth/signup',
             json=user_with_correct_signup_data
         )  # user
-        self.client.post(v2_url_prefix + '/parties', json=correct_party)
-        self.client.post(v2_url_prefix + '/offices', json=correct_office)
+        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.headers)
+        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.headers)
         self.client.post(
             v2_url_prefix + '/office/1/register',
             json=correct_candidate_infor,
@@ -26,7 +26,7 @@ class TestPetition(TestBase):
         )
         self.client.post(
             v2_url_prefix + '/votes/',
-            json=correct_vote
+            json=correct_vote, headers=self.headers
         )
 
     # clear all lists after tests
@@ -37,7 +37,7 @@ class TestPetition(TestBase):
     def test_create_petition(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',
-            json=correct_petition
+            json=correct_petition, headers=self.headers
         )
         data = res.get_json()
 
@@ -48,7 +48,7 @@ class TestPetition(TestBase):
     def test_create_petition_office_not_found(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',
-            json=petition_with_wrong_office_id)
+            json=petition_with_wrong_office_id, headers=self.headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
@@ -58,7 +58,7 @@ class TestPetition(TestBase):
     def test_create_petition_user_not_found(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',
-            json=petition_with_wrong_user_id)
+            json=petition_with_wrong_user_id, headers=self.headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
@@ -68,7 +68,7 @@ class TestPetition(TestBase):
     def test_create_petition_no_evidence(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',
-            json=petition_with_no_evidence
+            json=petition_with_no_evidence, headers=self.headers
         )
         data = res.get_json()
 
@@ -79,7 +79,7 @@ class TestPetition(TestBase):
     def test_create_petition_wrong_evidence_format(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',
-            json=petition_with_wrong_evidence_format)
+            json=petition_with_wrong_evidence_format, headers=self.headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
