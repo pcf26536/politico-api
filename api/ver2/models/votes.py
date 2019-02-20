@@ -13,12 +13,12 @@ class Vote(Skeleton):
     def __init__(
             self,
             created_on=datetime.datetime.now().date().__str__(),
-            created_by=None, candidate_id=None):
+            created_by=None, candidate_id=None, office_id=None):
         super().__init__('Vote', 'politico_votes')
 
         self.created_on = created_on
         self.created_by = created_by
-        self.office = None
+        self.office = office_id
         self.candidate = candidate_id
         self.Id = None
 
@@ -57,8 +57,7 @@ class Vote(Skeleton):
                 "JOIN politico_users ON politico_users.id = politico_votes.candidate " \
                 "WHERE politico_votes.office = '{}' " \
                 "GROUP BY politico_users.fname, politico_users.lname, politico_offices.name ".format(
-            self.table, self.office)
-        print(query)
+                    self.table, self.office)
         return super().fetch_all(query)
 
     def get_all_results(self):
@@ -68,8 +67,7 @@ class Vote(Skeleton):
                 "JOIN politico_offices ON politico_offices.id = politico_votes.office " \
                 "JOIN politico_users ON politico_users.id = politico_votes.candidate " \
                 "GROUP BY politico_users.fname, politico_users.lname, politico_offices.name ".format(
-            self.table, self.office)
-        print(query)
+                    self.table, self.office)
         return super().fetch_all(query)
 
     def validate_vote(self):
