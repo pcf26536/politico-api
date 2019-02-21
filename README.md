@@ -86,25 +86,25 @@ I used Postman, get it here => [Postman](https://www.getpostman.com/downloads/)
 
 <p>Version 2 Endpoints</p>
 
-| **API Endpoint**                     | **Function**                                 | **URL Route**                               |
-| ---                                  | ---                                          | ---                                         |
-| **POST** /auth/signup                | Allows a user to signup                      | `api/v2/auth/signin`                        |
-| **POST** /auth/login                 | Allows a user to login                       | `api/v2/auth/login`                         |
-| **POST** /auth/reset                 | Allows a user to reset password              | `api/v2/auth/reset`                         |
-| **POST** /offices                    | Create a political office.                   | `/api/v2/offices/`                          |
-| **GET** /offices/`<office-id>`       | Get a specific political office record       | `api/v2/offices/<int:office_id>`            |
-| **GET** /offices                     | Gets all political offices records           | `api/v2/offices/`                           |
-| **DELETE** /offices/`<office-id>`    | Delete a political office                    | `/api/v2/offices/<int:office-id>`           |
-| **PATCH** /offices/`<office-id>`/name| Edit the name of a specific political office.| `/api/v2/offices/<int:office-id>/name`      |
-| **POST** /parties                    | Creates a political party                    | `/api/v2/parties/`                          |
-| **DELETE** /parties/`<party-id>`     | Delete a political party                     | `/api/v2/parties/<int:party-id>`            |
-| **PATCH** /parties/`<party-id>`/name | Edit the name of a specific political party. | `/api/v2/parties/<int:party-id>/name`       |
-| **GET** /parties                     | Gets all political parties                   | `/api/v2/parties/`                          |
-| **GET** /parties/`<int:party-id>`    | Gets a specific political party              | `/api/v2/parties/<int:party_id>`            |
-| **POST** /office/1/register          | Registers a candidate to a political office. | `/api/v2/offices/<int:office-id>/register`  |
-| **POST** /votes/                     | Votes for a candidate.                       | `/api/v2/votes/`                            |
-| **GET** /office/1/result             | View the votes results of an office.         | `/api/v2/offices/<int:office-id>/result`    |
-| **POST** /petitions/                 | Create a petition.                           | `/api/v2/petitions/`                        |
+| **API Endpoint**                      | **Function**                                 | **URL Route**                               |
+| ---                                   | ---                                          | ---                                         |
+| **POST** /auth/signup                 | Allows a user to signup                      | `api/v2/auth/signin`                        |
+| **POST** /auth/login                  | Allows a user to login                       | `api/v2/auth/login`                         |
+| **POST** /auth/reset                  | Allows a user to reset password              | `api/v2/auth/reset`                         |
+| **POST** /offices                     | Create a political office.                   | `/api/v2/offices/`                          |
+| **GET** /offices/`<office-id>`        | Get a specific political office record       | `api/v2/offices/<int:office_id>`            |
+| **GET** /offices                      | Gets all political offices records           | `api/v2/offices/`                           |
+| **DELETE** /offices/`<office-id>`     | Delete a political office                    | `/api/v2/offices/<int:office-id>`           |
+| **PATCH** /offices/`<office-id>`/name | Edit the name of a specific political office.| `/api/v2/offices/<int:office-id>/name`      |
+| **POST** /parties                     | Creates a political party                    | `/api/v2/parties/`                          |
+| **DELETE** /parties/`<party-id>`      | Delete a political party                     | `/api/v2/parties/<int:party-id>`            |
+| **PATCH** /parties/`<party-id>`/name  | Edit the name of a specific political party. | `/api/v2/parties/<int:party-id>/name`       |
+| **GET** /parties                      | Gets all political parties                   | `/api/v2/parties/`                          |
+| **GET** /parties/`<int:party-id>`     | Gets a specific political party              | `/api/v2/parties/<int:party_id>`            |
+| **POST** /office/1/register           | Registers a candidate to a political office. | `/api/v2/offices/<int:office-id>/register`  |
+| **POST** /votes/                      | Votes for a candidate.                       | `/api/v2/votes/`                            |
+| **GET** /office/1/result              | View the votes results of an office.         | `/api/v2/offices/<int:office-id>/result`    |
+| **POST** /petitions/                  | Create a petition.                           | `/api/v2/petitions/`                        |
 
 ## Credits
 [Andela BootCamp Cycle 37](https://andela.com/)
