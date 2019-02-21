@@ -44,7 +44,6 @@ class TestOffices(TestBase):
         self.assertEqual(res.status_code, 409)
 
     def test_add_office_missing_fields(self):
-        """ Tests when some political office fields are missing e.g office name """
         res = self.client.post('/api/v1/offices', json={type_key: leg_type})
         data = res.get_json()
 
@@ -55,23 +54,27 @@ class TestOffices(TestBase):
         self.assertEqual(res.status_code, status_400)
 
     def test_add_office_missing_fields_value(self):
-        """ Tests when some political office fields are missing e.g office name """
-        res = self.client.post('/api/v1/offices', json={type_key: leg_type, name_key: ""})
+        res = self.client.post(
+            '/api/v1/offices', json={type_key: leg_type, name_key: ""})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "Please provide ['name'] value(s) for the office")
+        self.assertEqual(
+            data[error_key], "Please provide ['name'] value(s) for the office")
         self.assertEqual(res.status_code, status_400)
 
     def test_wrong_office_type(self):
-        """ Tests when some political office fields are missing e.g office name """
-        res = self.client.post('/api/v1/offices', json={type_key: "Office", name_key: "MCA"})
+        res = self.client.post(
+            '/api/v1/offices',
+            json={type_key: "Office", name_key: "MCA"})
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            "Incorrect value [Office], office types should be ['federal', 'legislative', 'state', 'local government']"
+            "Incorrect value [Office], "
+            "office types should be"
+            " ['federal', 'legislative', 'state', 'local government']"
         )
         self.assertEqual(res.status_code, status_400)
 
@@ -83,7 +86,8 @@ class TestOffices(TestBase):
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            "No data was provided, fields ['name', 'type'] required to create office"
+            "No data was provided, fields"
+            " ['name', 'type'] required to create office"
         )
         self.assertEqual(res.status_code, status_400)
 

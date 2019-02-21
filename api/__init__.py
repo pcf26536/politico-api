@@ -23,7 +23,7 @@ def create_app(config_name):
     if not config_name:
         config_name = 'development'
 
-    app = Flask(__name__, instance_relative_config=True) # instantiate the app
+    app = Flask(__name__, instance_relative_config=True)
 
     # set configuration
     app.config.from_object(app_config[config_name])
@@ -75,16 +75,30 @@ def create_app(config_name):
     @app.errorhandler(status_400)
     def bad_request(error):
         """ Handle error 400 """
-        return jsonify({'message': 'Please review your request and try again', 'status': 400})
+        return jsonify(
+            {'message': 'Please review your request and try again',
+             'status': 400
+             })
 
     @app.errorhandler(status_404)
     def page_not_found(error):
         """ Handle error 404 """
-        return jsonify({'message': 'The requested resource was not found', 'status': 404})
+        return jsonify(
+            {'message': 'The requested resource was not found', 'status': 404}
+        )
 
     @app.errorhandler(status_405)
     def method_not_allowed(error):
         """ Handle error 405 """
         return jsonify({'message': 'Method not allowed', 'status': 405})
+
+    @app.errorhandler(500)
+    def sys_unavailable(error):
+        return jsonify(
+            {
+                'message': 'System not available, try again later!',
+                'status': 500
+             }
+        )
 
     return app

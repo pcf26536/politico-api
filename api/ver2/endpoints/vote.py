@@ -3,8 +3,9 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.ver2.utils.strings import vote_key
 from api.strings import post_method, status_201, get_method
 from api.ver1.ballot.strings import candidate_key
-from api.ver1.utils import check_form_data, no_entry_resp, field_missing_resp, error, success
-from api.ver2.models.votes import Vote, Candidate
+from api.ver1.utils import check_form_data, no_entry_resp, \
+    field_missing_resp, success, error
+from api.ver2.models.votes import Vote
 from api.ver2.utils.utilities import system_unavailable
 
 
@@ -25,7 +26,7 @@ def votes():
                         created_by=user,
                         candidate_id=data[candidate_key]
                     )
-                except Exception as e:
+                except IndexError as e:
                     return field_missing_resp(vote_key, fields, e.args[0])
 
                 if vote.validate_vote():

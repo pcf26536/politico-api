@@ -1,10 +1,9 @@
 from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix, user_key, token_key, user_entity
 from api.ver2.utils.validators import invalid_name
-from api.ver2.utils.test_data.signup_test_data import *
 from api.strings import status_201
 from api.strings import status_key, data_key, error_key, status_400
-from api.ver2.utils.test_data.login_test_data import *
+from api.tests.ver2.test_data.signup_test_data import *
 
 
 class TestSignUp(TestBase):
@@ -24,7 +23,9 @@ class TestSignUp(TestBase):
         )
         data = res.get_json()
 
-        self.assertEqual(data[data_key][0][user_key][lname], user_with_correct_signup_data[lname])
+        self.assertEqual(
+            data[data_key][0][user_key][lname],
+            user_with_correct_signup_data[lname])
         self.assertEqual(data[status_key], status_201)
         self.assertIn(token_key, data[data_key][0])
         self.assertEqual(res.status_code, status_201)
@@ -37,7 +38,9 @@ class TestSignUp(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "firstname field is required to create {}".format(user_entity))
+        self.assertEqual(
+            data[error_key],
+            "firstname field is required to create {}".format(user_entity))
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_name_format(self):
@@ -73,7 +76,8 @@ class TestSignUp(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_400)
-        self.assertEqual(data[error_key], "Password must be at least 6 characters long")
+        self.assertEqual(
+            data[error_key], "Password must be at least 6 characters long")
         self.assertEqual(res.status_code, status_400)
 
     def test_signup_wrong_passport_format(self):
@@ -86,7 +90,8 @@ class TestSignUp(TestBase):
         self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
-            'Bad {} format [{}] has no file extension.'.format(pspt, user_with_wrong_passport_url[pspt])
+            'Bad {} format [{}] has no file extension.'
+            ''.format(pspt, user_with_wrong_passport_url[pspt])
         )
         self.assertEqual(res.status_code, status_400)
 

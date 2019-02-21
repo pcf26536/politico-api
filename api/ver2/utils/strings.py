@@ -24,3 +24,5 @@ petition_key = 'Petition'
 office_id_key = 'office_id'
 authorization_key = 'Authorization'
 evidence_types = imageTypes + ['pdf', 'mp4', '3gp', 'mkv', 'mp3']
+ver_1_url_prefix = 'api/v1'
+ver_2_url_prefix = 'api/v2'

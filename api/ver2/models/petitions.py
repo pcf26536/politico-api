@@ -10,7 +10,8 @@ import datetime
 
 
 class Petition(Skeleton):
-    def __init__(self, created_on=datetime.datetime.now().date().__str__(), created_by=None, office_id=None, body=None, evidence=None):
+    def __init__(self, created_on=datetime.datetime.now().date().__str__(),
+                 created_by=None, office_id=None, body=None, evidence=None):
         super().__init__('Vote', 'politico_petitions')
 
         self.created_on = created_on
@@ -22,8 +23,10 @@ class Petition(Skeleton):
 
     def create(self):
         data = super().add(
-            createdOn_key + ',' + createdBy_key + ', ' + office_key + ', ' + 'text' + ', ' + evidence_key,
-            self.created_on, self.created_by, self.office, self.body, self.evidence
+            createdOn_key + ',' + createdBy_key + ', ' + office_key + ', '
+            + 'text' + ', ' + evidence_key,
+            self.created_on, self.created_by, self.office, self.body,
+            self.evidence
         )
         self.Id = data.get(id_key)
         return data
@@ -72,7 +75,8 @@ class Petition(Skeleton):
             return False
 
         if not valid_date(self.created_on):
-            self.message = "Invalid date format; expected format is YYYY/MM/DD e.g 2019-12-30"
+            self.message = "Invalid date format;" \
+                           " expected format is YYYY/MM/DD e.g 2019-12-30"
             self.code = status_400
             return False
 
@@ -93,7 +97,8 @@ class Petition(Skeleton):
             self.code = in_body[1]
             return False
 
-        if Petition().get_by_two(office_key, self.office, createdBy_key, self.created_by):
+        if Petition().get_by_two(office_key, self.office, createdBy_key,
+                                 self.created_by):
             self.message = 'User has already created a petition for that office'
             self.code = status_409
             return False

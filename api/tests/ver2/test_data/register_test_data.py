@@ -1,7 +1,6 @@
 from api.ver1.ballot.models import candidates
 from api.strings import id_key
 from api.ver1.ballot.strings import candidate_key
-from api.ver1.offices.strings import office_key
 from api.ver1.parties.strings import party_key
 
 

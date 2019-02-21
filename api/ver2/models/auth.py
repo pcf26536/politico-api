@@ -4,12 +4,12 @@ from api.ver1.users.strings import *
 from api.strings import id_key, status_409
 from api.ver2.utils.strings import password_key, admin_key
 from flask_jwt_extended import \
-    (create_access_token, create_refresh_token, jwt_required,
-     jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
+    (create_access_token, create_refresh_token)
 
 
 class Auth(Skeleton):
-    def __init__(self, Id=None, email=None, password=None, is_admin=False, table='politico_auth'):
+    def __init__(self, Id=None, email=None, password=None, is_admin=False,
+                 table='politico_auth'):
         super().__init__('User', table)
         self.Id = Id
         self.email = email

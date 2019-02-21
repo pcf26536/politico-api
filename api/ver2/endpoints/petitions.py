@@ -3,7 +3,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from api.ver2.utils.strings import evidence_key, petition_key
 from api.strings import post_method, status_201
 from api.ver1.ballot.strings import body_key
-from api.ver1.utils import check_form_data, no_entry_resp, field_missing_resp, error, success
+from api.ver1.utils import check_form_data, no_entry_resp, \
+    field_missing_resp, error, success
 from api.ver1.offices.strings import office_key
 from api.ver2.models.petitions import Petition
 from api.ver2.utils.utilities import system_unavailable

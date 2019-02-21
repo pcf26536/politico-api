@@ -1,5 +1,6 @@
 from .skeleton import Skeleton
-from api.strings import id_key, name_key, ok_str, status_key, error_key, status_400
+from api.strings import id_key, name_key, ok_str, status_key, error_key,\
+    status_400
 from api.ver1.parties.strings import hqAddKey, logoUrlKey
 from api.ver1.parties.validators import validate_hqadd, validate_logourl
 from api.ver2.utils.validators import is_string
@@ -69,12 +70,14 @@ class Party(Skeleton):
             return False
 
         if self.get_by('name', self.name):
-            self.message = "Conflict: Party with {} as name already exists".format(self.name)
+            self.message = "Conflict: Party with {} as name already exists" \
+                           "".format(self.name)
             self.code = 409
             return False
 
         if self.get_by('hq_address', self.hqAddress):
-            self.message = "Conflict: party with {} as hqAddress already exists".format(self.hqAddress)
+            self.message = "Conflict: party with {} as hqAddress already exists" \
+                           "".format(self.hqAddress)
             self.code = 409
             return False
 
