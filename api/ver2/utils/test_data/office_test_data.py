@@ -3,5 +3,5 @@ from api.ver1.offices.strings import fed_type
 
 correct_office = {
     name_key: "Women Representative",
-    type_key : fed_type
+    type_key: fed_type
 }

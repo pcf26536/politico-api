@@ -1,0 +1,706 @@
+FORMAT: 1A
+HOST: https://gvotie.herokuapp.com
+
+# gVotie
+
+gVotie is a simple API allowing consumers to build awesome voting applications.
+
+## Endpoints Collection [/]
+
+### Index Endpoints [GET]
+
+Lists all available endpoints.
+
++ Response 200 (application/json)
+
+        {
+          "data": [
+            "Howdy! Welcome to the gVotie API - Available Endpoints",
+            {
+              "SignUp": "https://gvotie.herokuapp.com/api/v2/auth/signup",
+              "method": "POST"
+            },
+            {
+              "Login": "https://gvotie.herokuapp.com/api/v2/auth/login",
+              "method": "POST"
+            },
+            {
+              "Rest Password": "https://gvotie.herokuapp.com/api/v2/auth/reset",
+              "method": "POST"
+            },
+            {
+              "Get Parties v1": "https://gvotie.herokuapp.com/api/v1/parties",
+              "method": "GET"
+            },
+            {
+              "Get Party v1": "https://gvotie.herokuapp.com/api/v1/parties/<int:id>",
+              "method": "GET"
+            },
+            {
+              "Get Parties v2": "https://gvotie.herokuapp.com/api/v2/parties",
+              "method": "GET"
+            },
+            {
+              "Add Party v1": "https://gvotie.herokuapp.com/api/v1/parties",
+              "method": "POST"
+            },
+            {
+              "Add Party v2": "https://gvotie.herokuapp.com/api/v2/parties",
+              "method": "POST"
+            },
+            {
+              "Get Party v2": "https://gvotie.herokuapp.com/api/v2/parties/<int:id>",
+              "method": "GET"
+            },
+            {
+              "Delete Party v2": "https://gvotie.herokuapp.com/api/v2/parties/<int:id>",
+              "method": "DELETE"
+            },
+            {
+              "Update Party Name v2": "https://gvotie.herokuapp.com/api/v2/parties/<int:id>/name",
+              "method": "PATCH"
+            },
+            {
+              "Add Office v1": "https://gvotie.herokuapp.com/api/v1/offices",
+              "method": "POST"
+            },
+            {
+              "Add Office v2": "https://gvotie.herokuapp.com/api/v2/offices",
+              "method": "POST"
+            },
+            {
+              "Get Offices v1": "https://gvotie.herokuapp.com/api/v1/offices",
+              "method": "GET"
+            },
+            {
+              "Get Office v1": "https://gvotie.herokuapp.com/api/v1/offices/<int:id>",
+              "method": "GET"
+            },
+            {
+              "Get Offices v2": "https://gvotie.herokuapp.com/api/v2/offices",
+              "method": "GET"
+            },
+            {
+              "Add Office v1": "https://gvotie.herokuapp.com/api/v1/offices",
+              "method": "POST"
+            },
+            {
+              "Add Office v2": "https://gvotie.herokuapp.com/api/v2/offices",
+              "method": "POST"
+            },
+            {
+              "Get Office v2": "https://gvotie.herokuapp.com/api/v2/offices/<int:id>",
+              "method": "GET"
+            },
+            {
+              "Delete Office v2": "https://gvotie.herokuapp.com/api/v2/offices/<int:id>",
+              "method": "DELETE"
+            },
+            {
+              "Update Office Name v2": "https://gvotie.herokuapp.com/api/v2/offices/<int:id>",
+              "method": "PATCH"
+            },
+            {
+              "Vote": "https://gvotie.herokuapp.com/api/v2/votes/",
+              "method": "POST"
+            },
+            {
+              "Register Candidates": "https://gvotie.herokuapp.com/api/v2/office/<int:id>/register",
+              "method": "POST"
+            },
+            {
+              "Get All Candidates": "https://gvotie.herokuapp.com/api/v2/office/<int:id>/register",
+              "method": "GET"
+            },
+            {
+              "Get All Results": "https://gvotie.herokuapp.com/api/v2/votes/",
+              "method": "GET"
+            },
+            {
+              "Get Specific Candidate Votes": "https://gvotie.herokuapp.com/api/v2/votes/<int:id>",
+              "method": "GET"
+            },
+            {
+              "Get Specific Office Results": "https://gvotie.herokuapp.com/api/v2/office/<int:id>/result",
+              "method": "GET"
+            },
+            {
+              "Create Petition": "https://gvotie.herokuapp.com/api/v2/petitions/",
+              "method": "POST"
+            }
+          ],
+          "status": 200
+        }
+
+## Sign Up [/api/v2/auth/signup]
+
+### Sign Up Endpoint [POST]
+
+Allows users to sign up.
+
++ Request (application/json)
+
+        {
+            "firstname" : "john",
+            "lastname" : "doe",
+            "email": "johndoe@andela.com",
+            "phoneNumber": "0713972278",
+            "passportUrl" : "passport.jpg", 
+            "password": "qwerty1212"
+         }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+
+        {
+          "data": [
+            {
+              "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA2OTc3NzQsIm5iZiI6MTU1MDY5Nzc3NCwianRpIjoiZTRjOTZhMDktOWIzYy00NzFjLWJlODEtYmQ0YWQ1ZDJmOTA3IiwiZXhwIjoxNTUwNjk4Njc0LCJpZGVudGl0eSI6MiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.bZ8KoW5bEdTXrn7HAlP4cMixw0Kfj5WI5lByP3eoZqo",
+              "user": {
+                "email": "johndoe@andela.com",
+                "firstname": "john",
+                "id": 2,
+                "isAdmin": false,
+                "lastname": "doe",
+                "passportUrl": "passport.jpg",
+                "phoneNumber": "0713972278"
+              }
+            }
+          ],
+          "status": 201
+        }
+
+## Login [/api/v2/auth/login]
+
+### Login Endpoint [POST]
+
+Allows users to login.
+
++ Request (application/json)
+
+        {
+            "email": "johndoe@andela.com",
+            "password": "qwerty1212"
+         }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+
+       {
+          "data": [
+            {
+              "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA2OTgwODgsIm5iZiI6MTU1MDY5ODA4OCwianRpIjoiNWNhNzkwZTktMDAxYy00NjNmLWE1MmQtM2JkMjY3OGVlMDk4IiwiZXhwIjoxNTUwNjk4OTg4LCJpZGVudGl0eSI6MiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.upPUxuTFSSU-oLjG1zvftjnesiGrEH9uiOwZCsK4CBw",
+              "user": {
+                "admin": false,
+                "email": "johndoe@andela.com",
+                "fname": "john",
+                "lname": "doe",
+                "phone": "0713972278"
+              }
+            }
+          ],
+          "status": 200
+        }
+        
+## Reset Password [/api/v2/auth/reset]
+
+### Password Reset Endpoint [POST]
+
+Allows users to reset their passwords.
+
++ Request (application/json)
+
+        {
+            "email": "johndoe@andela.com"
+         }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 108
+    + Body
+        
+        {
+          "data": [
+            {
+              "email": "johndoe@andela.com",
+              "message": "Check your email for password reset link"
+            }
+          ],
+          "status": 200
+        }
+    
+    
+    
+## Add, Get Parties [/api/v2/parties]
+
+### Add Party Endpoint [POST]
+
+Allows an admin to create a political party.
+
++ Request (application/json)
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDIyMTgsIm5iZiI6MTU1MDcwMjIxOCwianRpIjoiMTc4MjBhNzEtZWI0MS00ZDZhLWE5ZjQtOWJmNzYwOTM2NTgwIiwiZXhwIjoxNTUwNzAzMTE4LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.CEic9m3IKYdpFgxjtPsnaMwUU_ILDcKOkvBfCxxjFoQ
+    + Body
+
+        {
+            "name": "African National Congress",
+            "hqAddress": "14588-0100, Mombasa",
+            "logoUrl": "anc.gif"
+        }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 122
+    + Body
+    
+        {
+          "data": [
+            {
+              "hqAddress": "14588-0100, Mombasa",
+              "id": 1,
+              "logoUrl": "anc.gif",
+              "name": "African National Congress"
+            }
+          ],
+          "status": 201
+        }
+    
+    
+### Get Parties Endpoint [GET]
+
+Allows a user to fetch all political parties.
+
++ Request (application/json)
+    
+     + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDIyMTgsIm5iZiI6MTU1MDcwMjIxOCwianRpIjoiMTc4MjBhNzEtZWI0MS00ZDZhLWE5ZjQtOWJmNzYwOTM2NTgwIiwiZXhwIjoxNTUwNzAzMTE4LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.CEic9m3IKYdpFgxjtPsnaMwUU_ILDcKOkvBfCxxjFoQ
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 124
+    + Body
+    
+            {
+              "data": [
+                {
+                  "hq_address": "14588-0100, Mombasa",
+                  "id": 1,
+                  "logo_url": "anc.gif",
+                  "name": "African National Congress"
+                }
+              ],
+              "status": 200
+            }
+
+## Get, Delete Parties [/api/v2/parties/1]
+
+### Fetch Party Endpoint [GET]
+
+Allows a user to fetch a political party by ID.
+
++ Request (application/json)
+
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDIyMTgsIm5iZiI6MTU1MDcwMjIxOCwianRpIjoiMTc4MjBhNzEtZWI0MS00ZDZhLWE5ZjQtOWJmNzYwOTM2NTgwIiwiZXhwIjoxNTUwNzAzMTE4LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.CEic9m3IKYdpFgxjtPsnaMwUU_ILDcKOkvBfCxxjFoQ
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+    + Body
+    
+            {
+              "data": [
+                {
+                  "hq_address": "14588-0100, Mombasa",
+                  "id": 1,
+                  "logo_url": "anc.gif",
+                  "name": "African National Congress"
+                }
+              ],
+              "status": 200
+            }
+            
+            
+### Delete Party Endpoint [DELETE]
+
+Allows an admin to delete a political party by ID.
+
++ Request (application/json)
+     + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDMyNzQsIm5iZiI6MTU1MDcwMzI3NCwianRpIjoiNTliNTgyYjQtOGIwMS00ZjVlLTkwZmUtODQ3MmY2YmFlNzlmIiwiZXhwIjoxNTUwNzA0MTc0LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.qAtGysQF-drjoF-y1V4dm-5_wXyIQUR5KHZXt9j0IJc
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+    + Body
+    
+        {
+          "data": [
+            {
+              "message": "Jubilee Party deleted successfully"
+            }
+          ],
+          "status": 200
+        }
+    
+## Edit Parties [/api/v2/parties/1/name]    
+
+### Edit Party Endpoint [PATCH]
+
+Allows an admin to edit a political party by ID.
+
++ Request (application/json)
+    
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDIyMTgsIm5iZiI6MTU1MDcwMjIxOCwianRpIjoiMTc4MjBhNzEtZWI0MS00ZDZhLWE5ZjQtOWJmNzYwOTM2NTgwIiwiZXhwIjoxNTUwNzAzMTE4LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.CEic9m3IKYdpFgxjtPsnaMwUU_ILDcKOkvBfCxxjFoQ
+    + Body
+    
+        {
+            "name" : "Jubilee Party"
+        }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+    + Body
+    
+        {
+          "data": [
+            {
+              "hq_address": "14588-0100, Mombasa",
+              "id": 1,
+              "logo_url": "anc.gif",
+              "name": "Jubilee Party"
+            }
+          ],
+          "status": 200
+        }
+    
+
+## Add, Get Offices [/api/v2/offices]
+
+### Add Office Endpoint [POST]
+
+Allows an admin to create a political office.
+
++ Request (application/json)
+    
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDMyNzQsIm5iZiI6MTU1MDcwMzI3NCwianRpIjoiNTliNTgyYjQtOGIwMS00ZjVlLTkwZmUtODQ3MmY2YmFlNzlmIiwiZXhwIjoxNTUwNzA0MTc0LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.qAtGysQF-drjoF-y1V4dm-5_wXyIQUR5KHZXt9j0IJc
+    + Body
+    
+        {
+            "name": "Women Representative",
+            "type": "federal"
+        }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+        
+        {
+          "data": [
+            {
+              "id": 1,
+              "name": "Women Representative",
+              "type": "federal"
+            }
+          ],
+          "status": 201
+        }
+    
+### Get Offices Endpoint [GET]
+
+Allows an user to fetch all political offices.
+
++ Request (application/json)
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQyMjcsIm5iZiI6MTU1MDcwNDIyNywianRpIjoiZDQzMmFlZmQtMjQwOS00MmQ3LWE2MDYtMTdhZWJmZWRlNDQ5IiwiZXhwIjoxNTUwNzA1MTI3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3CWfBdt1lbTIarpL_DISINvNaqpmIjD8RBEX7CjFN28
+
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "Women Representative",
+                "type": "federal"
+              }
+            ],
+            "status": 200
+          }
+    
+
+## Get, Delete Offices [/api/v2/offices/1]
+
+### Fetch Office Endpoint [GET]
+
+Allows a user to fetch a political office by ID.
+
++ Request (application/json)
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQyMjcsIm5iZiI6MTU1MDcwNDIyNywianRpIjoiZDQzMmFlZmQtMjQwOS00MmQ3LWE2MDYtMTdhZWJmZWRlNDQ5IiwiZXhwIjoxNTUwNzA1MTI3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3CWfBdt1lbTIarpL_DISINvNaqpmIjD8RBEX7CjFN28
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+          {
+            "data": [
+              {
+                "id": 1,
+                "name": "Women Representative",
+                "type": "federal"
+              }
+            ],
+            "status": 200
+          }
+    
+
+### Delete Office Endpoint [DELETE]
+
+Allows an admin to delete a political office by ID.
+
++ Request (application/json)
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQyMjcsIm5iZiI6MTU1MDcwNDIyNywianRpIjoiZDQzMmFlZmQtMjQwOS00MmQ3LWE2MDYtMTdhZWJmZWRlNDQ5IiwiZXhwIjoxNTUwNzA1MTI3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3CWfBdt1lbTIarpL_DISINvNaqpmIjD8RBEX7CjFN28
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+            {
+            "data": [
+              {
+                "message": "Governer Office deleted successfully"
+              }
+            ],
+            "status": 200
+          }
+
+
+## Edit Office [/api/v2/offices/1/name]
+
+### Edit Office Endpoint [PATCH]
+
+Allows an admin to edit a political office by ID.
+
++ Request (application/json)
+
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQyMjcsIm5iZiI6MTU1MDcwNDIyNywianRpIjoiZDQzMmFlZmQtMjQwOS00MmQ3LWE2MDYtMTdhZWJmZWRlNDQ5IiwiZXhwIjoxNTUwNzA1MTI3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3CWfBdt1lbTIarpL_DISINvNaqpmIjD8RBEX7CjFN28
+    + Body
+    
+        {
+            "name" : "Governer"
+        }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body    
+        {
+          "data": [
+            {
+              "id": 1,
+              "name": "Governer",
+              "type": "federal"
+            }
+          ],
+          "status": 200
+        }
+
+
+
+## Register Candidates [/api/v2/office/1/register]
+
+### Register Candidate Endpoint [POST]
+
+Allows an admin to register a candidate to run for specified political office.
+
++ Request (application/json)
+ 
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQyMjcsIm5iZiI6MTU1MDcwNDIyNywianRpIjoiZDQzMmFlZmQtMjQwOS00MmQ3LWE2MDYtMTdhZWJmZWRlNDQ5IiwiZXhwIjoxNTUwNzA1MTI3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3CWfBdt1lbTIarpL_DISINvNaqpmIjD8RBEX7CjFN28
+
+    + Body
+    
+        {
+            "party": 2,
+            "candidate": 2
+        }
+        
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+    
+            {
+              "data": [
+                {
+                  "candidate": 2,
+                  "id": 1,
+                  "office": 1,
+                  "party": 2
+                }
+              ],
+              "status": 201
+            }
+    
+
+## Vote [/api/v2/votes/]
+
+### Voting Endpoint [POST]
+
+Allows a user to vote  for a candidate running for a specific office.
+
++ Request (application/json)
+    
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQ1ODcsIm5iZiI6MTU1MDcwNDU4NywianRpIjoiMGIwYzQxNWQtZjhlMS00ODE5LThmYTktZDkzMTRkMGE3NmY4IiwiZXhwIjoxNTUwNzA1NDg3LCJpZGVudGl0eSI6MiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Snlq3w1bNv8Zfv_-AUUA31uE8Yv1SMO4tWUVGeW7cUE
+    + Body
+    
+        {
+            "candidate": 2
+        }
+        
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 116
+
+    + Body
+    
+            {
+              "data": [
+                {
+                  "candidate": 2,
+                  "createdby": 2,
+                  "createdon": "Wed, 20 Feb 2019 00:00:00 GMT",
+                  "id": 1,
+                  "office": 1
+                }
+              ],
+              "status": 201
+            }
+
+## View Results [/api/v2/office/1/result]
+
+### View the Result Endpoint [GET]
+
+Collate and fetch the result of specific office following a concluded election.
+
++ Request (application/json)
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQ1ODcsIm5iZiI6MTU1MDcwNDU4NywianRpIjoiMGIwYzQxNWQtZjhlMS00ODE5LThmYTktZDkzMTRkMGE3NmY4IiwiZXhwIjoxNTUwNzA1NDg3LCJpZGVudGl0eSI6MiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Snlq3w1bNv8Zfv_-AUUA31uE8Yv1SMO4tWUVGeW7cUE
+
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+    
+            {
+              "data": [
+                {
+                  "first_name": "john",
+                  "last_name": "doe",
+                  "office": "Women Representative",
+                  "votes": 1
+                }
+              ],
+              "status": 200
+            }
+    
+
+## Create Petitions [/api/v2/petitions/]
+
+### Create Petition Endpoint [POST]
+
+Create ​petitions ​challenging the outcome of a concluded election.
+
++ Request (application/json)
+    + Headers
+        
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQ1ODcsIm5iZiI6MTU1MDcwNDU4NywianRpIjoiMGIwYzQxNWQtZjhlMS00ODE5LThmYTktZDkzMTRkMGE3NmY4IiwiZXhwIjoxNTUwNzA1NDg3LCJpZGVudGl0eSI6MiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Snlq3w1bNv8Zfv_-AUUA31uE8Yv1SMO4tWUVGeW7cUE
+    + Body
+        
+        {
+            "office": 1,
+            "body": "The voting was rigged!!",
+            "evidence": "video2.mp4"
+        }
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 458
+
+    + Body
+            {
+              "data": [
+                {
+                  "body": "The voting was rigged!!",
+                  "createdBy": 2,
+                  "createdOn": "2019-02-20",
+                  "evidence": "video2.mp4",
+                  "id": 1,
+                  "office": 1
+                }
+              ],
+              "status": 201
+            }

@@ -49,3 +49,8 @@ def index():
 
             {'Create Petition': request.base_url + ver_2_url_prefix + '/petitions/', 'method': 'POST'},
         ])
+
+
+@route_bp.route('/docs')
+def docs():
+    return

@@ -8,7 +8,6 @@ from api.ver2.models.users import User
 from api.ver2.models.auth import Auth
 from api.ver2.utils.validators import is_valid_email, invalid_passwords
 from api.ver2.utils.utilities import system_unavailable
-from api.ver2.utils import is_not_admin
 from werkzeug.security import generate_password_hash
 import traceback
 
