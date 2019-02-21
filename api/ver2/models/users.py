@@ -48,9 +48,12 @@ class User(Skeleton):
 
     def get_by_id(self, value):
         """ search for a row in a table """
-        query = "SELECT politico_users.fname, politico_users.lname, politico_auth.email, " \
-                "politico_users.phone, politico_auth.admin  FROM {} JOIN  politico_auth " \
-                "ON politico_users.id = politico_auth.id WHERE politico_users.id = '{}'".format(
+        query = "SELECT politico_users.fname, politico_users.lname," \
+                " politico_auth.email, " \
+                "politico_users.phone, politico_auth.admin " \
+                " FROM {} JOIN  politico_auth " \
+                "ON politico_users.id = politico_auth.id " \
+                "WHERE politico_users.id = '{}'".format(
                     self.table, value)
         return super().fetch_one(query)
 
@@ -91,22 +94,27 @@ class User(Skeleton):
             return False
 
         if not re.match(r'^[^.]*.[^.]*$', self.passport_url):
-            self.message = 'Bad {} format [{}], only one dot(.) should be present.'.format(pspt, self.passport_url)
+            self.message = 'Bad {} format [{}],' \
+                           ' only one dot(.) should be present.'\
+                .format(pspt, self.passport_url)
             self.code = status_400
             return False
         else:
             try:
                 name, ext = self.passport_url.split('.')
                 if ext not in imageTypes:
-                    self.message = 'Only {} image types allowed for {}'.format(imageTypes, pspt)
+                    self.message = 'Only {} image types allowed for {}' \
+                                   ''.format(imageTypes, pspt)
                     self.code = status_400
                     return False
                 elif not re.match(r'[\w.-]{1,256}', name):
-                    self.message = 'Bad {} format [{}]. No spaces allowed.'.format(pspt, name)
+                    self.message = 'Bad {} format [{}]. No spaces allowed.' \
+                                   ''.format(pspt, name)
                     self.code = status_400
                     return False
             except Exception:
-                self.message = 'Bad {} format [{}] has no file extension.'.format(pspt, self.passport_url)
+                self.message = 'Bad {} format [{}] has no file extension.' \
+                               ''.format(pspt, self.passport_url)
                 self.code = status_400
                 return False
 

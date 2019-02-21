@@ -10,11 +10,11 @@ class TestUsers(TestBase):
         super().setUp()
 
         self.user = {
-            fname : 'Jeptha',
-            lname : 'Malela',
+            fname: 'Jeptha',
+            lname: 'Malela',
             email: 'malelalela@andela.com',
             phone: '+254 712 345 278',
-            pspt : 'passport2.jpg',
+            pspt: 'passport2.jpg',
             admin: False
         }
 

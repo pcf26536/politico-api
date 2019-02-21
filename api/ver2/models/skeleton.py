@@ -72,7 +72,8 @@ class Skeleton(Database):
         return super().fetch_one(query)
 
     def get_group(self, col1, col2, count_col, grp_col1, grp_col2):
-        query = "SELECT {}, {}, COUNT ({}) AS result FROM {} GROUP BY {},{}".format(
+        query = "SELECT {}, {}, COUNT ({}) AS result FROM {} GROUP BY {},{}" \
+                "".format(
             col1, col2, count_col, self.table, grp_col1, grp_col2)
         print(query)
         return super().fetch_all(query)

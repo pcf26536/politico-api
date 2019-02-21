@@ -15,6 +15,5 @@ config_name = os.getenv('APP_SETTINGS')
 # defining the configuration to be used
 app = create_app(config_name)
 
-# the interpreter inserts this at the top of the module when run as the main program.
 if __name__ == "__main__":
     app.run()

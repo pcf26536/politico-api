@@ -1,6 +1,6 @@
 from flask import request, Blueprint
 from flask_jwt_extended import (jwt_required)
-from api.ver1.utils import field_missing_resp, runtime_error_resp, \
+from api.ver1.utils import field_missing_resp, \
     not_found_resp, check_form_data, no_entry_resp, success, error
 from api.ver2.models.offices import Office
 from api.strings import name_key, post_method, get_method, type_key, delete_method
@@ -67,7 +67,9 @@ def get_office_delete_ep(id):
                     if is_not_admin():
                         return is_not_admin()
                     office.delete(id)
-                    return success(200, [{'message': p['name'] + ' deleted successfully'}])
+                    return success(
+                        200, [
+                            {'message': p['name'] + ' deleted successfully'}])
             else:
                 return not_found_resp(office_key)
     except Exception as e:
@@ -86,7 +88,9 @@ def edit_ep(id):
                 fields = [name_key]
                 data = check_form_data(office_key, request, fields)
                 if not data:
-                    return error("No data was provided, fields [name] required to edit office", 400)
+                    return error(
+                        "No data was provided,"
+                        " fields [name] required to edit office", 400)
                 new_name = data[name_key]
                 if Office().get_by('name', new_name):
                     return error('Name already exists', 409)

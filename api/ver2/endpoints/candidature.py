@@ -2,7 +2,7 @@ from flask import request, Blueprint
 from flask_jwt_extended import (jwt_required)
 from api.strings import post_method, status_201, get_method
 from api.ver1.utils import check_form_data, no_entry_resp, \
-    field_missing_resp, error, success, runtime_error_resp
+    field_missing_resp, error, success
 from api.ver1.parties.strings import party_key
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key
@@ -69,6 +69,7 @@ def results(id):
                 data.append(vote)
             return success(200, data)
         else:
-            return error('Voting for the specified office has not commenced yet!', 404)
+            return error('Voting for the specified '
+                         'office has not commenced yet!', 404)
     except Exception as e:
             return system_unavailable(e)

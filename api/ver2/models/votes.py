@@ -24,7 +24,8 @@ class Vote(Skeleton):
 
     def create(self):
         data = super().add(
-            createdOn_key + ',' + createdBy_key + ', ' + office_key + ', ' + candidate_key,
+            createdOn_key + ',' + createdBy_key + ', ' + office_key + ', '
+            + candidate_key,
             self.created_on, self.created_by, self.office, self.candidate
         )
         self.Id = data.get(id_key)
@@ -50,23 +51,31 @@ class Vote(Skeleton):
         return self
 
     def get_office_result(self):
-        query = "SELECT politico_offices.name as office, politico_users.fname as first_name," \
+        query = "SELECT politico_offices.name as office," \
+                " politico_users.fname as first_name," \
                 " politico_users.lname as last_name " \
                 ", COUNT (politico_votes.candidate) AS votes FROM {} " \
-                "JOIN politico_offices ON politico_offices.id = politico_votes.office " \
-                "JOIN politico_users ON politico_users.id = politico_votes.candidate " \
+                "JOIN politico_offices ON " \
+                "politico_offices.id = politico_votes.office " \
+                "JOIN politico_users" \
+                " ON politico_users.id = politico_votes.candidate " \
                 "WHERE politico_votes.office = '{}' " \
-                "GROUP BY politico_users.fname, politico_users.lname, politico_offices.name ".format(
+                "GROUP BY politico_users.fname, politico_users.lname," \
+                " politico_offices.name ".format(
                     self.table, self.office)
         return super().fetch_all(query)
 
     def get_all_results(self):
-        query = "SELECT politico_offices.name as office, politico_users.fname as first_name," \
+        query = "SELECT politico_offices.name as office, " \
+                "politico_users.fname as first_name," \
                 " politico_users.lname as last_name " \
                 ", COUNT (politico_votes.candidate) AS votes FROM {} " \
-                "JOIN politico_offices ON politico_offices.id = politico_votes.office " \
-                "JOIN politico_users ON politico_users.id = politico_votes.candidate " \
-                "GROUP BY politico_users.fname, politico_users.lname, politico_offices.name ".format(
+                "JOIN politico_offices ON" \
+                " politico_offices.id = politico_votes.office " \
+                "JOIN politico_users ON" \
+                " politico_users.id = politico_votes.candidate " \
+                "GROUP BY politico_users.fname, politico_users.lname, " \
+                "politico_offices.name ".format(
                     self.table, self.office)
         return super().fetch_all(query)
 
@@ -92,18 +101,21 @@ class Vote(Skeleton):
             self.code = status_404
             return False
 
-        if not Candidate().get_by_two(office_key, self.office, candidate_key, self.candidate):
+        if not Candidate().get_by_two(office_key, self.office, candidate_key,
+                                      self.candidate):
             self.message = 'Candidate is not registered for that office'
             self.code = status_409
             return False
 
-        if self.get_by_two(createdBy_key, self.created_by, office_key, self.office):
+        if self.get_by_two(createdBy_key, self.created_by, office_key,
+                           self.office):
             self.message = 'User has already voted for specified office'
             self.code = status_409
             return False
 
         if not valid_date(self.created_on):
-            self.message = "Invalid date format; expected format is YYYY-MM-DD e.g 2019-12-30"
+            self.message = "Invalid date format;" \
+                           " expected format is YYYY-MM-DD e.g 2019-12-30"
             self.code = status_400
             return False
 

@@ -1,10 +1,12 @@
 from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix
 from api.strings import status_key, data_key, error_key, status_404, status_409
-from api.ver2.utils.test_data.register_test_data import *
-from api.ver2.utils.test_data.office_test_data import correct_office
-from api.ver2.utils.test_data.party_test_data import correct_party
-from api.ver2.utils.test_data.signup_test_data import user_with_correct_signup_data, user_with_correct_signup_data_2
+from api.tests.ver2.test_data.register_test_data import *
+from api.tests.ver2.test_data.office_test_data import correct_office
+from api.tests.ver2.test_data.party_test_data import correct_party
+from api.tests.ver2.test_data.signup_test_data\
+    import user_with_correct_signup_data, \
+    user_with_correct_signup_data_2
 from api.strings import status_201
 
 
@@ -17,8 +19,12 @@ class TestRegister(TestBase):
             json=user_with_correct_signup_data
         ) # user
 
-        self.client.post(v2_url_prefix + '/parties', json=correct_party, headers=self.admin_headers)
-        self.client.post(v2_url_prefix + '/offices', json=correct_office, headers=self.admin_headers)
+        self.client.post(
+            v2_url_prefix + '/parties',
+            json=correct_party, headers=self.admin_headers)
+        self.client.post(
+            v2_url_prefix + '/offices',
+            json=correct_office, headers=self.admin_headers)
 
     # clear all lists after tests
     def tearDown(self):
@@ -34,7 +40,9 @@ class TestRegister(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_201)
-        self.assertEqual(data[data_key][0][candidate_key], correct_candidate_infor[candidate_key])
+        self.assertEqual(
+            data[data_key][0][candidate_key],
+            correct_candidate_infor[candidate_key])
         self.assertEqual(res.status_code, status_201)
 
     def test_user_not_found(self):
@@ -110,5 +118,7 @@ class TestRegister(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_409)
-        self.assertEqual(data[error_key], 'Two candidates from the same Party cannot be vie for one office')
+        self.assertEqual(
+            data[error_key],
+            'Two candidates from the same Party cannot be vie for one office')
         self.assertEqual(res.status_code, status_409)

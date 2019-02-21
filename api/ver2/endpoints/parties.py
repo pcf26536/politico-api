@@ -60,7 +60,8 @@ def get_or_delete_ep(id):
                 if is_not_admin():
                     return is_not_admin()
                 party.delete(id)
-                return success(200, [{'message': p['name'] + ' deleted successfully'}])
+                return success(200, [{'message': p['name']
+                                                 + ' deleted successfully'}])
         else:
             return not_found_resp(party_key)
     except Exception as e:
@@ -79,7 +80,9 @@ def edit_ep(id):
                 fields = [name_key]
                 data = check_form_data(party_key, request, fields)
                 if not data:
-                    return error("No data was provided, fields [name] required to edit party", 400)
+                    return error(
+                        "No data was provided, "
+                        "fields [name] required to edit party", 400)
                 new_name = data[name_key]
                 if Party().get_by('name', new_name):
                     return error('Name already exists', 409)

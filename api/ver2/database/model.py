@@ -34,7 +34,8 @@ class Database:
         connection.commit()
 
     def create_root_user(self):
-        query = "SELECT * FROM politico_auth WHERE email = 'w.gichuhi5@students.ku.ac.ke'"
+        query = "SELECT * FROM politico_auth" \
+                " WHERE email = 'w.gichuhi5@students.ku.ac.ke'"
         cursor.execute(query)
         user = cursor.fetchone()
 
