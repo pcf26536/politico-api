@@ -56,6 +56,7 @@ def create_app(config_name):
     db.create_db_tables()
     db.create_root_user()
 
+    CORS(app)
     jwt = JWTManager(app)
     mail = Mail(app)  # Create an instance of Mail class.
 
