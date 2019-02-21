@@ -37,11 +37,11 @@ class TestOffices(TestBase):
         res = self.client.post('/api/v1/offices', json=self.office)
         data = res.get_json()
 
-        self.assertEqual(data[status_key], 409)
+        self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
             "Conflict: office with Women Representative as name already exists")
-        self.assertEqual(res.status_code, 409)
+        self.assertEqual(res.status_code, status_400)
 
     def test_add_office_missing_fields(self):
         res = self.client.post('/api/v1/offices', json={type_key: leg_type})

@@ -42,13 +42,13 @@ class TestParties(TestBase):
                                    logoUrlKey: "122fd.png"})
         data = res.get_json()
 
-        self.assertEqual(data[status_key], 409)
+        self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
             "Conflict:"
             " party with 14588-0100, Mombasa as hqAddress already exists"
         )
-        self.assertEqual(res.status_code, 409)
+        self.assertEqual(res.status_code, status_400)
 
     def test_add_party_missing_fields(self):
         """ Tests when some political party fields are missing e.g logo url """

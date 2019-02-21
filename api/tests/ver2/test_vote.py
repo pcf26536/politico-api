@@ -6,10 +6,11 @@ from api.tests.ver2.test_data.party_test_data import correct_party
 from api.tests.ver2.test_data.signup_test_data import\
     user_with_correct_signup_data
 from api.tests.ver2.test_data.register_test_data import correct_candidate_infor
-from api.strings import status_201, status_409
+from api.strings import status_201, status_400
 from api.tests.ver2.test_data.login_test_data import \
     user_with_correct_credentials
 from api.tests.ver2.test_data.vote_test_data import *
+from api.ver1.ballot.strings import createdBy_key
 
 
 class TestVote(TestBase):
@@ -69,10 +70,10 @@ class TestVote(TestBase):
             json=correct_vote, headers=self.user_headers)
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_409)
+        self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key], 'User has already voted for specified office')
-        self.assertEqual(res.status_code, status_409)
+        self.assertEqual(res.status_code, status_400)
 
     def test_voter_user_not_found(self):
         res = self.client.post(

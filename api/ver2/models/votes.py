@@ -2,7 +2,7 @@ from .skeleton import Skeleton
 from .users import User
 from .offices import Office
 from .candidates import Candidate
-from api.strings import id_key, status_400, status_404, status_409
+from api.strings import id_key, status_400, status_404
 from api.ver1.offices.strings import office_key
 from api.ver1.ballot.strings import candidate_key, createdBy_key, createdOn_key
 from api.ver2.utils.validators import is_int, valid_date, no_date_diff
@@ -104,13 +104,13 @@ class Vote(Skeleton):
         if not Candidate().get_by_two(office_key, self.office, candidate_key,
                                       self.candidate):
             self.message = 'Candidate is not registered for that office'
-            self.code = status_409
+            self.code = status_400
             return False
 
         if self.get_by_two(createdBy_key, self.created_by, office_key,
                            self.office):
             self.message = 'User has already voted for specified office'
-            self.code = status_409
+            self.code = status_400
             return False
 
         if not valid_date(self.created_on):

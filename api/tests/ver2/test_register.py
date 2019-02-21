@@ -1,6 +1,6 @@
 from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix
-from api.strings import status_key, data_key, error_key, status_404, status_409
+from api.strings import status_key, data_key, error_key, status_404, status_400
 from api.tests.ver2.test_data.register_test_data import *
 from api.tests.ver2.test_data.office_test_data import correct_office
 from api.tests.ver2.test_data.party_test_data import correct_party
@@ -94,9 +94,9 @@ class TestRegister(TestBase):
         )
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_409)
+        self.assertEqual(data[status_key], status_400)
         self.assertEqual(data[error_key], 'Candidate is already registered')
-        self.assertEqual(res.status_code, status_409)
+        self.assertEqual(res.status_code, status_400)
 
     def test_candidates_same_party_and_office(self):
         self.client.post(
@@ -117,8 +117,8 @@ class TestRegister(TestBase):
         )
         data = res.get_json()
 
-        self.assertEqual(data[status_key], status_409)
+        self.assertEqual(data[status_key], status_400)
         self.assertEqual(
             data[error_key],
             'Two candidates from the same Party cannot be vie for one office')
-        self.assertEqual(res.status_code, status_409)
+        self.assertEqual(res.status_code, status_400)
