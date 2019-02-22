@@ -11,7 +11,9 @@ def validate_officeType(value):
         if value in office_type_list:
             return ok_str
         else:
-            return error('Incorrect value [{}], office types should be {}'.format(value, office_type_list), 400)
+            return error(
+                'Incorrect value [{}], office types should be {}'
+                ''.format(value, office_type_list), 400)
     else:
         return error("Please provide ['type'] value(s) for the office", 400)
 

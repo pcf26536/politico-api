@@ -14,122 +14,13 @@ Lists all available endpoints.
 + Response 200 (application/json)
 
         {
-          "data": [
-            "Howdy! Welcome to the gVotie API - Available Endpoints",
-            {
-              "SignUp": "https://gvotie.herokuapp.com/api/v2/auth/signup",
-              "method": "POST"
-            },
-            {
-              "Login": "https://gvotie.herokuapp.com/api/v2/auth/login",
-              "method": "POST"
-            },
-            {
-              "Rest Password": "https://gvotie.herokuapp.com/api/v2/auth/reset",
-              "method": "POST"
-            },
-            {
-              "Get Parties v1": "https://gvotie.herokuapp.com/api/v1/parties",
-              "method": "GET"
-            },
-            {
-              "Get Party v1": "https://gvotie.herokuapp.com/api/v1/parties/<int:id>",
-              "method": "GET"
-            },
-            {
-              "Get Parties v2": "https://gvotie.herokuapp.com/api/v2/parties",
-              "method": "GET"
-            },
-            {
-              "Add Party v1": "https://gvotie.herokuapp.com/api/v1/parties",
-              "method": "POST"
-            },
-            {
-              "Add Party v2": "https://gvotie.herokuapp.com/api/v2/parties",
-              "method": "POST"
-            },
-            {
-              "Get Party v2": "https://gvotie.herokuapp.com/api/v2/parties/<int:id>",
-              "method": "GET"
-            },
-            {
-              "Delete Party v2": "https://gvotie.herokuapp.com/api/v2/parties/<int:id>",
-              "method": "DELETE"
-            },
-            {
-              "Update Party Name v2": "https://gvotie.herokuapp.com/api/v2/parties/<int:id>/name",
-              "method": "PATCH"
-            },
-            {
-              "Add Office v1": "https://gvotie.herokuapp.com/api/v1/offices",
-              "method": "POST"
-            },
-            {
-              "Add Office v2": "https://gvotie.herokuapp.com/api/v2/offices",
-              "method": "POST"
-            },
-            {
-              "Get Offices v1": "https://gvotie.herokuapp.com/api/v1/offices",
-              "method": "GET"
-            },
-            {
-              "Get Office v1": "https://gvotie.herokuapp.com/api/v1/offices/<int:id>",
-              "method": "GET"
-            },
-            {
-              "Get Offices v2": "https://gvotie.herokuapp.com/api/v2/offices",
-              "method": "GET"
-            },
-            {
-              "Add Office v1": "https://gvotie.herokuapp.com/api/v1/offices",
-              "method": "POST"
-            },
-            {
-              "Add Office v2": "https://gvotie.herokuapp.com/api/v2/offices",
-              "method": "POST"
-            },
-            {
-              "Get Office v2": "https://gvotie.herokuapp.com/api/v2/offices/<int:id>",
-              "method": "GET"
-            },
-            {
-              "Delete Office v2": "https://gvotie.herokuapp.com/api/v2/offices/<int:id>",
-              "method": "DELETE"
-            },
-            {
-              "Update Office Name v2": "https://gvotie.herokuapp.com/api/v2/offices/<int:id>",
-              "method": "PATCH"
-            },
-            {
-              "Vote": "https://gvotie.herokuapp.com/api/v2/votes/",
-              "method": "POST"
-            },
-            {
-              "Register Candidates": "https://gvotie.herokuapp.com/api/v2/office/<int:id>/register",
-              "method": "POST"
-            },
-            {
-              "Get All Candidates": "https://gvotie.herokuapp.com/api/v2/office/<int:id>/register",
-              "method": "GET"
-            },
-            {
-              "Get All Results": "https://gvotie.herokuapp.com/api/v2/votes/",
-              "method": "GET"
-            },
-            {
-              "Get Specific Candidate Votes": "https://gvotie.herokuapp.com/api/v2/votes/<int:id>",
-              "method": "GET"
-            },
-            {
-              "Get Specific Office Results": "https://gvotie.herokuapp.com/api/v2/office/<int:id>/result",
-              "method": "GET"
-            },
-            {
-              "Create Petition": "https://gvotie.herokuapp.com/api/v2/petitions/",
-              "method": "POST"
-            }
-          ],
-          "status": 200
+            "data": [
+                {
+                    "Documentation": "https://gvotie.docs.apiary.io",
+                    "Message": "Howdy! Welcome to the gVotie API"
+                }
+            ],
+            "status": 200
         }
 
 ## Sign Up [/api/v2/auth/signup]
@@ -555,6 +446,49 @@ Allows an admin to edit a political office by ID.
         }
 
 
+## Fetch Users [/api/v2/auth/users]
+
+### Fetch All Users Endpoint [GET]
+
+Allows users to reset their passwords.
+
++ Request (application/json)
+
+        + Headers
+
+            Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQyMjcsIm5iZiI6MTU1MDcwNDIyNywianRpIjoiZDQzMmFlZmQtMjQwOS00MmQ3LWE2MDYtMTdhZWJmZWRlNDQ5IiwiZXhwIjoxNTUwNzA1MTI3LCJpZGVudGl0eSI6MSwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.3CWfBdt1lbTIarpL_DISINvNaqpmIjD8RBEX7CjFN28
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 108
+    + Body
+
+        {
+            "data": [
+                {
+                    "fname": "daniel",
+                    "id": 2,
+                    "lname": "mark",
+                    "phone": "0712345678"
+                },
+                {
+                    "fname": "john",
+                    "id": 3,
+                    "lname": "doe",
+                    "phone": "0722101010"
+                },
+                {
+                    "fname": "john",
+                    "id": 4,
+                    "lname": "doe",
+                    "phone": "0713972278"
+                }
+            ],
+            "status": 200
+        }
+
 
 ## Register Candidates [/api/v2/office/1/register]
 
@@ -634,9 +568,29 @@ Allows a user to vote  for a candidate running for a specific office.
               "status": 201
             }
 
-## View Results [/api/v2/office/1/result]
+### Votes Results Endpoint [GET]
 
-### View the Result Endpoint [GET]
+Allows a user to view all votes casted grouped by candidates votes.
+
++ Request (application/json)
+
+    + Headers
+
+        Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1NTA3MDQ1ODcsIm5iZiI6MTU1MDcwNDU4NywianRpIjoiMGIwYzQxNWQtZjhlMS00ODE5LThmYTktZDkzMTRkMGE3NmY4IiwiZXhwIjoxNTUwNzA1NDg3LCJpZGVudGl0eSI6MiwiZnJlc2giOmZhbHNlLCJ0eXBlIjoiYWNjZXNzIn0.Snlq3w1bNv8Zfv_-AUUA31uE8Yv1SMO4tWUVGeW7cUE
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Content-Length: 116
+
+    + Body
+
+
+
+## View Results By Office [/api/v2/office/1/result]
+
+### View the Result By Office Endpoint [GET]
 
 Collate and fetch the result of specific office following a concluded election.
 

@@ -17,21 +17,6 @@ class TestTestingConfig(unittest.TestCase):
         self.app = None
 
 
-class TestStagingConfig(unittest.TestCase):
-    """ Test class for staging config """
-
-    def setUp(self):
-        self.app = create_app('staging')
-
-    def test_app_is_staging(self):
-        """ Test function for staging environment """
-        self.assertEqual(self.app.config['DEBUG'], True)
-        self.assertEqual(self.app.config['TESTING'], False)
-
-    def tearDown(self):
-        self.app = None
-
-
 class TestDevelopmentConfig(unittest.TestCase):
     """ Test class for development config """
 

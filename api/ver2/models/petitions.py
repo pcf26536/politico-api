@@ -100,7 +100,7 @@ class Petition(Skeleton):
         if Petition().get_by_two(office_key, self.office, createdBy_key,
                                  self.created_by):
             self.message = 'User has already created a petition for that office'
-            self.code = status_409
+            self.code = status_400
             return False
 
         return super().validate_self()

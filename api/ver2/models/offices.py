@@ -58,7 +58,7 @@ class Office(Skeleton):
             print('after')
             self.message = "Conflict: office with {} as name already exists" \
                            "".format(self.name)
-            self.code = 409
+            self.code = status_400
             return False
 
         return super().validate_self()

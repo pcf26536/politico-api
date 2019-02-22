@@ -14,22 +14,20 @@ from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
 from flask_mail import Mail, Message
+from flask_cors import CORS
 from .strings import *
 import os
 
 
 def create_app(config_name):
     """ create flask app with specified configs """
-    if not config_name:
-        config_name = 'development'
-
     app = Flask(__name__, instance_relative_config=True)
 
     # set configuration
     app.config.from_object(app_config[config_name])
     app.config.from_pyfile('config.py')
 
-    app.config['JWT_SECRET_KEY'] = "jwt-secret-string"
+    app.config['JWT_SECRET_KEY'] = os.getenv('SECRET')
     app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
     app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
     app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
@@ -58,6 +56,7 @@ def create_app(config_name):
     db.create_db_tables()
     db.create_root_user()
 
+    CORS(app)
     jwt = JWTManager(app)
     mail = Mail(app)  # Create an instance of Mail class.
 
@@ -100,5 +99,13 @@ def create_app(config_name):
                 'status': 500
              }
         )
+
+    @jwt.expired_token_loader
+    def expired_token_callback(expired_token):
+        token_type = expired_token['type']
+        return jsonify({
+            'status': 401,
+            'error': 'The {} token has expired'.format(token_type)
+        }), 401
 
     return app

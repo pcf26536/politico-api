@@ -1,7 +1,7 @@
 from flask import request, Blueprint
 from werkzeug.security import check_password_hash
 from api.strings import post_method, status_201, id_key, status_404,\
-    status_200, status_400
+    status_200, status_400, get_method
 from api.ver1.utils import error, no_entry_resp, check_form_data, \
     field_missing_resp, success
 from api.ver1.users.strings import *
@@ -12,6 +12,8 @@ from api.ver2.models.auth import Auth
 from api.ver2.utils.validators import is_valid_email, invalid_passwords
 from api.ver2.utils.utilities import system_unavailable
 from werkzeug.security import generate_password_hash
+from api.ver2.utils import is_not_admin
+from flask_jwt_extended import (jwt_required)
 import traceback
 
 auth = Blueprint('auth', __name__)
@@ -94,6 +96,17 @@ def login():
             return error(message, code)
         else:
             return no_entry_resp(user_entity, fields)
+    except Exception as e:
+        return system_unavailable(e)
+
+
+@auth.route('/auth/users', methods=[get_method])
+@jwt_required
+def users():
+    if is_not_admin():
+        return is_not_admin()
+    try:
+        return success(200, User().get_all())
     except Exception as e:
         return system_unavailable(e)
 

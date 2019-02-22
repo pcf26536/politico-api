@@ -71,20 +71,7 @@ I used Postman, get it here => [Postman](https://www.getpostman.com/downloads/)
 </p>
 </details>
 
-<p>Version 1 Endpoints</p>
-
-| **API Endpoint**                     | **Function**                                 | **URL Route**                         |
-| ---                                  | ---                                          | ---                                   |
-| **GET** /offices                     | Get a specific political office record       | `api/v1/offices/<int:office_id>`      |
-| **GET** /offices                     | Gets all political offices records           | `api/v1/offices/`                     |
-| **POST** /offices                    | Create a political office.                   | `/api/v1/offices/`                    |
-| **POST** /parties                    | Creates a political party                    | `/api/v1/parties/`                    |
-| **DELETE** /parties/`<party-id>`     | Delete a political party                     | `/api/v1/parties/<int:party-id>`      |
-| **PATCH** /parties/`<party-id>`/name | Edit the name of a specific political party. | `/api/v1/parties/<int:party-id>/name` |
-| **GET** /parties                     | Gets all political parties                   | `/api/v1/parties/`                    |
-| **GET** /parties/`<int:party-id>`    | Gets a specific political party              | `/api/v1/parties/<int:party_id>`      |
-
-<p>Version 2 Endpoints</p>
+### Version 2 Endpoints
 
 | **API Endpoint**                      | **Function**                                 | **URL Route**                               |
 | ---                                   | ---                                          | ---                                         |
@@ -105,6 +92,20 @@ I used Postman, get it here => [Postman](https://www.getpostman.com/downloads/)
 | **POST** /votes/                      | Votes for a candidate.                       | `/api/v2/votes/`                            |
 | **GET** /office/1/result              | View the votes results of an office.         | `/api/v2/offices/<int:office-id>/result`    |
 | **POST** /petitions/                  | Create a petition.                           | `/api/v2/petitions/`                        |
+
+### Version 1 Endpoints
+
+| **API Endpoint**                     | **Function**                                 | **URL Route**                         |
+| ---                                  | ---                                          | ---                                   |
+| **GET** /offices                     | Get a specific political office record       | `api/v1/offices/<int:office_id>`      |
+| **GET** /offices                     | Gets all political offices records           | `api/v1/offices/`                     |
+| **POST** /offices                    | Create a political office.                   | `/api/v1/offices/`                    |
+| **POST** /parties                    | Creates a political party                    | `/api/v1/parties/`                    |
+| **DELETE** /parties/`<party-id>`     | Delete a political party                     | `/api/v1/parties/<int:party-id>`      |
+| **PATCH** /parties/`<party-id>`/name | Edit the name of a specific political party. | `/api/v1/parties/<int:party-id>/name` |
+| **GET** /parties                     | Gets all political parties                   | `/api/v1/parties/`                    |
+| **GET** /parties/`<int:party-id>`    | Gets a specific political party              | `/api/v1/parties/<int:party_id>`      |
+
 
 ## Credits
 [Andela BootCamp Cycle 37](https://andela.com/)

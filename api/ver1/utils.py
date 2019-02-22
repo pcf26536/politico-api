@@ -10,7 +10,7 @@ def generate_id(list):
 
 
 def success(code, data=None):
-    """ Creates a success basic reponse """
+    """ Creates a success basic response """
     resp = {
         status_key: code,
         data_key: data
@@ -19,7 +19,7 @@ def success(code, data=None):
 
 
 def error(message, code):
-    """ Creates an error basic reponse """
+    """ Creates an error basic response """
     resp = {
         status_key: code,
         error_key: message
@@ -53,7 +53,8 @@ def name_length_resp(entity, name):
 
 
 def check_name_base(entity, name, data_list):
-    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
+    if not (re.match(r'[a-zA-Z]{3,}', name)
+            and not(re.search(r"\s{2,}", name))):
         return name_format_resp(entity, name)
     elif not (len(name) > 2):
         return name_length_resp(entity, name)
@@ -63,7 +64,8 @@ def check_name_base(entity, name, data_list):
 
 
 def invalid_name(entity, name):
-    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
+    if not (re.match(r'[a-zA-Z]{3,}', name)
+            and not(re.search(r"\s{2,}", name))):
         return name_format_resp(entity, name)
     elif not (len(name) > 2):
         return name_length_resp(entity, name)
@@ -82,7 +84,8 @@ def not_found_resp(entity):
 
 def no_entry_resp(entity, fields):
     return error(
-        "No data was provided, fields {} required to create {}".format(fields, entity),
+        "No data was provided, fields {} required to create {}"
+        "".format(fields, entity),
         status_400)
 
 
@@ -97,7 +100,9 @@ def field_missing_resp(entity, fields, field, action=None):
 
 
 def method_not_allowed(method):
-    return error("method [{}] not allowed on this endpoint".format(method), status_405)
+    return error(
+        "method [{}] not allowed on this endpoint".format(method),
+        status_405)
 
 
 def runtime_error_resp(e):
@@ -106,25 +111,36 @@ def runtime_error_resp(e):
 
 def name_format_resp(entity, name):
     return error(
-        message="The {} name [{}] provided is invalid/wrong format".format(entity, name),
+        message="The {} name [{}] provided is invalid/wrong format"
+                "".format(entity, name),
         code=status_400)
 
 
 def exists_resp(entity, value, field):
-    return error('Conflict: {} with {} as {} already exists'.format(entity, value, field), 409)
+    return error(
+        'Conflict: {} with {} as {} already exists'
+        ''.format(entity, value, field), status_400)
 
 
 def validate_image(entity, value):
     if not re.match(r'^[^.]*.[^.]*$', value):
-        return error('Bad {} format [{}], only one dot(.) should be present.'.format(entity, value), 400)
+        return error(
+            'Bad {} format [{}], only one dot(.) should be present.'
+            ''.format(entity, value), status_400)
     else:
         try:
             name, ext = value.split('.')
-            if not ext in imageTypes:
-                return error('Only {} image types allowed'.format(imageTypes), 405)
+            if ext not in imageTypes:
+                return error(
+                    'Only {} image types allowed'
+                    ''.format(imageTypes), 405)
             elif not re.match(r'[\w.-]{1,256}', name):
-                return error('Bad {} format [{}]. No spaces allowed.'.format(entity, name), 400)
+                return error(
+                    'Bad {} format [{}]. No spaces allowed.'
+                    ''.format(entity, name), status_400)
             else:
                 return None
         except Exception:
-            return error('Bad {} format [{}] has no file extension.'.format(entity, value), 400)
+            return error(
+                'Bad {} format [{}] has no file extension.'
+                ''.format(entity, value), 400)

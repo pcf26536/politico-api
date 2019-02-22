@@ -1,7 +1,7 @@
 from werkzeug.security import generate_password_hash
 from .skeleton import Skeleton
 from api.ver1.users.strings import *
-from api.strings import id_key, status_409
+from api.strings import id_key, status_400
 from api.ver2.utils.strings import password_key, admin_key
 from flask_jwt_extended import \
     (create_access_token, create_refresh_token)
@@ -47,7 +47,7 @@ class Auth(Skeleton):
     def validate_auth(self):
         if self.get_by(email, self.email):
             self.message = "A {} with that email already exists".format('User')
-            self.code = status_409
+            self.code = status_400
             return False
 
         return super().validate_self()

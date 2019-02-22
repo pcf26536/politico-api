@@ -14,6 +14,7 @@ class TestBase(unittest.TestCase):
         self.app = create_app('testing')
         self.app_context = self.app.app_context()
         self.app_context.push()
+        self.app.config['JWT_SECRET_KEY'] = 'secret'
         self.client = self.app.test_client()
 
         # login as a admin

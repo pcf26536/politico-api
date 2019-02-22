@@ -30,14 +30,16 @@ def invalid_passwords(pass1, pass2):
 
 def invalid_evidence(evidence):
     if not re.match(r'^[^.]*.[^.]*$', evidence):
-        return ['Bad evidence [{}] file extension.'.format(evidence), 400]
+        return ['Bad evidence [{}] file extension.'.format(evidence), status_400]
     else:
         try:
             name, ext = evidence.split('.')
-            if not ext in evidence_types:
-                return ['Only {} types allowed'.format(evidence_types), 400]
+            if ext not in evidence_types:
+                return ['Only {} types allowed'.format(evidence_types),
+                        status_400]
         except Exception:
-            return ['Bad evidence format [{}] has no file extension.'.format(evidence), 400]
+            return ['Bad evidence format [{}] has no file extension.'.format(
+                evidence), status_400]
     return None
 
 
@@ -121,9 +123,14 @@ def no_date_diff(date):
 
 
 def invalid_name(name, entity):
-    if not (re.match(r'[a-zA-Z]{3,}', name) and not(re.search(r"\s{2,}", name))):
-        return {'message': "The {} name [{}] provided is invalid/wrong format".format(entity, name), 'code': 400}
+    if not (re.match(r'[a-zA-Z]{3,}', name)
+            and not(re.search(r"\s{2,}", name))):
+        return {
+            'message': "The {} name [{}] provided is invalid/wrong format"
+                       "".format(entity, name), 'code': status_400}
     elif not (len(name) > 2):
-        return {'message': "The {} name [{}] provided is too short".format(entity, name), 'code': 400}
+        return {
+            'message': "The {} name [{}] provided is too short"
+                       "".format(entity, name), 'code': status_400}
     return None
 

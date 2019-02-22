@@ -3,11 +3,8 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from api import create_app  # import create_app fxn for api(local) module
 
-# create .env file path
-dotenv_path = join(dirname(__file__), '.env')
-
-# load .env from the path
-load_dotenv(dotenv_path)
+# create .env and load .env from the path
+load_dotenv(join(dirname(__file__), '.env'))
 
 # Get the app settings defined in the .env file
 config_name = os.getenv('APP_SETTINGS')

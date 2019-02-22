@@ -23,11 +23,6 @@ class TestingConfig(Config):
                    " port='5432' user='postgres' password='kadanieet'"
 
 
-class StagingConfig(Config):
-    """Configurations for Staging."""
-    DEBUG = True
-
-
 class ProductionConfig(Config):
     """Configurations for Production."""
     DEBUG = False
@@ -38,6 +33,5 @@ class ProductionConfig(Config):
 app_config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
-    'staging': StagingConfig,
     'production': ProductionConfig,
 }

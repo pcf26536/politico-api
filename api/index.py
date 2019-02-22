@@ -12,7 +12,10 @@ def index():
     return success(
         code=status_200,
         data=[
-                'Howdy! Welcome to the gVotie API - Available Endpoints'
+                {
+                    'Message': 'Howdy! Welcome to the gVotie API',
+                    'Documentation': 'https://gvotie.docs.apiary.io'
+                }
             ]
         )
 

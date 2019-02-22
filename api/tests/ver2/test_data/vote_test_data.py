@@ -17,3 +17,6 @@ voter_does_not_exist_vote[createdBy_key] = 10000
 
 invalid_date_vote = correct_vote.copy()
 invalid_date_vote[createdOn_key] = 'fake date'
+
+string_candidate_vote = correct_vote.copy()
+string_candidate_vote[candidate_key] = 'fake date'

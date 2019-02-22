@@ -72,13 +72,13 @@ class Party(Skeleton):
         if self.get_by('name', self.name):
             self.message = "Conflict: Party with {} as name already exists" \
                            "".format(self.name)
-            self.code = 409
+            self.code = status_400
             return False
 
         if self.get_by('hq_address', self.hqAddress):
             self.message = "Conflict: party with {} as hqAddress already exists" \
                            "".format(self.hqAddress)
-            self.code = 409
+            self.code = status_400
             return False
 
         return super().validate_self()

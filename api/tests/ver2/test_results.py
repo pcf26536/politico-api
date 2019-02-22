@@ -63,7 +63,8 @@ class TestResults(TestBase):
     def test_get_results_office_id_not_found(self):
         """ Tests invalid office id """
         res = self.client.get(
-            v2_url_prefix + '/office/10000000/result', headers=self.user_headers)
+            v2_url_prefix + '/office/10000000/result',
+            headers=self.user_headers)
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_404)
@@ -71,3 +72,16 @@ class TestResults(TestBase):
             data[error_key],
             'Voting for the specified office has not commenced yet!')
         self.assertEqual(res.status_code, status_404)
+
+    def test_get_all_votes(self):
+        self.client.post(
+            v2_url_prefix + '/votes/',
+            json=correct_vote, headers=self.user_headers)
+
+        res = self.client.get(
+            v2_url_prefix + '/votes/', headers=self.user_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], 200)
+        self.assertEqual(len(data[data_key]), 1)
+        self.assertEqual(res.status_code, 200)

@@ -2,7 +2,7 @@ from .skeleton import Skeleton
 from .users import User
 from .offices import Office
 from .parties import Party
-from api.strings import id_key, status_400, status_404, status_409
+from api.strings import id_key, status_400, status_404
 from api.ver1.offices.strings import office_key
 from api.ver1.parties.strings import party_key
 from api.ver1.ballot.strings import candidate_key
@@ -103,7 +103,7 @@ class Candidate(Skeleton):
 
         if self.get_by(candidate_key, self.candidate):
             self.message = "{} is already registered".format(self.entity)
-            self.code = status_409
+            self.code = status_400
             return False
 
         if not Office().get_by(id_key, self.office):
@@ -119,7 +119,7 @@ class Candidate(Skeleton):
         if self.get_by_two(party_key, self.party, office_key, self.office):
             self.message = 'Two candidates from the same Party' \
                            ' cannot be vie for one office'
-            self.code = status_409
+            self.code = status_400
             return False
 
         return super().validate_self()

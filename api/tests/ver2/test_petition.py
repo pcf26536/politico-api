@@ -76,6 +76,18 @@ class TestPetition(TestBase):
             data[error_key], 'Selected Office does not exist')
         self.assertEqual(res.status_code, status_404)
 
+    def test_create_petition_office_str(self):
+        res = self.client.post(
+            v2_url_prefix + '/petitions/',
+            json=petition_with_string_office_id,
+            headers=self.user_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_400)
+        self.assertEqual(
+            data[error_key], "String types are not allowed for Office ID field")
+        self.assertEqual(res.status_code, status_400)
+
     def test_create_petition_user_not_found(self):
         res = self.client.post(
             v2_url_prefix + '/petitions/',

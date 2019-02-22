@@ -84,13 +84,13 @@ class TestParties(TestBase):
             headers=self.admin_headers)
         data = res.get_json()
 
-        self.assertEqual(data[status_key], 409)
+        self.assertEqual(data[status_key], 400)
         self.assertEqual(
             data[error_key],
             "Conflict: party with 14588-0100,"
             " Mombasa as hqAddress already exists"
         )
-        self.assertEqual(res.status_code, 409)
+        self.assertEqual(res.status_code, 400)
 
     def test_add_party_missing_fields(self):
         """ Tests when some political party fields are missing e.g logo url """
@@ -165,7 +165,7 @@ class TestParties(TestBase):
         data = res.get_json()
 
         self.assertEqual(data[status_key], status_200)
-        # self.assertEqual(len(data[data_key]), no_of_parties)
+        self.assertEqual(len(data[data_key]), 0)
         self.assertEqual(res.status_code, status_200)
 
     # tests for GET single party
