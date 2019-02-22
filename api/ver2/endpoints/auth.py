@@ -12,6 +12,8 @@ from api.ver2.models.auth import Auth
 from api.ver2.utils.validators import is_valid_email, invalid_passwords
 from api.ver2.utils.utilities import system_unavailable
 from werkzeug.security import generate_password_hash
+from api.ver2.utils import is_not_admin
+from flask_jwt_extended import (jwt_required)
 import traceback
 
 auth = Blueprint('auth', __name__)
@@ -99,7 +101,10 @@ def login():
 
 
 @auth.route('/auth/users', methods=[get_method])
+@jwt_required
 def users():
+    if is_not_admin():
+        return is_not_admin()
     try:
         return success(200, User().get_all())
     except Exception as e:
