@@ -1,7 +1,7 @@
 from flask import request, Blueprint
 from werkzeug.security import check_password_hash
 from api.strings import post_method, status_201, id_key, status_404,\
-    status_200, status_400
+    status_200, status_400, get_method
 from api.ver1.utils import error, no_entry_resp, check_form_data, \
     field_missing_resp, success
 from api.ver1.users.strings import *
@@ -94,6 +94,14 @@ def login():
             return error(message, code)
         else:
             return no_entry_resp(user_entity, fields)
+    except Exception as e:
+        return system_unavailable(e)
+
+
+@auth.route('/auth/users', methods=[get_method])
+def users():
+    try:
+        return success(200, User().get_all())
     except Exception as e:
         return system_unavailable(e)
 
