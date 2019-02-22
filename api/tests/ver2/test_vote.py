@@ -94,3 +94,15 @@ class TestVote(TestBase):
         self.assertEqual(data[status_key], status_404)
         self.assertEqual(data[error_key], "Selected Candidate does not exist")
         self.assertEqual(res.status_code, status_404)
+
+    def test_create_vote_string_candidate(self):
+        res = self.client.post(
+            v2_url_prefix + '/votes/', json=string_candidate_vote,
+            headers=self.user_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_400)
+        self.assertEqual(
+            data[error_key],
+            "String types are not allowed for Candidate ID field")
+        self.assertEqual(res.status_code, status_400)

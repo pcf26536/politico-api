@@ -54,6 +54,19 @@ def candidates():
         return system_unavailable(e)
 
 
+@candids.route('/candidates/<int:id>', methods=[get_method])
+@jwt_required
+def candidate(id):
+    try:
+        candid = Candidate().get_by('candidate', id)
+        if candid:
+            return success(200, candid)
+        else:
+            return error('Candidate not found', 404)
+    except Exception as e:
+        return system_unavailable(e)
+
+
 @candids.route('/office/<int:id>/result', methods=[get_method])
 def results(id):
     try:

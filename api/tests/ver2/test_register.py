@@ -1,6 +1,7 @@
 from api.tests.ver2.test_base import TestBase
 from api.ver2.utils.strings import v2_url_prefix
-from api.strings import status_key, data_key, error_key, status_404, status_400
+from api.strings import status_key, data_key, error_key, status_404, \
+    status_400, status_200
 from api.tests.ver2.test_data.register_test_data import *
 from api.tests.ver2.test_data.office_test_data import correct_office
 from api.tests.ver2.test_data.party_test_data import correct_party
@@ -122,3 +123,54 @@ class TestRegister(TestBase):
             data[error_key],
             'Two candidates from the same Party cannot be vie for one office')
         self.assertEqual(res.status_code, status_400)
+
+    def test_get_all_candidates(self):
+        self.client.post(
+            v2_url_prefix + '/office/1/register',
+            json=correct_candidate_infor,
+            headers=self.admin_headers
+        )
+
+        res = self.client.get(
+            v2_url_prefix + '/candidates',
+            headers=self.admin_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_200)
+        self.assertEqual(len(data[data_key]), 1)
+        self.assertEqual(res.status_code, status_200)
+
+    def test_get_all_candidates_no_data(self):
+        res = self.client.get(v2_url_prefix + '/candidates',
+                              headers=self.admin_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_200)
+        self.assertEqual(len(data[data_key]), 0)
+        self.assertEqual(res.status_code, status_200)
+
+    def test_get_candidates_by_office(self):
+        self.client.post(
+            v2_url_prefix + '/office/1/register',
+            json=correct_candidate_infor,
+            headers=self.admin_headers
+        )
+
+        res = self.client.get(v2_url_prefix + '/office/1/register',
+                              headers=self.admin_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_200)
+        self.assertEqual(len(data[data_key]), 1)
+        self.assertEqual(data[data_key][0]['id'], 1)
+        self.assertEqual(res.status_code, status_200)
+
+    def test_get_single_candidate_not_found(self):
+        res = self.client.get(
+            v2_url_prefix + '/candidates/1',
+            headers=self.admin_headers)
+        data = res.get_json()
+
+        self.assertEqual(data[status_key], status_404)
+        self.assertEqual(data['error'], 'Candidate not found')
+        self.assertEqual(res.status_code, status_404)

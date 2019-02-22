@@ -20,6 +20,9 @@ petition_with_wrong_date_format[createdOn_key] = '12th March 18'
 petition_with_wrong_office_id = correct_petition.copy()
 petition_with_wrong_office_id[office_key] = 55
 
+petition_with_string_office_id = correct_petition.copy()
+petition_with_string_office_id[office_key] = 'gfgfgf'
+
 petition_with_wrong_body_format = correct_petition.copy()
 petition_with_wrong_body_format[body_key] = '!!@#$%%^^&&*(()'
 
