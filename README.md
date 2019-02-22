@@ -71,7 +71,7 @@ I used Postman, get it here => [Postman](https://www.getpostman.com/downloads/)
 </p>
 </details>
 
-###Version 2 Endpoints
+### Version 2 Endpoints
 
 | **API Endpoint**                      | **Function**                                 | **URL Route**                               |
 | ---                                   | ---                                          | ---                                         |
@@ -93,7 +93,7 @@ I used Postman, get it here => [Postman](https://www.getpostman.com/downloads/)
 | **GET** /office/1/result              | View the votes results of an office.         | `/api/v2/offices/<int:office-id>/result`    |
 | **POST** /petitions/                  | Create a petition.                           | `/api/v2/petitions/`                        |
 
-###Version 1 Endpoints
+### Version 1 Endpoints
 
 | **API Endpoint**                     | **Function**                                 | **URL Route**                         |
 | ---                                  | ---                                          | ---                                   |
