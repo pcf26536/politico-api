@@ -83,7 +83,9 @@ class Vote(Skeleton):
         """ search for a row in a table """
         query = "SELECT politico_users.fname as first_name," \
                 " politico_users.lname as last_name, " \
-                "politico_offices.name as office FROM {} " \
+                "politico_offices.name as office, " \
+                "politico_votes.createdon as createdon " \
+                "FROM {} " \
                 "JOIN politico_offices ON " \
                 " politico_offices.id = politico_votes.office " \
                 "JOIN politico_users ON " \
