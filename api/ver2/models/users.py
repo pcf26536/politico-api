@@ -48,7 +48,8 @@ class User(Skeleton):
 
     def get_by_id(self, value):
         """ search for a row in a table """
-        query = "SELECT politico_users.fname, politico_users.lname," \
+        query = "SELECT politico_users.id, politico_users.fname, " \
+                "politico_users.lname," \
                 " politico_auth.email, " \
                 "politico_users.phone, politico_auth.admin " \
                 " FROM {} JOIN  politico_auth " \
