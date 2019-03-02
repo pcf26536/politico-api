@@ -79,6 +79,18 @@ class Vote(Skeleton):
                     self.table, self.office)
         return super().fetch_all(query)
 
+    def get_by(self, key, value):
+        """ search for a row in a table """
+        query = "SELECT politico_users.fname as first_name," \
+                " politico_users.lname as last_name, " \
+                "politico_offices.name as office FROM {} " \
+                "JOIN politico_offices ON " \
+                " politico_offices.id = politico_votes.office " \
+                "JOIN politico_users ON " \
+                "politico_users.id = politico_votes.candidate " \
+                "WHERE {} = '{}'".format(self.table, key, value)
+        return super().fetch_all(query)
+
     def validate_vote(self):
         if not is_int(self.candidate):
             self.message = "String types are not allowed for Candidate ID field"
