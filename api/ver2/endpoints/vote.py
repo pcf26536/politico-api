@@ -37,7 +37,7 @@ def votes():
             else:
                 return no_entry_resp(vote_key, fields)
         elif request.method == get_method:
-            return success(200, Vote().get_all_results())
+            return success(200, [Vote().get_all_results()])
     except Exception as e:
         return system_unavailable(e)
 
@@ -46,6 +46,6 @@ def votes():
 @jwt_required
 def user_votes(id):
     try:
-        return success(200, Vote().get_by('createdby', id))
+        return success(200, [Vote().get_by('createdby', id)])
     except Exception as e:
         return system_unavailable(e)
