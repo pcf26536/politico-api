@@ -75,7 +75,7 @@ def create_app(config_name):
     def bad_request(error):
         """ Handle error 400 """
         return jsonify(
-            {'message': 'Please review your request and try again',
+            {'error': 'Please review your request and try again',
              'status': 400
              })
 
@@ -83,19 +83,19 @@ def create_app(config_name):
     def page_not_found(error):
         """ Handle error 404 """
         return jsonify(
-            {'message': 'The requested resource was not found', 'status': 404}
+            {'error': 'The requested resource was not found', 'status': 404}
         )
 
     @app.errorhandler(status_405)
     def method_not_allowed(error):
         """ Handle error 405 """
-        return jsonify({'message': 'Method not allowed', 'status': 405})
+        return jsonify({'error': 'Method not allowed', 'status': 405})
 
     @app.errorhandler(500)
     def sys_unavailable(error):
         return jsonify(
             {
-                'message': 'System not available, try again later!',
+                'error': 'System not available, try again later!',
                 'status': 500
              }
         )
