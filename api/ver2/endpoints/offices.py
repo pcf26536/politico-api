@@ -84,23 +84,22 @@ def edit_ep(id):
     try:
         if is_not_admin():
             return is_not_admin()
-        if request.method == 'PATCH':
-            office = Office().get_by('id', id)
-            if office:
-                fields = [name_key]
-                data = check_form_data(office_key, request, fields)
-                if not data:
-                    return error(
-                        "No data was provided,"
-                        " fields [name] required to edit office", 400)
-                new_name = data[name_key]
-                if Office().get_by('name', new_name):
-                    return error('Name already exists', 409)
-                invalid = invalid_name(new_name, office_key)
-                if invalid:
-                    return error(invalid['message'], invalid['code'])
-                new = Office(Id=id).patch('name', new_name, id)
-                return success(200, [new])
-            return not_found_resp(office_key)
+        office = Office().get_by('id', id)
+        if office:
+            fields = [name_key]
+            data = check_form_data(office_key, request, fields)
+            if not data:
+                return error(
+                    "No data was provided,"
+                    " fields [name] required to edit office", 400)
+            new_name = data[name_key]
+            if Office().get_by('name', new_name):
+                return error('Name already exists', 409)
+            invalid = invalid_name(new_name, office_key)
+            if invalid:
+                return error(invalid['message'], invalid['code'])
+            new = Office(Id=id).patch('name', new_name, id)
+            return success(200, [new])
+        return not_found_resp(office_key)
     except Exception as e:
         return system_unavailable(e)
