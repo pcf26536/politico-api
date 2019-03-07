@@ -152,9 +152,13 @@ def reset():
                                 reset_markup:
                             text = reset_markup.read().replace('\n', '')
                             text = text.replace('action_url', reset_url)
-                            text = text.replace(
-                                'username',
-                                User().get_by_id(2)['fname'])
+                            try:
+                                text = text.replace(
+                                    'username',
+                                    User().get_by_id(user['id'])['fname'])
+                            except Exception:
+                                return error('Admin Not Allowed To Reset '
+                                             'Password!', 400)
 
                         from_email = Email("politico-noreply@politico.com")
                         to_email = Email(mail)
