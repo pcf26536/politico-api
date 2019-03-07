@@ -191,6 +191,7 @@ def reset():
 
 
 @auth.route('/auth/reset/link/<string:token>', methods=[post_method])
+@jwt_required
 def reset_link(token):
     try:
         if token == reset_token:
