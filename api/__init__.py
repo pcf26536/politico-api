@@ -13,7 +13,7 @@ from api.ver2.endpoints.candidature import candids
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
-from flask_mail import Mail, Message
+from flask_sendgrid import SendGrid
 from flask_cors import CORS
 from .strings import *
 import os
@@ -58,18 +58,6 @@ def create_app(config_name):
 
     CORS(app)
     jwt = JWTManager(app)
-    mail = Mail(app)  # Create an instance of Mail class.
-
-    @app.route('/mailer', methods=['POST'])
-    def mailer():
-        data = request.get_json()
-        msg = Message(
-            data['subject'],
-            recipients=data['recipients'],
-            sender=os.getenv('MAIL_USERNAME')
-        )
-        msg.body = data['body']
-        mail.send(msg)
 
     @app.errorhandler(status_400)
     def bad_request(error):
