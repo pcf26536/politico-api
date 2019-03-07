@@ -10,7 +10,7 @@ users = [
         id_key : 1,
         fname : 'john',
         lname : 'doe',
-        email: 'johndoe@andela.com',
+        email: 'muffwaindan@gmail.com',
         phone: '0713972278',
         pspt : 'passport.jpg', admin: False
     },
