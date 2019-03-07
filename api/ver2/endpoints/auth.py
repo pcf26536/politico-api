@@ -1,4 +1,4 @@
-from flask import request, Blueprint
+from flask import request, Blueprint, current_app
 from werkzeug.security import check_password_hash
 from api.strings import post_method, status_201, id_key, status_404,\
     status_200, status_400, get_method
@@ -14,7 +14,10 @@ from api.ver2.utils.utilities import system_unavailable
 from werkzeug.security import generate_password_hash
 from api.ver2.utils import is_not_admin
 from flask_jwt_extended import (jwt_required)
+import sendgrid
+from sendgrid.helpers.mail import *
 import traceback
+import os
 
 auth = Blueprint('auth', __name__)
 reset_token = None
@@ -138,12 +141,34 @@ def reset():
                                 'Check your email for password reset link',
                             'email': mail
                         }]
-                        body = 'Click this link to reset your password:\n'\
-                               + request.base_url + '/link/' + reset_token
-                        recipients = [mail]
+                        reset_url = \
+                        """https://wainainad60.github.io/Politico/templates/reset_pass.html?token={}""".format(
+                            reset_token)
                         code = status_200
-                        print(body)
-                        return success(code, res_data)
+                        print(reset_url)
+                        sg = sendgrid.SendGridAPIClient(
+                            apikey=os.environ.get('SENDGRID_API_KEY'))
+                        with open('pass_reset_markup.html', 'r') as \
+                                reset_markup:
+                            text = reset_markup.read().replace('\n', '')
+                            text = text.replace('action_url', reset_url)
+                            text = text.replace(
+                                'username',
+                                User().get_by_id(2)['fname'])
+
+                        from_email = Email("politico-noreply@politico.com")
+                        to_email = Email(mail)
+                        subject = "Password reset link"
+                        content = Content("text/html",
+                                          text)
+                        try:
+                            mail = Mail(from_email, subject, to_email, content)
+                            response = sg.client.mail.send.post(
+                                request_body=mail.get())
+                            if response.status_code == 202:
+                                return success(code, res_data)
+                        except Exception as e:
+                            system_unavailable(e)
                     else:
                         message = 'No user is registered with that email'
                         code = status_404
@@ -151,7 +176,7 @@ def reset():
                     message = 'Please enter a valid email'
             except Exception as e:
                 return error('runtime exception: {}, {}'.format(e.args[0],
-                    traceback.print_exc()), 500)
+                                traceback.print_exc()), 500)
         else:
             message = 'No Input Received: ' \
                       'Please input an email to reset you password'
@@ -178,7 +203,8 @@ def reset_link(token):
                             Auth().get_by('email', reset_user)[0]['id'])
                         return success(
                             200, [
-                                {'message': 'password reset successful',
+                                {'message': 'password reset successful, '
+                                            'please login',
                                  'user': user}])
                     return error(invalid['message'], invalid['code'])
                 except Exception as e:

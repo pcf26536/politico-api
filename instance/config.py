@@ -6,6 +6,8 @@ class Config(object):
     """Parent configuration class."""
     DEBUG = False
     SECRET = os.getenv('SECRET')
+    SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+    SENDGRID_DEFAULT_FROM = os.getenv('SENDGRID_DEFAULT_FROM')
 
 
 class DevelopmentConfig(Config):
