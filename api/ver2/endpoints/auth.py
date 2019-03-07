@@ -139,7 +139,8 @@ def reset():
                         res_data = [{
                             'message':
                                 'Check your email for password reset link',
-                            'email': mail
+                            'email': mail,
+                            'token': reset_token
                         }]
                         reset_url = \
                         """https://wainainad60.github.io/Politico/templates/reset_pass.html?token={}""".format(
