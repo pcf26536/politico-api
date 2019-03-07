@@ -16,7 +16,7 @@ before_script:
   - psql -c "CREATE DATABASE politico_test;" -U postgres
 
 env:
-  - DATABASE_URL="dbname='politico' host='127.0.0.1' port='5432' user='postgres' password='kadanieet'" TEST_DATABASE_URL="dbname='politico_test' host='127.0.0.1' port='5432' user='postgres' password='kadanieet'" SECRET="jwt-secret-string" APP_SETTINGS='testing' ADMIN_MAIL="w.gichuhi5@students.ku.ac.ke" ADMIN_PASS="kadanieet"
+  - DATABASE_URL="dbname='politico' host='127.0.0.1' port='5432' user='postgres' password='kadanieet'" TEST_DATABASE_URL="dbname='politico_test' host='127.0.0.1' port='5432' user='postgres' password='kadanieet'" SECRET="jwt-secret-string" APP_SETTINGS='testing' ADMIN_MAIL="w.gichuhi5@students.ku.ac.ke" ADMIN_PASS="kadanieet" SENDGRID_API_KEY="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" SENDGRID_DEFAULT_FROM="politco-noreply@politico.com"
 
 # command to automate tests
 script:
