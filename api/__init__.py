@@ -13,7 +13,7 @@ from api.ver2.endpoints.candidature import candids
 from api.strings import status_400, status_404, status_405
 from api.ver2.database.model import Database
 from flask_jwt_extended import JWTManager
-from flask_mail import Mail, Message
+from flask_sendgrid import SendGrid
 from flask_cors import CORS
 from .strings import *
 import os
@@ -58,24 +58,12 @@ def create_app(config_name):
 
     CORS(app)
     jwt = JWTManager(app)
-    mail = Mail(app)  # Create an instance of Mail class.
-
-    @app.route('/mailer', methods=['POST'])
-    def mailer():
-        data = request.get_json()
-        msg = Message(
-            data['subject'],
-            recipients=data['recipients'],
-            sender=os.getenv('MAIL_USERNAME')
-        )
-        msg.body = data['body']
-        mail.send(msg)
 
     @app.errorhandler(status_400)
     def bad_request(error):
         """ Handle error 400 """
         return jsonify(
-            {'message': 'Please review your request and try again',
+            {'error': 'Please review your request and try again',
              'status': 400
              })
 
@@ -83,19 +71,19 @@ def create_app(config_name):
     def page_not_found(error):
         """ Handle error 404 """
         return jsonify(
-            {'message': 'The requested resource was not found', 'status': 404}
+            {'error': 'The requested resource was not found', 'status': 404}
         )
 
     @app.errorhandler(status_405)
     def method_not_allowed(error):
         """ Handle error 405 """
-        return jsonify({'message': 'Method not allowed', 'status': 405})
+        return jsonify({'error': 'Method not allowed', 'status': 405})
 
     @app.errorhandler(500)
     def sys_unavailable(error):
         return jsonify(
             {
-                'message': 'System not available, try again later!',
+                'error': 'System not available, try again later!',
                 'status': 500
              }
         )

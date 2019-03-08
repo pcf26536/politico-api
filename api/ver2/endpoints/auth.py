@@ -1,4 +1,4 @@
-from flask import request, Blueprint
+from flask import request, Blueprint, current_app
 from werkzeug.security import check_password_hash
 from api.strings import post_method, status_201, id_key, status_404,\
     status_200, status_400, get_method
@@ -13,8 +13,11 @@ from api.ver2.utils.validators import is_valid_email, invalid_passwords
 from api.ver2.utils.utilities import system_unavailable
 from werkzeug.security import generate_password_hash
 from api.ver2.utils import is_not_admin
-from flask_jwt_extended import (jwt_required)
+from flask_jwt_extended import (jwt_required, get_jwt_identity)
+import sendgrid
+from sendgrid.helpers.mail import *
 import traceback
+import os
 
 auth = Blueprint('auth', __name__)
 reset_token = None
@@ -136,14 +139,41 @@ def reset():
                         res_data = [{
                             'message':
                                 'Check your email for password reset link',
-                            'email': mail
+                            'email': mail,
+                            'token': reset_token
                         }]
-                        body = 'Click this link to reset your password:\n'\
-                               + request.base_url + '/link/' + reset_token
-                        recipients = [mail]
+                        reset_url = \
+                        """https://wainainad60.github.io/Politico/templates/reset_pass.html?token={}""".format(
+                            reset_token)
                         code = status_200
-                        print(body)
-                        return success(code, res_data)
+                        print(reset_url)
+                        sg = sendgrid.SendGridAPIClient(
+                            apikey=os.environ.get('SENDGRID_API_KEY'))
+                        with open('pass_reset_markup.html', 'r') as \
+                                reset_markup:
+                            text = reset_markup.read().replace('\n', '')
+                            text = text.replace('action_url', reset_url)
+                            try:
+                                text = text.replace(
+                                    'username',
+                                    User().get_by_id(user['id'])['fname'])
+                            except Exception:
+                                return error('Admin Not Allowed To Reset '
+                                             'Password!', 400)
+
+                        from_email = Email("politico-noreply@politico.com")
+                        to_email = Email(mail)
+                        subject = "Password reset link"
+                        content = Content("text/html",
+                                          text)
+                        try:
+                            mail = Mail(from_email, subject, to_email, content)
+                            response = sg.client.mail.send.post(
+                                request_body=mail.get())
+                            if response.status_code == 202:
+                                return success(code, res_data)
+                        except Exception as e:
+                            system_unavailable(e)
                     else:
                         message = 'No user is registered with that email'
                         code = status_404
@@ -151,7 +181,7 @@ def reset():
                     message = 'Please enter a valid email'
             except Exception as e:
                 return error('runtime exception: {}, {}'.format(e.args[0],
-                    traceback.print_exc()), 500)
+                                traceback.print_exc()), 500)
         else:
             message = 'No Input Received: ' \
                       'Please input an email to reset you password'
@@ -161,38 +191,38 @@ def reset():
 
 
 @auth.route('/auth/reset/link/<string:token>', methods=[post_method])
+@jwt_required
 def reset_link(token):
-    try:
-        if token == reset_token:
-            fields = [password_1, password_2]
-            data = check_form_data(user_key, request, fields)
-            if data:
-                try:
-                    pass1 = data[password_1]
-                    pass2 = data[password_2]
-                    invalid = invalid_passwords(pass1, pass2)
-                    if not invalid:
-                        user = Auth().patch(
-                            password_key,
-                            generate_password_hash(pass1),
-                            Auth().get_by('email', reset_user)[0]['id'])
-                        return success(
-                            200, [
-                                {'message': 'password reset successful',
-                                 'user': user}])
-                    return error(invalid['message'], invalid['code'])
-                except Exception as e:
-                    return error(
-                        'Please provide a value for {} to reset you password'
-                        ''.format(e.args[0]),
-                        status_400
-                    )
-            else:
-                return error(
-                    'Please input New Password twice to reset '
-                    'current password. fields={}'.format(fields),
-                    status_400
-                )
-        return error('Invalid token please try again', status_400)
-    except Exception as e:
-        return system_unavailable(e)
+
+    fields = [password_1, password_2]
+    data = check_form_data(user_key, request, fields)
+    if data:
+        try:
+            pass1 = data[password_1]
+            pass2 = data[password_2]
+            invalid = invalid_passwords(pass1, pass2)
+            if not invalid:
+                user = Auth().patch(
+                    password_key,
+                    generate_password_hash(pass1),
+                    get_jwt_identity())
+                del user['password']
+                return success(
+                    200, [
+                        {'message': 'password reset successful, '
+                                    'please login',
+                         'user': user}])
+            return error(invalid['message'], invalid['code'])
+        except KeyError as e:
+            return error(
+                'Please provide a value for {} to reset you password'
+                ''.format(e.args[0]),
+                status_400
+            )
+    else:
+        return error(
+            'Please input New Password twice to reset '
+            'current password. fields={}'.format(fields),
+            status_400
+        )
+

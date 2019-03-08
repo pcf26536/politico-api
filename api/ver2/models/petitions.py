@@ -53,6 +53,20 @@ class Petition(Skeleton):
         self.Id = json[id_key]
         return self
 
+    def fetch_petitions(self):
+        query = "SELECT politico_users.fname as fname," \
+                " politico_users.lname as lname," \
+                " politico_offices.name as office, " \
+                "politico_petitions.text as body, " \
+                 "DATE(politico_petitions.createdon) as date, " \
+                 "politico_petitions.evidence as evidence from {} " \
+                "JOIN politico_users ON " \
+                "politico_users.id = politico_petitions.createdby " \
+                 "JOIN politico_offices ON " \
+                 "politico_petitions.office = politico_offices.id " \
+                "".format(self.table)
+        return super().fetch_all(query)
+
     def validate_petition(self):
         if not is_int(self.created_by):
             self.message = "String types are not allowed for Created By field"

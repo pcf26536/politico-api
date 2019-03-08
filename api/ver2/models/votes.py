@@ -66,7 +66,8 @@ class Vote(Skeleton):
         return super().fetch_all(query)
 
     def get_all_results(self):
-        query = "SELECT politico_offices.name as office, " \
+        query = "SELECT politico_offices.name as office_name, " \
+                "politico_votes.office as office_id, " \
                 "politico_users.fname as first_name," \
                 " politico_users.lname as last_name " \
                 ", COUNT (politico_votes.candidate) AS votes FROM {} " \
@@ -75,8 +76,22 @@ class Vote(Skeleton):
                 "JOIN politico_users ON" \
                 " politico_users.id = politico_votes.candidate " \
                 "GROUP BY politico_users.fname, politico_users.lname, " \
-                "politico_offices.name ".format(
+                "politico_offices.name, politico_votes.office ".format(
                     self.table, self.office)
+        return super().fetch_all(query)
+
+    def get_by(self, key, value):
+        """ search for a row in a table """
+        query = "SELECT politico_users.fname as first_name," \
+                " politico_users.lname as last_name, " \
+                "politico_offices.name as office, " \
+                "politico_votes.createdon as createdon " \
+                "FROM {} " \
+                "JOIN politico_offices ON " \
+                " politico_offices.id = politico_votes.office " \
+                "JOIN politico_users ON " \
+                "politico_users.id = politico_votes.candidate " \
+                "WHERE {} = '{}'".format(self.table, key, value)
         return super().fetch_all(query)
 
     def validate_vote(self):

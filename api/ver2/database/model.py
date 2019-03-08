@@ -3,6 +3,7 @@ from instance.config import app_config
 from werkzeug.security import generate_password_hash
 from psycopg2.extras import RealDictCursor
 from api.ver2.database import create_table_queries, table_names
+import os
 
 
 class Database:
@@ -35,15 +36,16 @@ class Database:
 
     def create_root_user(self):
         query = "SELECT * FROM politico_auth" \
-                " WHERE email = 'w.gichuhi5@students.ku.ac.ke'"
+                " WHERE email = '{}'".format(os.getenv('ADMIN_MAIL'))
         cursor.execute(query)
         user = cursor.fetchone()
 
         if not user:
             cursor.execute(
                 "INSERT INTO politico_auth (email, password, admin) "
-                "VALUES ('w.gichuhi5@students.ku.ac.ke', '{}', True)"
-                    .format(generate_password_hash('kadanieet')))
+                "VALUES ('{}', '{}', True)"
+                "".format(os.getenv('ADMIN_MAIL'), generate_password_hash(
+                    os.getenv('ADMIN_PASS'))))
             connection.commit()
 
     def insert(self, query):

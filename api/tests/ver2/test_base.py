@@ -4,6 +4,7 @@ from api.ver2.database.model import Database
 from api.ver1.users.strings import email
 from api.ver2.utils.strings import password_key, token_key, authorization_key
 from api.strings import data_key
+import os
 
 
 class TestBase(unittest.TestCase):
@@ -14,7 +15,7 @@ class TestBase(unittest.TestCase):
         self.app = create_app('testing')
         self.app_context = self.app.app_context()
         self.app_context.push()
-        self.app.config['JWT_SECRET_KEY'] = 'secret'
+        self.app.config['JWT_SECRET_KEY'] = os.getenv('SECRET')
         self.client = self.app.test_client()
 
         # login as a admin
