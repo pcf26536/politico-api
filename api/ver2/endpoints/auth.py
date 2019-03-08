@@ -194,37 +194,35 @@ def reset():
 @jwt_required
 def reset_link(token):
     try:
-        if token == reset_token:
-            fields = [password_1, password_2]
-            data = check_form_data(user_key, request, fields)
-            if data:
-                try:
-                    pass1 = data[password_1]
-                    pass2 = data[password_2]
-                    invalid = invalid_passwords(pass1, pass2)
-                    if not invalid:
-                        user = Auth().patch(
-                            password_key,
-                            generate_password_hash(pass1),
-                            Auth().get_by('email', reset_user)[0]['id'])
-                        return success(
-                            200, [
-                                {'message': 'password reset successful, '
-                                            'please login',
-                                 'user': user}])
-                    return error(invalid['message'], invalid['code'])
-                except Exception as e:
-                    return error(
-                        'Please provide a value for {} to reset you password'
-                        ''.format(e.args[0]),
-                        status_400
-                    )
-            else:
+        fields = [password_1, password_2]
+        data = check_form_data(user_key, request, fields)
+        if data:
+            try:
+                pass1 = data[password_1]
+                pass2 = data[password_2]
+                invalid = invalid_passwords(pass1, pass2)
+                if not invalid:
+                    user = Auth().patch(
+                        password_key,
+                        generate_password_hash(pass1),
+                        Auth().get_by('email', reset_user)[0]['id'])
+                    return success(
+                        200, [
+                            {'message': 'password reset successful, '
+                                        'please login',
+                             'user': user}])
+                return error(invalid['message'], invalid['code'])
+            except Exception as e:
                 return error(
-                    'Please input New Password twice to reset '
-                    'current password. fields={}'.format(fields),
+                    'Please provide a value for {} to reset you password'
+                    ''.format(e.args[0]),
                     status_400
                 )
-        return error('Invalid token please try again', status_400)
+        else:
+            return error(
+                'Please input New Password twice to reset '
+                'current password. fields={}'.format(fields),
+                status_400
+            )
     except Exception as e:
         return system_unavailable(e)
