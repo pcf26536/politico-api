@@ -1,5 +1,5 @@
 # politico-api
-[![Build Status](https://travis-ci.com/wainainad60/politico-api.svg?branch=develop)](https://travis-ci.com/wainainad60/politico-api)
+[![Build Status](https://travis-ci.com/pcf26536/politico-api.svg?branch=develop-v2)](https://travis-ci.com/pcf26536/politico-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/3b017887aca842e598a1f5d9513cacc8)](https://www.codacy.com/app/wainainad60/politico-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=wainainad60/politico-api&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/09ac0b6bb9682e362053/maintainability)](https://codeclimate.com/github/wainainad60/politico-api/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/wainainad60/politico-api/badge.svg?branch=develop-v2)](https://coveralls.io/github/wainainad60/politico-api?branch=develop-v2)
